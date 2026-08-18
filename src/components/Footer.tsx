@@ -3,9 +3,12 @@ export default function Footer() {
     <footer className="border-t border-border/40 bg-background py-12 mt-20">
       <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-8">
         <div>
-          <h3 className="text-xl font-display font-bold tracking-wider text-foreground mb-4">
-            Ryme<span className="text-primary">Helper</span>
-          </h3>
+          <div className="flex items-center gap-2 mb-4">
+            <img src="/logo.png" alt="RhymeHelper Logo" className="h-8 w-8 object-contain rounded-md" />
+            <h3 className="text-xl font-display font-bold tracking-wider text-foreground">
+              Ryme<span className="text-primary">Helper</span>
+            </h3>
+          </div>
           <p className="text-sm text-muted-foreground font-sans">
             The distraction-free writer's notepad for lyricists, rappers, and poets.
           </p>
