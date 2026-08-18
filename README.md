@@ -2,13 +2,13 @@
 
 RymeHelper is a professional, distraction-free writing environment built specifically for rappers, lyricists, and songwriters. This repository contains the source code for the **RymeHelper Marketing Website**, built with React, Vite, Tailwind CSS v4, and Framer Motion.
 
-## 🎤 Key Features of RymeHelper
+## Key Features of RymeHelper
 * **Rich Text Editing:** A meticulously designed writing canvas that stays out of your way. Highlight multisyllabic rhymes and structure your verses.
 * **Instant Rhyme Popup:** Highlight any word and instantly see perfect matches, slant rhymes, and assonance right at your cursor.
 * **Multi-Word Search:** Find phrases that match the exact vowel structure of your punchline to build complex rhyme schemes.
 * **Live Syllable Counter:** Real-time syllable metrics displayed directly in the margin so your rhythm is visually confirmed as you write.
 
-## 💻 Tech Stack
+## Tech Stack
 - **Framework:** React + Vite
 - **Routing:** React Router DOM
 - **Styling:** Tailwind CSS v4 (Cinematic Dark Theme)
