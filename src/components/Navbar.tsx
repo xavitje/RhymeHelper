@@ -22,8 +22,9 @@ export default function Navbar() {
   return (
     <nav className="fixed top-0 w-full z-50 border-b border-border/40 bg-background/80 backdrop-blur-md">
       <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-        <Link to="/" className="text-xl font-display font-bold tracking-wider text-foreground">
-          Ryme<span className="text-primary">Helper</span>
+        <Link to="/" className="flex items-center gap-2 text-xl font-display font-bold tracking-wider text-foreground">
+          <img src="/logo.png" alt="RhymeHelper Logo" className="h-8 w-8 object-contain rounded-md" />
+          <span>Ryme<span className="text-primary">Helper</span></span>
         </Link>
         <div className="hidden md:flex items-center gap-8 text-sm font-mono text-muted-foreground">
           <Link to="/" className="hover:text-foreground transition-colors">Studio</Link>
