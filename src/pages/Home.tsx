@@ -7,8 +7,8 @@ export default function Home() {
       {/* Hero Section */}
       <section className="relative max-w-7xl mx-auto px-6 pt-12 lg:pt-24 pb-20 flex flex-col items-center text-center">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary/20 blur-[120px] rounded-full pointer-events-none -z-10" />
-        
-        <motion.h1 
+
+        <motion.h1
           className="text-6xl md:text-8xl lg:text-9xl font-display font-bold uppercase tracking-tight text-foreground leading-[0.9]"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -17,8 +17,8 @@ export default function Home() {
           Never Break <br />
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-primary/50">Your Flow.</span>
         </motion.h1>
-        
-        <motion.p 
+
+        <motion.p
           className="mt-8 text-xl md:text-2xl text-muted-foreground font-sans max-w-2xl"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -26,14 +26,14 @@ export default function Home() {
         >
           A specialized, distraction-free writing environment built specifically for rappers, lyricists, and poets.
         </motion.p>
-        
-        <motion.div 
+
+        <motion.div
           className="mt-12 flex flex-col sm:flex-row items-center gap-6"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.5, duration: 0.8 }}
         >
-          <a href="https://github.com/xavitje/RhymeHelper/releases/download/v1.0.0/RymeHelper-Setup-1.0.0.exe" download className="group relative px-8 py-4 bg-primary text-white font-mono text-lg rounded-md hover:bg-primary/90 transition-all flex items-center gap-3 overflow-hidden shadow-[0_0_30px_rgba(168,85,247,0.3)]">
+          <a href="#download" className="group relative px-8 py-4 bg-primary text-white font-mono text-lg rounded-md hover:bg-primary/90 transition-all flex items-center gap-3 overflow-hidden shadow-[0_0_30px_rgba(168,85,247,0.3)]">
             <span className="relative z-10 flex items-center gap-2">
               <Download className="w-5 h-5" />
               Download Free
@@ -41,14 +41,14 @@ export default function Home() {
             <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out" />
           </a>
           <a href="https://checkout.rhymehelper.store/checkout/buy/4d484294-7957-4748-846f-f9bf3cf00252?embed=1" className="lemonsqueezy-button px-8 py-4 border border-border text-foreground font-mono text-lg rounded-md hover:bg-muted hover:border-muted-foreground transition-all flex items-center gap-3">
-            Buy Pro — $19.99
+            Buy Pro — €9.99
           </a>
         </motion.div>
       </section>
 
       {/* Interface Showcase */}
       <section className="relative w-full max-w-[1400px] mx-auto px-6 mb-32 z-10">
-        <motion.div 
+        <motion.div
           className="relative rounded-xl overflow-hidden border border-border/50 shadow-2xl bg-[#121212] p-2 aspect-[16/9] flex items-center justify-center"
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -85,7 +85,7 @@ export default function Home() {
                  <span className="ml-auto font-mono text-sm bg-muted/30 px-3 py-1 rounded-full text-primary/70">15</span>
                </div>
              </div>
-             
+
              {/* Sidebar Rhyme Dictionary */}
              <div className="w-[300px] border-l border-border/30 bg-[#121212] p-6 hidden md:block">
                 <div className="text-xl font-sans mb-6">Words for "seen"</div>
@@ -139,7 +139,7 @@ export default function Home() {
               A meticulously designed writing canvas that stays out of your way. Highlight multisyllabic rhymes, structure your verses, and keep your focus purely on the flow.
             </p>
           </div>
-          
+
           {/* Feature 2 */}
           <div className="bg-muted/10 border border-border p-8 md:p-12 group hover:border-primary/50 transition-colors">
             <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center text-primary mb-8 group-hover:scale-110 transition-transform">
@@ -150,7 +150,7 @@ export default function Home() {
               Never leave the editor to find a word. Highlight any word and instantly see perfect matches, slant rhymes, and assonance right at your cursor.
             </p>
           </div>
-          
+
           {/* Feature 3 */}
           <div className="bg-muted/10 border border-border p-8 md:p-12 group hover:border-primary/50 transition-colors">
             <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center text-primary mb-8 group-hover:scale-110 transition-transform">
@@ -161,7 +161,7 @@ export default function Home() {
               Elevate your pen game with multi-word queries. Find phrases that match the exact vowel structure of your punchline to build complex rhyme schemes.
             </p>
           </div>
-          
+
           {/* Feature 4 */}
           <div className="bg-muted/10 border border-border p-8 md:p-12 group hover:border-primary/50 transition-colors">
             <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center text-primary mb-8 group-hover:scale-110 transition-transform">
