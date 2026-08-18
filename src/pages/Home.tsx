@@ -40,7 +40,7 @@ export default function Home() {
             </span>
             <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out" />
           </a>
-          <a href="/pricing" className="px-8 py-4 border border-border text-foreground font-mono text-lg rounded-md hover:bg-muted hover:border-muted-foreground transition-all flex items-center gap-3">
+          <a href="https://checkout.rhymehelper.store/checkout/buy/4d484294-7957-4748-846f-f9bf3cf00252?embed=1" className="lemonsqueezy-button px-8 py-4 border border-border text-foreground font-mono text-lg rounded-md hover:bg-muted hover:border-muted-foreground transition-all flex items-center gap-3">
             Buy Pro — $19.99
           </a>
         </motion.div>
