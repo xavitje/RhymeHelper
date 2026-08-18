@@ -55,7 +55,11 @@ export default function Pricing() {
           </div>
           <div className="mb-8">
             <h2 className="text-3xl font-display uppercase tracking-wide mb-2 text-primary">Pro</h2>
-            <div className="text-4xl font-mono text-foreground mb-4">$19.99<span className="text-xl text-muted-foreground ml-2">/ lifetime</span></div>
+            <div className="text-4xl font-mono text-foreground mb-4">
+              €9.99
+              <span className="text-lg text-muted-foreground line-through ml-2">€19.99</span>
+              <span className="text-xs text-primary font-sans block mt-1 uppercase tracking-wider">Launch Deal</span>
+            </div>
             <p className="text-muted-foreground font-sans">For professional lyricists building complex schemes.</p>
           </div>
           
