@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { supabase } from '../lib/supabaseClient';
 import { motion } from 'framer-motion';
 import { Key, Download, AlertCircle } from 'lucide-react';
+import { APP_CONFIG } from '../config';
 
 export default function Dashboard() {
   const [user, setUser] = useState<any>(null);
@@ -177,7 +178,7 @@ export default function Dashboard() {
               <span className="font-mono">Mac (Intel)</span>
               <span className="text-xs uppercase tracking-widest border border-border px-2 py-0.5 rounded">Coming Soon</span>
             </button>
-            <a href="https://github.com/xavitje/RhymeHelper/releases/download/v1.0.0/RymeHelper-Setup-1.0.0.exe" download className="w-full flex items-center justify-between p-4 border border-border rounded-md hover:border-foreground transition-colors group">
+            <a href={APP_CONFIG.WINDOWS_DOWNLOAD_URL} download className="w-full flex items-center justify-between p-4 border border-border rounded-md hover:border-foreground transition-colors group">
               <span className="font-mono text-foreground group-hover:text-primary transition-colors">Windows (x64)</span>
               <Download className="w-4 h-4 text-muted-foreground group-hover:text-primary transition-colors" />
             </a>
