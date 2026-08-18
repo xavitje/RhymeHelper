@@ -33,7 +33,7 @@ export default function Home() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.5, duration: 0.8 }}
         >
-          <a href="#download" className="group relative px-8 py-4 bg-primary text-white font-mono text-lg rounded-md hover:bg-primary/90 transition-all flex items-center gap-3 overflow-hidden shadow-[0_0_30px_rgba(168,85,247,0.3)]">
+          <a href="https://github.com/xavitje/RhymeHelper/releases/download/v1.0.0/RymeHelper-Setup-1.0.0.exe" download className="group relative px-8 py-4 bg-primary text-white font-mono text-lg rounded-md hover:bg-primary/90 transition-all flex items-center gap-3 overflow-hidden shadow-[0_0_30px_rgba(168,85,247,0.3)]">
             <span className="relative z-10 flex items-center gap-2">
               <Download className="w-5 h-5" />
               Download Free
