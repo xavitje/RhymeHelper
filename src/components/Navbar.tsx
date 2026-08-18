@@ -30,9 +30,14 @@ export default function Navbar() {
         </div>
         <div className="flex items-center gap-4">
           {user ? (
-            <Link to="/dashboard" className="text-sm font-mono text-primary hover:text-primary/80 transition-colors hidden md:block">
-              Dashboard
-            </Link>
+            <>
+              <Link to="/dashboard" className="text-sm font-mono text-primary hover:text-primary/80 transition-colors hidden md:block">
+                Dashboard
+              </Link>
+              <Link to="/account" className="text-sm font-mono text-muted-foreground hover:text-foreground transition-colors hidden md:block">
+                Account
+              </Link>
+            </>
           ) : (
             <Link to="/login" className="text-sm font-mono text-muted-foreground hover:text-foreground transition-colors hidden md:block">
               Login

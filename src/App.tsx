@@ -5,6 +5,7 @@ import Home from './pages/Home';
 import Pricing from './pages/Pricing';
 import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
+import Account from './pages/Account';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
             <Route path="/pricing" element={<Pricing />} />
             <Route path="/login" element={<Login />} />
             <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/account" element={<Account />} />
             {/* Placeholder routes for others */}
             <Route path="*" element={<div className="p-20 text-center font-display text-4xl">Page Coming Soon</div>} />
           </Routes>
