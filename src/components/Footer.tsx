@@ -46,7 +46,6 @@ export default function Footer() {
               <p className="text-sm font-sans text-foreground">&lt; 24h Response Time</p>
             </div>
           </div>
-          </ul>
         </div>
       </div>
       <div className="max-w-7xl mx-auto px-6 mt-12 pt-8 border-t border-border/40 text-center text-xs font-mono text-muted-foreground">

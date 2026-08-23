@@ -21,17 +21,17 @@ export default function NotFound() {
           <p className="text-muted-foreground font-sans mb-8">
             The track you're looking for doesn't exist, has been moved, or is currently unreleased.
           </p>
-          
+
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Link 
-              to="/" 
+            <Link
+              to="/"
               className="w-full sm:w-auto px-8 py-4 bg-primary text-white font-mono rounded-md hover:bg-primary/90 transition-colors flex items-center justify-center gap-2"
             >
               <Home className="w-4 h-4" />
               Back Home
             </Link>
-            <Link 
-              to="/pricing" 
+            <Link
+              to="/pricing"
               className="w-full sm:w-auto px-8 py-4 border border-border text-foreground font-mono rounded-md hover:bg-muted transition-colors flex items-center justify-center gap-2"
             >
               View Pricing

@@ -30,7 +30,7 @@ export default function Dashboard() {
   const handleActivate = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!licenseInput.trim()) return;
-    
+
     setActivating(true);
     setMessage({ type: '', text: '' });
 
@@ -61,9 +61,9 @@ export default function Dashboard() {
         const { error } = await supabase.auth.updateUser({
           data: { license_key: licenseInput.trim() }
         });
-        
+
         if (error) throw error;
-        
+
         // Update local state
         setUser({
           ...user,
@@ -101,7 +101,7 @@ export default function Dashboard() {
           <h1 className="text-4xl font-display uppercase tracking-wide">Studio <span className="text-primary">Dashboard</span></h1>
           <p className="text-muted-foreground font-mono text-sm mt-2">{user?.email}</p>
         </div>
-        <button 
+        <button
           onClick={handleLogout}
           className="px-4 py-2 text-sm font-mono border border-border text-foreground hover:bg-muted rounded-md transition-colors"
         >
@@ -112,7 +112,7 @@ export default function Dashboard() {
       <div className={`grid grid-cols-1 ${hasLicense ? '' : 'md:grid-cols-2'} gap-8`}>
         {/* License Section - Only visible if they don't have a license */}
         {!hasLicense && (
-          <motion.div 
+          <motion.div
             className="bg-muted/5 border border-border p-8 rounded-xl"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -128,7 +128,7 @@ export default function Dashboard() {
               <p className="text-muted-foreground font-sans text-sm mb-6">
                 Enter your Lemon Squeezy license key to unlock Pro features on the desktop app.
               </p>
-              
+
               {message.text && (
                 <div className={`p-3 rounded-md mb-6 font-mono text-xs flex items-start gap-2 ${message.type === 'error' ? 'bg-red-500/10 text-red-400 border border-red-500/20' : 'bg-[#22c55e]/10 text-[#22c55e] border border-[#22c55e]/20'}`}>
                   {message.type === 'error' && <AlertCircle className="w-4 h-4 shrink-0 mt-0.5" />}
@@ -137,15 +137,15 @@ export default function Dashboard() {
               )}
 
               <form onSubmit={handleActivate} className="flex gap-2">
-                <input 
-                  type="text" 
+                <input
+                  type="text"
                   required
                   value={licenseInput}
                   onChange={(e) => setLicenseInput(sanitize(e.target.value))}
                   placeholder="XXXX-XXXX-XXXX-XXXX"
                   className="flex-1 bg-background border border-border rounded-md px-4 py-2 text-foreground focus:outline-none focus:border-primary transition-colors font-mono text-sm"
                 />
-                <button 
+                <button
                   type="submit"
                   disabled={activating}
                   className="px-6 py-2 bg-primary text-white font-mono text-sm rounded-md hover:bg-primary/90 transition-colors disabled:opacity-50 whitespace-nowrap"
@@ -158,7 +158,7 @@ export default function Dashboard() {
         )}
 
         {/* Downloads Section */}
-        <motion.div 
+        <motion.div
           className="bg-muted/5 border border-border p-8 rounded-xl"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}

@@ -1,7 +1,6 @@
 import { motion } from 'framer-motion';
-import { Download, Zap, BookOpen, Layers, Keyboard, PenTool, ArrowRight, ChevronDown } from 'lucide-react';
+import { Download, Zap, PenTool, ArrowRight, ChevronDown } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { APP_CONFIG } from '../config';
 import { Helmet } from 'react-helmet-async';
 import { useState } from 'react';
 
@@ -93,30 +92,30 @@ export default function Home() {
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 1 }}
           >
-             {/* Main Editor Area */}
-             <div className="w-full h-full border border-border/30 rounded-lg overflow-hidden flex bg-[#161616] relative shadow-inner">
-               <div className="flex-1 p-6 md:p-12 text-muted-foreground font-sans text-lg md:text-2xl leading-relaxed">
-                 <div className="flex items-center gap-6 mb-6">
-                   <span className="font-mono text-sm text-border">1</span>
-                   <p>Lock into the studio and never break your flow,</p>
-                   <span className="ml-auto font-mono text-sm bg-muted/30 px-3 py-1 rounded-full text-primary/70 hidden sm:block">13</span>
-                 </div>
-                 <div className="flex items-center gap-6 mb-6 relative">
-                   <span className="font-mono text-sm text-border">5</span>
-                   <p>The sharpest writer's notepad that the booth has ever <span className="bg-primary text-white px-1">seen.</span></p>
-                   <span className="ml-auto font-mono text-sm bg-muted/30 px-3 py-1 rounded-full text-primary/70 hidden sm:block">15</span>
-                 </div>
-               </div>
+            {/* Main Editor Area */}
+            <div className="w-full h-full border border-border/30 rounded-lg overflow-hidden flex bg-[#161616] relative shadow-inner">
+              <div className="flex-1 p-6 md:p-12 text-muted-foreground font-sans text-lg md:text-2xl leading-relaxed">
+                <div className="flex items-center gap-6 mb-6">
+                  <span className="font-mono text-sm text-border">1</span>
+                  <p>Lock into the studio and never break your flow,</p>
+                  <span className="ml-auto font-mono text-sm bg-muted/30 px-3 py-1 rounded-full text-primary/70 hidden sm:block">13</span>
+                </div>
+                <div className="flex items-center gap-6 mb-6 relative">
+                  <span className="font-mono text-sm text-border">5</span>
+                  <p>The sharpest writer's notepad that the booth has ever <span className="bg-primary text-white px-1">seen.</span></p>
+                  <span className="ml-auto font-mono text-sm bg-muted/30 px-3 py-1 rounded-full text-primary/70 hidden sm:block">15</span>
+                </div>
+              </div>
 
-               {/* Sidebar Rhyme Dictionary */}
-               <div className="w-[300px] border-l border-border/30 bg-[#121212] p-6 hidden md:block">
-                  <div className="text-xl font-sans mb-6 text-foreground">Words for "seen"</div>
-                  <div className="flex flex-wrap gap-2 mb-6">
-                    <span className="border border-[#22c55e] text-[#22c55e] rounded-full px-3 py-1 text-sm">keen</span>
-                    <span className="border border-[#22c55e] text-[#22c55e] rounded-full px-3 py-1 text-sm">mean</span>
-                  </div>
-               </div>
-             </div>
+              {/* Sidebar Rhyme Dictionary */}
+              <div className="w-[300px] border-l border-border/30 bg-[#121212] p-6 hidden md:block">
+                <div className="text-xl font-sans mb-6 text-foreground">Words for "seen"</div>
+                <div className="flex flex-wrap gap-2 mb-6">
+                  <span className="border border-[#22c55e] text-[#22c55e] rounded-full px-3 py-1 text-sm">keen</span>
+                  <span className="border border-[#22c55e] text-[#22c55e] rounded-full px-3 py-1 text-sm">mean</span>
+                </div>
+              </div>
+            </div>
           </motion.div>
         </section>
 
