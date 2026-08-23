@@ -8,7 +8,7 @@ import { sanitize } from '../lib/sanitize';
 export default function Account() {
   const [user, setUser] = useState<any>(null);
   const [loading, setLoading] = useState(true);
-  
+
   // Email Form State
   const [newEmail, setNewEmail] = useState('');
   const [emailLoading, setEmailLoading] = useState(false);
@@ -70,13 +70,13 @@ export default function Account() {
 
   const handleRemoveLicense = async () => {
     if (!confirm('Are you sure you want to unlink your license key from this account?')) return;
-    
+
     try {
       const { error } = await supabase.auth.updateUser({
         data: { license_key: null }
       });
       if (error) throw error;
-      
+
       setUser({
         ...user,
         user_metadata: {
@@ -108,9 +108,9 @@ export default function Account() {
       </div>
 
       <div className="space-y-8">
-        
+
         {/* Email Section */}
-        <motion.div 
+        <motion.div
           className="bg-muted/5 border border-border p-8 rounded-xl"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -119,7 +119,7 @@ export default function Account() {
             <Mail className="w-5 h-5 text-muted-foreground" />
             <h2 className="text-xl font-display uppercase tracking-wide">Email Address</h2>
           </div>
-          
+
           <p className="text-sm font-sans text-muted-foreground mb-4">Current Email: <span className="text-foreground font-mono">{user?.email}</span></p>
 
           {emailMessage.text && (
@@ -130,15 +130,15 @@ export default function Account() {
           )}
 
           <form onSubmit={handleUpdateEmail} className="flex gap-2">
-            <input 
-              type="email" 
+            <input
+              type="email"
               required
               value={newEmail}
               onChange={(e) => setNewEmail(sanitize(e.target.value))}
               placeholder="New email address"
               className="flex-1 bg-background border border-border rounded-md px-4 py-2 text-foreground focus:outline-none focus:border-primary transition-colors font-mono text-sm"
             />
-            <button 
+            <button
               type="submit"
               disabled={emailLoading}
               className="px-6 py-2 border border-border text-foreground font-mono text-sm rounded-md hover:bg-muted transition-colors disabled:opacity-50 whitespace-nowrap"
@@ -149,7 +149,7 @@ export default function Account() {
         </motion.div>
 
         {/* Password Section */}
-        <motion.div 
+        <motion.div
           className="bg-muted/5 border border-border p-8 rounded-xl"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -168,8 +168,8 @@ export default function Account() {
           )}
 
           <form onSubmit={handleUpdatePassword} className="flex gap-2">
-            <input 
-              type="password" 
+            <input
+              type="password"
               required
               minLength={6}
               value={newPassword}
@@ -177,7 +177,7 @@ export default function Account() {
               placeholder="New password (min 6 chars)"
               className="flex-1 bg-background border border-border rounded-md px-4 py-2 text-foreground focus:outline-none focus:border-primary transition-colors font-mono text-sm"
             />
-            <button 
+            <button
               type="submit"
               disabled={passwordLoading}
               className="px-6 py-2 border border-border text-foreground font-mono text-sm rounded-md hover:bg-muted transition-colors disabled:opacity-50 whitespace-nowrap"
@@ -188,7 +188,7 @@ export default function Account() {
         </motion.div>
 
         {/* License Details Section */}
-        <motion.div 
+        <motion.div
           className="bg-muted/5 border border-border p-8 rounded-xl"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -210,7 +210,7 @@ export default function Account() {
               <code className="block bg-background border border-border p-3 rounded-md text-sm text-foreground mb-6 break-all">
                 {user.user_metadata.license_key}
               </code>
-              <button 
+              <button
                 onClick={handleRemoveLicense}
                 className="text-sm font-mono text-red-400 hover:text-red-300 transition-colors"
               >
@@ -220,7 +220,7 @@ export default function Account() {
           ) : (
             <div>
               <p className="text-sm font-sans text-muted-foreground mb-4">No license key is currently linked to this account.</p>
-              <button 
+              <button
                 onClick={() => navigate('/dashboard')}
                 className="px-6 py-2 bg-primary/10 text-primary border border-primary/20 font-mono text-sm rounded-md hover:bg-primary hover:text-white transition-colors"
               >

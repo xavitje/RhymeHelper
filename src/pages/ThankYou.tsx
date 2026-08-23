@@ -20,12 +20,12 @@ export default function ThankYou() {
           <div className="w-20 h-20 bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-8">
             <CheckCircle2 className="w-10 h-10 text-primary" />
           </div>
-          
+
           <h1 className="text-4xl font-display uppercase tracking-wide mb-4">Welcome to <span className="text-primary">Pro</span></h1>
           <p className="text-lg text-muted-foreground font-sans mb-8">
             Your purchase was successful. We've sent your license key and setup instructions to your email address.
           </p>
-          
+
           <div className="bg-background border border-border p-6 rounded-xl mb-10 text-left">
             <h3 className="font-display uppercase tracking-wider mb-4 text-sm text-muted-foreground border-b border-border/50 pb-2">Next Steps</h3>
             <ol className="space-y-4 font-sans text-sm">
@@ -45,15 +45,15 @@ export default function ThankYou() {
           </div>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Link 
-              to="/dashboard" 
+            <Link
+              to="/dashboard"
               className="w-full sm:w-auto px-8 py-4 bg-primary text-white font-mono rounded-md hover:bg-primary/90 transition-colors flex items-center justify-center gap-2 shadow-[0_0_15px_rgba(168,85,247,0.3)]"
             >
               <Download className="w-4 h-4" />
               Go to Dashboard
             </Link>
-            <Link 
-              to="/" 
+            <Link
+              to="/"
               className="w-full sm:w-auto px-8 py-4 border border-border text-foreground font-mono rounded-md hover:bg-muted transition-colors flex items-center justify-center gap-2"
             >
               Return Home
