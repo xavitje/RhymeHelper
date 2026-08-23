@@ -19,6 +19,9 @@ export default function Account() {
   const [passwordLoading, setPasswordLoading] = useState(false);
   const [passwordMessage, setPasswordMessage] = useState({ type: '', text: '' });
 
+  // Delete Account State
+  const [deleteLoading, setDeleteLoading] = useState(false);
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -86,6 +89,24 @@ export default function Account() {
       });
     } catch (err: any) {
       alert('Failed to remove license: ' + err.message);
+    }
+  };
+
+  const handleDeleteAccount = async () => {
+    if (!window.confirm('Are you absolutely sure you want to delete your account? This will permanently erase all your data and cannot be undone.')) {
+      return;
+    }
+
+    setDeleteLoading(true);
+    try {
+      const { error } = await supabase.rpc('delete_user');
+      if (error) throw error;
+      
+      await supabase.auth.signOut();
+      navigate('/login');
+    } catch (err: any) {
+      alert('Failed to delete account: ' + err.message);
+      setDeleteLoading(false);
     }
   };
 
@@ -228,6 +249,31 @@ export default function Account() {
               </button>
             </div>
           )}
+        </motion.div>
+
+        {/* Danger Zone */}
+        <motion.div
+          className="border border-red-500/20 bg-red-500/5 p-8 rounded-xl mt-12"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.3 }}
+        >
+          <div className="flex items-center gap-3 mb-6">
+            <AlertCircle className="w-5 h-5 text-red-400" />
+            <h2 className="text-xl font-display uppercase tracking-wide text-red-400">Danger Zone</h2>
+          </div>
+          
+          <p className="text-sm font-sans text-muted-foreground mb-6">
+            Permanently delete your account and remove all associated data. In accordance with our Privacy Policy and GDPR requirements, your data will be securely erased. This action cannot be undone.
+          </p>
+          
+          <button
+            onClick={handleDeleteAccount}
+            disabled={deleteLoading}
+            className="px-6 py-2 bg-red-500/10 text-red-400 border border-red-500/20 font-mono text-sm rounded-md hover:bg-red-500 hover:text-white transition-colors disabled:opacity-50"
+          >
+            {deleteLoading ? 'Deleting...' : 'Delete Account'}
+          </button>
         </motion.div>
 
       </div>
