@@ -8,7 +8,7 @@ export default function Footer() {
           <div className="flex items-center gap-2 mb-4">
             <img src="/logo.png" alt="RhymeHelper Logo" className="h-8 w-8 object-contain rounded-md" />
             <h3 className="text-xl font-display font-bold tracking-wider text-foreground">
-              Ryme<span className="text-primary">Helper</span>
+              Rhyme<span className="text-primary">Helper</span>
             </h3>
           </div>
           <p className="text-sm text-muted-foreground font-sans">
@@ -39,7 +39,7 @@ export default function Footer() {
         </div>
       </div>
       <div className="max-w-7xl mx-auto px-6 mt-12 pt-8 border-t border-border/40 text-center text-xs font-mono text-muted-foreground">
-        &copy; {new Date().getFullYear()} RymeHelper. Built for the booth.
+        &copy; {new Date().getFullYear()} Rhyme Helper. Built for the booth.
       </div>
     </footer>
   );
