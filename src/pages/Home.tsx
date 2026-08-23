@@ -74,9 +74,9 @@ export default function Home() {
               </span>
               <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out" />
             </Link>
-            <Link to="/#features" className="px-8 py-4 border border-border text-foreground font-mono text-lg rounded-md hover:bg-muted hover:border-muted-foreground transition-all flex items-center gap-3">
+            <a href="#features" className="px-8 py-4 border border-border text-foreground font-mono text-lg rounded-md hover:bg-muted hover:border-muted-foreground transition-all flex items-center gap-3">
               Explore Features
-            </Link>
+            </a>
           </motion.div>
           <div className="mt-8 text-sm text-muted-foreground font-sans">
             Available for Windows and macOS. <Link to="/pricing" className="text-primary hover:underline">View Pricing options.</Link>
@@ -204,6 +204,12 @@ export default function Home() {
                 )}
               </div>
             ))}
+          </div>
+          
+          <div className="mt-8 text-center">
+            <Link to="/faq" className="inline-flex items-center gap-2 text-primary hover:text-primary/80 transition-colors font-mono font-medium">
+              View All FAQs <ArrowRight className="w-4 h-4" />
+            </Link>
           </div>
         </section>
 

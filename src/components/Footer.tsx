@@ -28,15 +28,14 @@ export default function Footer() {
           <h4 className="font-mono text-sm text-foreground mb-4">Resources</h4>
           <ul className="space-y-2 text-sm text-muted-foreground font-sans">
             <li><Link to="/resources" className="hover:text-primary transition-colors">Documentation</Link></li>
-            <li><Link to="/resources" className="hover:text-primary transition-colors">Keyboard Shortcuts</Link></li>
-            <li><Link to="/#faq" className="hover:text-primary transition-colors">FAQ</Link></li>
+            <li><Link to="/faq" className="hover:text-primary transition-colors">FAQ</Link></li>
           </ul>
         </div>
         <div>
           <h4 className="font-mono text-sm text-foreground mb-4">Legal</h4>
           <ul className="space-y-2 text-sm text-muted-foreground font-sans">
             <li><Link to="/privacy" className="hover:text-primary transition-colors">Privacy Policy</Link></li>
-            <li><Link to="#" className="hover:text-primary transition-colors">Terms of Service</Link></li>
+            <li><Link to="/terms" className="hover:text-primary transition-colors">Terms of Service</Link></li>
           </ul>
           
           <div className="mt-8 bg-muted/10 p-4 rounded-lg border border-border inline-flex items-center gap-3">
