@@ -4,6 +4,7 @@ import Footer from './components/Footer';
 import Home from './pages/Home';
 import Pricing from './pages/Pricing';
 import Login from './pages/Login';
+import ResetPassword from './pages/ResetPassword';
 import { HelmetProvider } from 'react-helmet-async';
 import Dashboard from './pages/Dashboard';
 import Account from './pages/Account';
@@ -23,6 +24,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/pricing" element={<Pricing />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/reset-password" element={<ResetPassword />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/account" element={<Account />} />
             <Route path="/thank-you" element={<ThankYou />} />
