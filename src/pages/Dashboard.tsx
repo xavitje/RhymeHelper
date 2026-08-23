@@ -4,6 +4,7 @@ import { supabase } from '../lib/supabaseClient';
 import { motion } from 'framer-motion';
 import { Key, Download, AlertCircle } from 'lucide-react';
 import { APP_CONFIG } from '../config';
+import { sanitize } from '../lib/sanitize';
 
 export default function Dashboard() {
   const [user, setUser] = useState<any>(null);
@@ -48,6 +49,11 @@ export default function Dashboard() {
       });
 
       const data = await response.json();
+
+      // Ensure the logged-in user actually owns this license
+      if (data.meta?.customer_email && data.meta.customer_email.toLowerCase() !== user?.email?.toLowerCase()) {
+        throw new Error('This license key belongs to a different email address.');
+      }
 
       if (data.activated || (data.error && data.error.includes('already activated'))) {
         // Save the valid license key to the user's Supabase metadata
@@ -135,7 +141,7 @@ export default function Dashboard() {
                   type="text" 
                   required
                   value={licenseInput}
-                  onChange={(e) => setLicenseInput(e.target.value)}
+                  onChange={(e) => setLicenseInput(sanitize(e.target.value))}
                   placeholder="XXXX-XXXX-XXXX-XXXX"
                   className="flex-1 bg-background border border-border rounded-md px-4 py-2 text-foreground focus:outline-none focus:border-primary transition-colors font-mono text-sm"
                 />

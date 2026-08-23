@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { supabase } from '../lib/supabaseClient';
 import { motion } from 'framer-motion';
+import { sanitize } from '../lib/sanitize';
 
 export default function Login() {
   const [email, setEmail] = useState('');
@@ -64,7 +65,7 @@ export default function Login() {
               type="email" 
               required
               value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={(e) => setEmail(sanitize(e.target.value))}
               className="w-full bg-background border border-border rounded-md px-4 py-3 text-foreground focus:outline-none focus:border-primary transition-colors font-sans"
               placeholder="producer@studio.com"
             />
@@ -75,7 +76,7 @@ export default function Login() {
               type="password" 
               required
               value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              onChange={(e) => setPassword(sanitize(e.target.value))}
               className="w-full bg-background border border-border rounded-md px-4 py-3 text-foreground focus:outline-none focus:border-primary transition-colors font-sans"
               placeholder="••••••••"
             />
