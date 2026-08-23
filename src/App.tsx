@@ -10,6 +10,7 @@ import Account from './pages/Account';
 import NotFound from './pages/NotFound';
 import ThankYou from './pages/ThankYou';
 import PrivacyPolicy from './pages/PrivacyPolicy';
+import Resources from './pages/Resources';
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
             <Route path="/account" element={<Account />} />
             <Route path="/thank-you" element={<ThankYou />} />
             <Route path="/privacy" element={<PrivacyPolicy />} />
+            <Route path="/resources" element={<Resources />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </main>
