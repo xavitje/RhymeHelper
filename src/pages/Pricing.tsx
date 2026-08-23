@@ -57,9 +57,15 @@ export default function Pricing() {
           <div className="mb-8">
             <h2 className="text-3xl font-display uppercase tracking-wide mb-2 text-primary">Pro</h2>
             <div className="text-4xl font-mono text-foreground mb-4">
-              €9.99
-              <span className="text-lg text-muted-foreground line-through ml-2">€19.99</span>
-              <span className="text-xs text-primary font-sans block mt-1 uppercase tracking-wider">Launch Deal</span>
+              {APP_CONFIG.SALE_PRICE ? (
+                <>
+                  {APP_CONFIG.SALE_PRICE}
+                  <span className="text-lg text-muted-foreground line-through ml-2">{APP_CONFIG.PRICE}</span>
+                  <span className="text-xs text-primary font-sans block mt-1 uppercase tracking-wider">Launch Deal</span>
+                </>
+              ) : (
+                APP_CONFIG.PRICE
+              )}
             </div>
             <p className="text-muted-foreground font-sans">For professional lyricists building complex schemes.</p>
           </div>
@@ -87,7 +93,7 @@ export default function Pricing() {
             </li>
           </ul>
           
-          <a href="https://checkout.rhymehelper.store/checkout/buy/85bfb619-30c6-4b30-89c9-14830c1ce986?embed=1" className="lemonsqueezy-button w-full py-4 bg-primary text-white font-mono text-lg rounded-md hover:bg-primary/90 transition-all shadow-[0_0_20px_rgba(168,85,247,0.3)] text-center flex items-center justify-center">
+          <a href={APP_CONFIG.LEMON_SQUEEZY_CHECKOUT_URL} className="lemonsqueezy-button w-full py-4 bg-primary text-white font-mono text-lg rounded-md hover:bg-primary/90 transition-all shadow-[0_0_20px_rgba(168,85,247,0.3)] text-center flex items-center justify-center">
             Buy Pro License
           </a>
         </motion.div>
