@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { Check } from 'lucide-react';
+import { APP_CONFIG } from '../config';
 
 export default function Pricing() {
   return (
@@ -38,9 +39,9 @@ export default function Pricing() {
             </li>
           </ul>
           
-          <button className="w-full py-4 border border-border text-foreground font-mono text-lg rounded-md hover:bg-muted hover:border-muted-foreground transition-all">
+          <a href={APP_CONFIG.WINDOWS_DOWNLOAD_URL} download className="w-full block text-center py-4 border border-border text-foreground font-mono text-lg rounded-md hover:bg-muted hover:border-muted-foreground transition-all">
             Download Free
-          </button>
+          </a>
         </motion.div>
 
         {/* Pro Tier */}

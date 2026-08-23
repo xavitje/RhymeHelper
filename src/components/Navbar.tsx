@@ -31,6 +31,7 @@ export default function Navbar() {
           <Link to="/" className="hover:text-foreground transition-colors">Studio</Link>
           <Link to="/pricing" className="hover:text-foreground transition-colors">Pricing</Link>
           <Link to="/resources" className="hover:text-foreground transition-colors">Docs</Link>
+          <Link to="/faq" className="hover:text-foreground transition-colors">FAQ</Link>
         </div>
         <div className="flex items-center gap-4">
           {user ? (
