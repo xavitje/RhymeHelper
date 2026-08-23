@@ -37,7 +37,7 @@ export default function Home() {
         <title>RymeHelper | The Distraction-Free Writer's Notepad</title>
         <meta name="description" content="A specialized writing environment built specifically for rappers, lyricists, and poets. Write without noise, map complex rhyme schemes." />
       </Helmet>
-      
+
       <div className="pt-24 pb-16">
         {/* Hero Section (CTA Above the Fold) */}
         <section className="relative max-w-7xl mx-auto px-6 pt-12 lg:pt-24 pb-20 flex flex-col items-center text-center">
@@ -145,7 +145,7 @@ export default function Home() {
                 A meticulously designed writing canvas that stays out of your way. Highlight multisyllabic rhymes, structure your verses, and keep your focus purely on the flow.
               </p>
             </div>
-            
+
             <div className="bg-muted/10 border border-border p-8 md:p-12 group hover:border-primary/50 transition-colors">
               <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center text-primary mb-8 group-hover:scale-110 transition-transform">
                 <Zap className="w-6 h-6" />
@@ -164,7 +164,7 @@ export default function Home() {
             <h2 className="text-4xl md:text-5xl font-display font-bold uppercase tracking-tight text-foreground mb-4">Trusted in the <span className="text-primary">Booth</span></h2>
             <p className="text-muted-foreground font-sans">Hear from artists who leveled up their pen game.</p>
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {[
               { name: "MC Vertex", title: "Independent Artist", quote: "I used to have 15 browser tabs open for rhyming dictionaries. RymeHelper keeps me in the zone. My writing speed doubled." },
@@ -187,11 +187,11 @@ export default function Home() {
           <div className="mb-12 text-center">
             <h2 className="text-4xl md:text-5xl font-display font-bold uppercase tracking-tight text-foreground mb-4">Frequently Asked <span className="text-primary">Questions</span></h2>
           </div>
-          
+
           <div className="space-y-4">
             {FAQS.map((faq, index) => (
               <div key={index} className="border border-border rounded-lg overflow-hidden bg-muted/5">
-                <button 
+                <button
                   onClick={() => setOpenFaq(openFaq === index ? null : index)}
                   className="w-full px-6 py-4 flex items-center justify-between text-left focus:outline-none hover:bg-muted/10 transition-colors"
                 >

@@ -86,7 +86,7 @@ export default function Pricing() {
             </li>
           </ul>
           
-          <a href="https://checkout.rhymehelper.store/checkout/buy/4d484294-7957-4748-846f-f9bf3cf00252?embed=1" className="lemonsqueezy-button w-full py-4 bg-primary text-white font-mono text-lg rounded-md hover:bg-primary/90 transition-all shadow-[0_0_20px_rgba(168,85,247,0.3)] text-center flex items-center justify-center">
+          <a href="https://checkout.rhymehelper.store/checkout/buy/85bfb619-30c6-4b30-89c9-14830c1ce986?embed=1" className="lemonsqueezy-button w-full py-4 bg-primary text-white font-mono text-lg rounded-md hover:bg-primary/90 transition-all shadow-[0_0_20px_rgba(168,85,247,0.3)] text-center flex items-center justify-center">
             Buy Pro License
           </a>
         </motion.div>

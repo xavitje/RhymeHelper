@@ -15,7 +15,7 @@ RymeHelper is a professional, distraction-free writing environment built specifi
 - **Animations:** Framer Motion
 - **Authentication & Licensing:** Supabase Auth + Lemon Squeezy integration
 
-## 🚀 Getting Started
+## Getting Started
 
 1. **Install dependencies:**
    ```bash
