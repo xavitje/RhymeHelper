@@ -37,14 +37,6 @@ export default function Footer() {
             <li><Link to="/privacy" className="hover:text-primary transition-colors">Privacy Policy</Link></li>
             <li><Link to="/terms" className="hover:text-primary transition-colors">Terms of Service</Link></li>
           </ul>
-          
-          <div className="mt-8 bg-muted/10 p-4 rounded-lg border border-border inline-flex items-center gap-3">
-            <Clock className="w-5 h-5 text-primary" />
-            <div>
-              <p className="text-xs font-mono text-muted-foreground uppercase tracking-widest">Support Promise</p>
-              <p className="text-sm font-sans text-foreground">&lt; 24h Response Time</p>
-            </div>
-          </div>
         </div>
       </div>
       <div className="max-w-7xl mx-auto px-6 mt-12 pt-8 border-t border-border/40 text-center text-xs font-mono text-muted-foreground">

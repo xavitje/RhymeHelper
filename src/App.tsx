@@ -12,6 +12,8 @@ import NotFound from './pages/NotFound';
 import ThankYou from './pages/ThankYou';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import Resources from './pages/Resources';
+import Faq from './pages/Faq';
+import TermsOfService from './pages/TermsOfService';
 
 function App() {
   return (
@@ -30,6 +32,8 @@ function App() {
             <Route path="/thank-you" element={<ThankYou />} />
             <Route path="/privacy" element={<PrivacyPolicy />} />
             <Route path="/resources" element={<Resources />} />
+            <Route path="/faq" element={<Faq />} />
+            <Route path="/terms" element={<TermsOfService />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </main>
