@@ -4,14 +4,19 @@ import Footer from './components/Footer';
 import Home from './pages/Home';
 import Pricing from './pages/Pricing';
 import Login from './pages/Login';
+import { HelmetProvider } from 'react-helmet-async';
 import Dashboard from './pages/Dashboard';
 import Account from './pages/Account';
+import NotFound from './pages/NotFound';
+import ThankYou from './pages/ThankYou';
+import PrivacyPolicy from './pages/PrivacyPolicy';
 
 function App() {
   return (
-    <BrowserRouter>
-      <div className="min-h-screen flex flex-col bg-background text-foreground selection:bg-primary/30 selection:text-primary">
-        <Navbar />
+    <HelmetProvider>
+      <BrowserRouter>
+        <div className="min-h-screen flex flex-col bg-background text-foreground selection:bg-primary/30 selection:text-primary">
+          <Navbar />
         <main className="flex-1">
           <Routes>
             <Route path="/" element={<Home />} />
@@ -19,13 +24,15 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/account" element={<Account />} />
-            {/* Placeholder routes for others */}
-            <Route path="*" element={<div className="p-20 text-center font-display text-4xl">Page Coming Soon</div>} />
+            <Route path="/thank-you" element={<ThankYou />} />
+            <Route path="/privacy" element={<PrivacyPolicy />} />
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </main>
         <Footer />
       </div>
     </BrowserRouter>
+    </HelmetProvider>
   );
 }
 

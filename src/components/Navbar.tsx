@@ -20,6 +20,7 @@ export default function Navbar() {
   const hasLicense = !!user?.user_metadata?.license_key;
 
   return (
+    <>
     <nav className="fixed top-0 w-full z-50 border-b border-border/40 bg-background/80 backdrop-blur-md">
       <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
         <Link to="/" className="flex items-center gap-2 text-xl font-display font-bold tracking-wider text-foreground">
@@ -55,5 +56,14 @@ export default function Navbar() {
         </div>
       </div>
     </nav>
+      {/* Sticky Mobile CTA */}
+      {!hasLicense && (
+        <div className="md:hidden fixed bottom-0 left-0 right-0 p-4 bg-background/95 backdrop-blur-md border-t border-border/40 z-50 shadow-[0_-10px_20px_rgba(0,0,0,0.5)]">
+          <Link to="/pricing" className="block w-full py-3 bg-primary text-white text-center font-mono rounded-md shadow-[0_0_15px_rgba(168,85,247,0.3)]">
+            Get RymeHelper Pro
+          </Link>
+        </div>
+      )}
+    </>
   );
 }

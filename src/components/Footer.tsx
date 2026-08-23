@@ -1,3 +1,6 @@
+import { Link } from 'react-router-dom';
+import { Clock } from 'lucide-react';
+
 export default function Footer() {
   return (
     <footer className="border-t border-border/40 bg-background py-12 mt-20">
@@ -16,24 +19,33 @@ export default function Footer() {
         <div>
           <h4 className="font-mono text-sm text-foreground mb-4">Product</h4>
           <ul className="space-y-2 text-sm text-muted-foreground font-sans">
-            <li><a href="/" className="hover:text-primary transition-colors">Features</a></li>
-            <li><a href="/pricing" className="hover:text-primary transition-colors">Pricing</a></li>
-            <li><a href="/download" className="hover:text-primary transition-colors">Download</a></li>
+            <li><Link to="/#features" className="hover:text-primary transition-colors">Features</Link></li>
+            <li><Link to="/pricing" className="hover:text-primary transition-colors">Pricing</Link></li>
+            <li><Link to="/dashboard" className="hover:text-primary transition-colors">Download</Link></li>
           </ul>
         </div>
         <div>
           <h4 className="font-mono text-sm text-foreground mb-4">Resources</h4>
           <ul className="space-y-2 text-sm text-muted-foreground font-sans">
-            <li><a href="/resources" className="hover:text-primary transition-colors">Documentation</a></li>
-            <li><a href="/resources" className="hover:text-primary transition-colors">Keyboard Shortcuts</a></li>
-            <li><a href="/resources" className="hover:text-primary transition-colors">FAQ</a></li>
+            <li><Link to="/resources" className="hover:text-primary transition-colors">Documentation</Link></li>
+            <li><Link to="/resources" className="hover:text-primary transition-colors">Keyboard Shortcuts</Link></li>
+            <li><Link to="/#faq" className="hover:text-primary transition-colors">FAQ</Link></li>
           </ul>
         </div>
         <div>
           <h4 className="font-mono text-sm text-foreground mb-4">Legal</h4>
           <ul className="space-y-2 text-sm text-muted-foreground font-sans">
-            <li><a href="#" className="hover:text-primary transition-colors">Privacy Policy</a></li>
-            <li><a href="#" className="hover:text-primary transition-colors">Terms of Service</a></li>
+            <li><Link to="/privacy" className="hover:text-primary transition-colors">Privacy Policy</Link></li>
+            <li><Link to="#" className="hover:text-primary transition-colors">Terms of Service</Link></li>
+          </ul>
+          
+          <div className="mt-8 bg-muted/10 p-4 rounded-lg border border-border inline-flex items-center gap-3">
+            <Clock className="w-5 h-5 text-primary" />
+            <div>
+              <p className="text-xs font-mono text-muted-foreground uppercase tracking-widest">Support Promise</p>
+              <p className="text-sm font-sans text-foreground">&lt; 24h Response Time</p>
+            </div>
+          </div>
           </ul>
         </div>
       </div>

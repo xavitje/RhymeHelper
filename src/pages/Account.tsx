@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { supabase } from '../lib/supabaseClient';
 import { motion } from 'framer-motion';
 import { User, Mail, Lock, Key, AlertCircle, CheckCircle2 } from 'lucide-react';
+import { sanitize } from '../lib/sanitize';
 
 export default function Account() {
   const [user, setUser] = useState<any>(null);
@@ -133,7 +134,7 @@ export default function Account() {
               type="email" 
               required
               value={newEmail}
-              onChange={(e) => setNewEmail(e.target.value)}
+              onChange={(e) => setNewEmail(sanitize(e.target.value))}
               placeholder="New email address"
               className="flex-1 bg-background border border-border rounded-md px-4 py-2 text-foreground focus:outline-none focus:border-primary transition-colors font-mono text-sm"
             />
@@ -172,7 +173,7 @@ export default function Account() {
               required
               minLength={6}
               value={newPassword}
-              onChange={(e) => setNewPassword(e.target.value)}
+              onChange={(e) => setNewPassword(sanitize(e.target.value))}
               placeholder="New password (min 6 chars)"
               className="flex-1 bg-background border border-border rounded-md px-4 py-2 text-foreground focus:outline-none focus:border-primary transition-colors font-mono text-sm"
             />
