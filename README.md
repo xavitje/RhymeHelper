@@ -34,5 +34,5 @@ RymeHelper is a professional, distraction-free writing environment built specifi
    npm run dev
    ```
 
-## 🔐 License
+## License
 Copyright © RymeHelper. All rights reserved.
