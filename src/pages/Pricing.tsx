@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Check } from 'lucide-react';
+import { Check, X, Star } from 'lucide-react';
 import { APP_CONFIG } from '../config';
 
 export default function Pricing() {
@@ -27,15 +27,23 @@ export default function Pricing() {
           <ul className="space-y-4 mb-10 flex-1 font-sans text-muted-foreground">
             <li className="flex items-start gap-3">
               <Check className="w-5 h-5 text-primary mt-0.5 shrink-0" />
-              <span>Distraction-free rich text editor</span>
+              <span>Standard Text Editor</span>
             </li>
             <li className="flex items-start gap-3">
               <Check className="w-5 h-5 text-primary mt-0.5 shrink-0" />
-              <span>Basic syllable counting</span>
+              <span>Basic Dictionary</span>
             </li>
-            <li className="flex items-start gap-3">
-              <Check className="w-5 h-5 text-primary mt-0.5 shrink-0" />
-              <span>Standard dictionary access</span>
+            <li className="flex items-start gap-3 opacity-50">
+              <X className="w-5 h-5 text-red-500 mt-0.5 shrink-0" />
+              <span className="line-through">Instant Rhyme Popups</span>
+            </li>
+            <li className="flex items-start gap-3 opacity-50">
+              <X className="w-5 h-5 text-red-500 mt-0.5 shrink-0" />
+              <span className="line-through">Multisyllabic Search</span>
+            </li>
+            <li className="flex items-start gap-3 opacity-50">
+              <X className="w-5 h-5 text-red-500 mt-0.5 shrink-0" />
+              <span className="line-through">Cloud Project Sync</span>
             </li>
           </ul>
           
@@ -73,23 +81,23 @@ export default function Pricing() {
           <ul className="space-y-4 mb-10 flex-1 font-sans text-muted-foreground">
             <li className="flex items-start gap-3">
               <Check className="w-5 h-5 text-primary mt-0.5 shrink-0" />
-              <span className="text-foreground">Everything in Basic</span>
+              <span className="text-foreground font-medium">Everything in Free, plus:</span>
+            </li>
+            <li className="flex items-start gap-3">
+              <Star className="w-5 h-5 text-yellow-400 mt-0.5 shrink-0 fill-yellow-400/20" />
+              <span className="text-foreground"><strong>Instant Rhyme Popups:</strong> See rhymes while you type without opening a browser.</span>
+            </li>
+            <li className="flex items-start gap-3">
+              <Star className="w-5 h-5 text-yellow-400 mt-0.5 shrink-0 fill-yellow-400/20" />
+              <span className="text-foreground"><strong>Multisyllabic Search:</strong> Find complex rhymes for entire sentences, not just single words.</span>
+            </li>
+            <li className="flex items-start gap-3">
+              <Star className="w-5 h-5 text-yellow-400 mt-0.5 shrink-0 fill-yellow-400/20" />
+              <span className="text-foreground"><strong>Advanced Filters:</strong> Filter by syllables, assonance, and slant rhymes.</span>
             </li>
             <li className="flex items-start gap-3">
               <Check className="w-5 h-5 text-primary mt-0.5 shrink-0" />
-              <span className="text-foreground">Instant Rhyme Popup & Live Dictionary</span>
-            </li>
-            <li className="flex items-start gap-3">
-              <Check className="w-5 h-5 text-primary mt-0.5 shrink-0" />
-              <span className="text-foreground">Multi-word exact rhyme search</span>
-            </li>
-            <li className="flex items-start gap-3">
-              <Check className="w-5 h-5 text-primary mt-0.5 shrink-0" />
-              <span className="text-foreground">Advanced assonance & slant rhyme filters</span>
-            </li>
-            <li className="flex items-start gap-3">
-              <Check className="w-5 h-5 text-primary mt-0.5 shrink-0" />
-              <span className="text-foreground">Lifetime updates</span>
+              <span className="text-foreground">Lifetime Access & Updates</span>
             </li>
           </ul>
           
