@@ -106,10 +106,40 @@ export default function Login() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full py-4 bg-primary text-white font-mono text-lg rounded-md hover:bg-primary/90 transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-[0_0_15px_rgba(168,85,247,0.2)] mt-6"
+            className="w-full py-4 bg-primary text-white font-mono text-lg rounded-md hover:bg-primary/90 transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-[0_0_15px_rgba(168,85,247,0.2)] mt-6 mb-4"
           >
             {loading ? 'Processing...' : (isForgotPassword ? 'Send Reset Link' : (isSignUp ? 'Sign Up' : 'Login'))}
           </button>
+
+          {!isForgotPassword && (
+            <>
+              <div className="flex items-center my-6">
+                <div className="flex-1 h-px bg-border/50"></div>
+                <span className="px-4 text-xs font-mono text-muted-foreground uppercase tracking-widest">or</span>
+                <div className="flex-1 h-px bg-border/50"></div>
+              </div>
+
+              <button
+                type="button"
+                disabled={loading}
+                onClick={async () => {
+                  setLoading(true);
+                  try {
+                    const { error } = await supabase.auth.signInWithOAuth({ provider: 'google' });
+                    if (error) throw error;
+                  } catch (err: any) {
+                    setMessage({ type: 'error', text: err.message });
+                  } finally {
+                    setLoading(false);
+                  }
+                }}
+                className="w-full py-4 bg-white text-gray-800 font-sans text-md font-semibold rounded-xl hover:bg-gray-50 transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-3 border border-gray-200 shadow-[0_2px_10px_rgba(255,255,255,0.05)] hover:-translate-y-[1px]"
+              >
+                <img src="https://www.google.com/favicon.ico" alt="Google" className="w-5 h-5" />
+                Continue with Google
+              </button>
+            </>
+          )}
         </form>
 
         <div className="mt-8 text-center text-sm font-sans text-muted-foreground border-t border-border/50 pt-6">
