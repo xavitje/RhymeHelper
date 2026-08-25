@@ -7,9 +7,9 @@
   "/login/page": "/login",
   "/page": "/",
   "/pricing/page": "/pricing",
-  "/privacy-policy/page": "/privacy-policy",
+  "/privacy/page": "/privacy",
   "/reset-password/page": "/reset-password",
   "/resources/page": "/resources",
-  "/terms-of-service/page": "/terms-of-service",
+  "/terms/page": "/terms",
   "/thank-you/page": "/thank-you"
 }
