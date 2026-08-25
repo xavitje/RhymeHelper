@@ -42,14 +42,14 @@ export default function ThankYou() {
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link
-              to="/dashboard"
+              href="/dashboard"
               className="w-full sm:w-auto px-8 py-4 bg-primary text-white font-mono rounded-md hover:bg-primary/90 transition-colors flex items-center justify-center gap-2 shadow-[0_0_15px_rgba(168,85,247,0.3)]"
             >
               <Download className="w-4 h-4" />
               Go to Dashboard
             </Link>
             <Link
-              to="/"
+              href="/"
               className="w-full sm:w-auto px-8 py-4 border border-border text-foreground font-mono rounded-md hover:bg-muted transition-colors flex items-center justify-center gap-2"
             >
               Return Home
