@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 
 export default function Footer() {
   return (
@@ -18,23 +18,23 @@ export default function Footer() {
         <div>
           <h4 className="font-mono text-sm text-foreground mb-4">Product</h4>
           <ul className="space-y-2 text-sm text-muted-foreground font-sans">
-            <li><Link to="/#features" className="hover:text-primary transition-colors">Features</Link></li>
-            <li><Link to="/pricing" className="hover:text-primary transition-colors">Pricing</Link></li>
-            <li><Link to="/dashboard" className="hover:text-primary transition-colors">Download</Link></li>
+            <li><Link href="/#features" className="hover:text-primary transition-colors">Features</Link></li>
+            <li><Link href="/pricing" className="hover:text-primary transition-colors">Pricing</Link></li>
+            <li><Link href="/dashboard" className="hover:text-primary transition-colors">Download</Link></li>
           </ul>
         </div>
         <div>
           <h4 className="font-mono text-sm text-foreground mb-4">Resources</h4>
           <ul className="space-y-2 text-sm text-muted-foreground font-sans">
-            <li><Link to="/resources" className="hover:text-primary transition-colors">Documentation</Link></li>
-            <li><Link to="/faq" className="hover:text-primary transition-colors">FAQ</Link></li>
+            <li><Link href="/resources" className="hover:text-primary transition-colors">Documentation</Link></li>
+            <li><Link href="/faq" className="hover:text-primary transition-colors">FAQ</Link></li>
           </ul>
         </div>
         <div>
           <h4 className="font-mono text-sm text-foreground mb-4">Legal</h4>
           <ul className="space-y-2 text-sm text-muted-foreground font-sans">
-            <li><Link to="/privacy" className="hover:text-primary transition-colors">Privacy Policy</Link></li>
-            <li><Link to="/terms" className="hover:text-primary transition-colors">Terms of Service</Link></li>
+            <li><Link href="/privacy" className="hover:text-primary transition-colors">Privacy Policy</Link></li>
+            <li><Link href="/terms" className="hover:text-primary transition-colors">Terms of Service</Link></li>
           </ul>
         </div>
       </div>
