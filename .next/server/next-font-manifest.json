@@ -1,6 +1,55 @@
 {
-  "app": {},
-  "appUsingSizeAdjust": false,
+  "app": {
+    "[project]/src/app/_not-found/page": [
+      "static/media/83afe278b6a6bb3c-s.p.2bn3s6zvc0dyp.woff2",
+      "static/media/1b99372b3eaef0c8-s.p.1gsd1jahc5dg_.woff2"
+    ],
+    "[project]/src/app/account/page": [
+      "static/media/83afe278b6a6bb3c-s.p.2bn3s6zvc0dyp.woff2",
+      "static/media/1b99372b3eaef0c8-s.p.1gsd1jahc5dg_.woff2"
+    ],
+    "[project]/src/app/dashboard/page": [
+      "static/media/83afe278b6a6bb3c-s.p.2bn3s6zvc0dyp.woff2",
+      "static/media/1b99372b3eaef0c8-s.p.1gsd1jahc5dg_.woff2"
+    ],
+    "[project]/src/app/faq/page": [
+      "static/media/83afe278b6a6bb3c-s.p.2bn3s6zvc0dyp.woff2",
+      "static/media/1b99372b3eaef0c8-s.p.1gsd1jahc5dg_.woff2"
+    ],
+    "[project]/src/app/login/page": [
+      "static/media/83afe278b6a6bb3c-s.p.2bn3s6zvc0dyp.woff2",
+      "static/media/1b99372b3eaef0c8-s.p.1gsd1jahc5dg_.woff2"
+    ],
+    "[project]/src/app/page": [
+      "static/media/83afe278b6a6bb3c-s.p.2bn3s6zvc0dyp.woff2",
+      "static/media/1b99372b3eaef0c8-s.p.1gsd1jahc5dg_.woff2"
+    ],
+    "[project]/src/app/pricing/page": [
+      "static/media/83afe278b6a6bb3c-s.p.2bn3s6zvc0dyp.woff2",
+      "static/media/1b99372b3eaef0c8-s.p.1gsd1jahc5dg_.woff2"
+    ],
+    "[project]/src/app/privacy/page": [
+      "static/media/83afe278b6a6bb3c-s.p.2bn3s6zvc0dyp.woff2",
+      "static/media/1b99372b3eaef0c8-s.p.1gsd1jahc5dg_.woff2"
+    ],
+    "[project]/src/app/reset-password/page": [
+      "static/media/83afe278b6a6bb3c-s.p.2bn3s6zvc0dyp.woff2",
+      "static/media/1b99372b3eaef0c8-s.p.1gsd1jahc5dg_.woff2"
+    ],
+    "[project]/src/app/resources/page": [
+      "static/media/83afe278b6a6bb3c-s.p.2bn3s6zvc0dyp.woff2",
+      "static/media/1b99372b3eaef0c8-s.p.1gsd1jahc5dg_.woff2"
+    ],
+    "[project]/src/app/terms/page": [
+      "static/media/83afe278b6a6bb3c-s.p.2bn3s6zvc0dyp.woff2",
+      "static/media/1b99372b3eaef0c8-s.p.1gsd1jahc5dg_.woff2"
+    ],
+    "[project]/src/app/thank-you/page": [
+      "static/media/83afe278b6a6bb3c-s.p.2bn3s6zvc0dyp.woff2",
+      "static/media/1b99372b3eaef0c8-s.p.1gsd1jahc5dg_.woff2"
+    ]
+  },
+  "appUsingSizeAdjust": true,
   "pages": {},
   "pagesUsingSizeAdjust": false
 }

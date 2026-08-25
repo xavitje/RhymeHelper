@@ -72,10 +72,10 @@
       "namedRegex": "^/pricing(?:/)?$"
     },
     {
-      "page": "/privacy-policy",
-      "regex": "^/privacy\\-policy(?:/)?$",
+      "page": "/privacy",
+      "regex": "^/privacy(?:/)?$",
       "routeKeys": {},
-      "namedRegex": "^/privacy\\-policy(?:/)?$"
+      "namedRegex": "^/privacy(?:/)?$"
     },
     {
       "page": "/reset-password",
@@ -90,10 +90,10 @@
       "namedRegex": "^/resources(?:/)?$"
     },
     {
-      "page": "/terms-of-service",
-      "regex": "^/terms\\-of\\-service(?:/)?$",
+      "page": "/terms",
+      "regex": "^/terms(?:/)?$",
       "routeKeys": {},
-      "namedRegex": "^/terms\\-of\\-service(?:/)?$"
+      "namedRegex": "^/terms(?:/)?$"
     },
     {
       "page": "/thank-you",
