@@ -1,4 +1,5 @@
-import { Link } from 'react-router-dom';
+"use client";
+import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { supabase } from '../lib/supabaseClient';
 
@@ -23,34 +24,34 @@ export default function Navbar() {
     <>
     <nav className="fixed top-0 w-full z-50 border-b border-border/40 bg-background/80 backdrop-blur-md">
       <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-        <Link to="/" className="flex items-center gap-2 text-xl font-display font-bold tracking-wider text-foreground">
+        <Link href="/" className="flex items-center gap-2 text-xl font-display font-bold tracking-wider text-foreground">
           <img src="/logo.png" alt="RhymeHelper Logo" className="h-8 w-8 object-contain rounded-md" />
           <span>Rhyme<span className="text-primary">Helper</span></span>
         </Link>
         <div className="hidden md:flex items-center gap-8 text-sm font-mono text-muted-foreground">
-          <Link to="/" className="hover:text-foreground transition-colors">Studio</Link>
-          <Link to="/pricing" className="hover:text-foreground transition-colors">Pricing</Link>
-          <Link to="/resources" className="hover:text-foreground transition-colors">Docs</Link>
-          <Link to="/faq" className="hover:text-foreground transition-colors">FAQ</Link>
+          <Link href="/" className="hover:text-foreground transition-colors">Studio</Link>
+          <Link href="/pricing" className="hover:text-foreground transition-colors">Pricing</Link>
+          <Link href="/resources" className="hover:text-foreground transition-colors">Docs</Link>
+          <Link href="/faq" className="hover:text-foreground transition-colors">FAQ</Link>
         </div>
         <div className="flex items-center gap-4">
           {user ? (
             <>
-              <Link to="/dashboard" className="text-sm font-mono text-primary hover:text-primary/80 transition-colors hidden md:block">
+              <Link href="/dashboard" className="text-sm font-mono text-primary hover:text-primary/80 transition-colors hidden md:block">
                 Dashboard
               </Link>
-              <Link to="/account" className="text-sm font-mono text-muted-foreground hover:text-foreground transition-colors hidden md:block">
+              <Link href="/account" className="text-sm font-mono text-muted-foreground hover:text-foreground transition-colors hidden md:block">
                 Account
               </Link>
             </>
           ) : (
-            <Link to="/login" className="text-sm font-mono text-muted-foreground hover:text-foreground transition-colors hidden md:block">
+            <Link href="/login" className="text-sm font-mono text-muted-foreground hover:text-foreground transition-colors hidden md:block">
               Login
             </Link>
           )}
           
           {!hasLicense && (
-            <Link to="/pricing" className="px-4 py-2 bg-primary/10 text-primary border border-primary/20 rounded-md text-sm font-mono hover:bg-primary hover:text-white transition-all shadow-[0_0_15px_rgba(168,85,247,0.15)] hover:shadow-[0_0_20px_rgba(168,85,247,0.4)]">
+            <Link href="/pricing" className="px-4 py-2 bg-primary/10 text-primary border border-primary/20 rounded-md text-sm font-mono hover:bg-primary hover:text-white transition-all shadow-[0_0_15px_rgba(168,85,247,0.15)] hover:shadow-[0_0_20px_rgba(168,85,247,0.4)]">
               Buy Pro
             </Link>
           )}

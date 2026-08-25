@@ -1,0 +1,15 @@
+{
+  "/_global-error/page": "/_global-error",
+  "/_not-found/page": "/_not-found",
+  "/account/page": "/account",
+  "/dashboard/page": "/dashboard",
+  "/faq/page": "/faq",
+  "/login/page": "/login",
+  "/page": "/",
+  "/pricing/page": "/pricing",
+  "/privacy-policy/page": "/privacy-policy",
+  "/reset-password/page": "/reset-password",
+  "/resources/page": "/resources",
+  "/terms-of-service/page": "/terms-of-service",
+  "/thank-you/page": "/thank-you"
+}
