@@ -60,8 +60,11 @@ export async function POST(req: Request) {
     const portalUrl = attributes.urls?.customer_portal;
 
     let updatedMetadata = { ...currentMetadata };
+    const productName = (attributes.first_order_item?.product_name || attributes.product_name || '').toLowerCase();
+    const variantName = (attributes.first_order_item?.variant_name || attributes.variant_name || '').toLowerCase();
+    const isCloudProduct = productName.includes('cloud') || variantName.includes('cloud');
 
-    // Determine if event pertains to Cloud Sync subscription or Pro purchase
+    // Handle Subscription events
     if (eventName === 'subscription_created' || eventName === 'subscription_updated') {
       const isActive = status === 'active' || status === 'on_trial';
       updatedMetadata.cloud_sync_active = isActive;
@@ -73,9 +76,17 @@ export async function POST(req: Request) {
       updatedMetadata.cloud_sync_active = false;
       updatedMetadata.subscription_status = status || 'cancelled';
     } else if (eventName === 'order_created') {
-      // Pro version or one-time purchase
-      updatedMetadata.is_pro = true;
-      updatedMetadata.license_key = attributes.order_number?.toString() || 'PRO_ACTIVATED';
+      const isPaid = status === 'paid';
+      if (isPaid) {
+        if (isCloudProduct) {
+          updatedMetadata.cloud_sync_active = true;
+          updatedMetadata.subscription_status = 'active';
+          if (portalUrl) updatedMetadata.customer_portal_url = portalUrl;
+        } else {
+          updatedMetadata.is_pro = true;
+          updatedMetadata.license_key = attributes.order_number?.toString() || 'PRO_ACTIVATED';
+        }
+      }
     }
 
     // Save updated metadata back to Supabase user
