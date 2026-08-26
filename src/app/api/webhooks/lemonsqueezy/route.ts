@@ -77,7 +77,7 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: 'User not found in Supabase' }, { status: 404 });
     }
 
-    const currentMetadata = userData.user.user_metadata || {};
+    const currentMetadata = userData.user_metadata || {};
     const status = attributes.status;
     const portalUrl = attributes.urls?.customer_portal;
 
