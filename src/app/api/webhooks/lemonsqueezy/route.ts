@@ -28,12 +28,8 @@ export async function POST(req: Request) {
     const payload = JSON.parse(rawBody);
     const eventName = payload.meta?.event_name;
     const customData = payload.meta?.custom_data || {};
-    const userId = customData.user_id;
-
-    if (!userId) {
-      console.log('Webhook received without user_id in custom_data. Ignoring.');
-      return NextResponse.json({ message: 'No user_id found in custom_data' }, { status: 200 });
-    }
+    const attributes = payload.data?.attributes || {};
+    const userEmail = attributes.user_email || attributes.customer_email;
 
     if (!supabaseServiceKey) {
       console.error('SUPABASE_SERVICE_ROLE_KEY is missing on server environment!');
@@ -47,11 +43,30 @@ export async function POST(req: Request) {
       }
     });
 
-    // Fetch existing user to merge metadata
-    const { data: userData, error: getUserError } = await supabaseAdmin.auth.admin.getUserById(userId);
-    if (getUserError || !userData?.user) {
-      console.error('User not found in Supabase:', userId, getUserError);
-      return NextResponse.json({ error: 'User not found' }, { status: 404 });
+    let targetUserId = customData.user_id;
+    let userData = null;
+
+    if (targetUserId) {
+      const { data, error } = await supabaseAdmin.auth.admin.getUserById(targetUserId);
+      if (!error && data?.user) userData = data.user;
+    }
+
+    // Fallback: lookup by email if user_id is missing or invalid
+    if (!userData && userEmail) {
+      console.log('Searching for user by email fallback:', userEmail);
+      const { data, error } = await supabaseAdmin.auth.admin.listUsers({ page: 1, perPage: 1000 });
+      if (!error && data?.users) {
+        const found = data.users.find(u => u.email?.toLowerCase() === userEmail.toLowerCase());
+        if (found) {
+          userData = found;
+          targetUserId = found.id;
+        }
+      }
+    }
+
+    if (!userData || !targetUserId) {
+      console.error('User not found by ID or Email:', { targetUserId, userEmail });
+      return NextResponse.json({ error: 'User not found in Supabase' }, { status: 404 });
     }
 
     const currentMetadata = userData.user.user_metadata || {};
@@ -90,7 +105,7 @@ export async function POST(req: Request) {
     }
 
     // Save updated metadata back to Supabase user
-    const { error: updateError } = await supabaseAdmin.auth.admin.updateUserById(userId, {
+    const { error: updateError } = await supabaseAdmin.auth.admin.updateUserById(targetUserId, {
       user_metadata: updatedMetadata
     });
 
@@ -99,7 +114,7 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: 'Failed to update user' }, { status: 500 });
     }
 
-    console.log(`Successfully updated metadata for user ${userId}:`, updatedMetadata);
+    console.log(`Successfully updated metadata for user ${targetUserId}:`, updatedMetadata);
     return NextResponse.json({ success: true, metadata: updatedMetadata }, { status: 200 });
 
   } catch (err: any) {
