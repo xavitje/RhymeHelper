@@ -31,7 +31,9 @@ export default function Account() {
       if (!session) {
         router.push('/login');
       } else {
-        setUser(session.user);
+        // Fetch fresh user metadata from Supabase DB to get real-time webhook updates
+        const { data: userData } = await supabase.auth.getUser();
+        setUser(userData?.user || session.user);
       }
       setLoading(false);
     };
