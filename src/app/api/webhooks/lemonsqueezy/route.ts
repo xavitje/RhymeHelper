@@ -70,7 +70,6 @@ export async function POST(req: Request) {
     }
 
     const currentMetadata = userData.user.user_metadata || {};
-    const attributes = payload.data?.attributes || {};
     const status = attributes.status;
     const portalUrl = attributes.urls?.customer_portal;
 
