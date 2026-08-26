@@ -22,7 +22,12 @@ export async function POST(req: Request) {
     const signatureBuffer = Buffer.from(signature, 'utf8');
 
     if (digest.length !== signatureBuffer.length || !crypto.timingSafeEqual(digest, signatureBuffer)) {
-      return NextResponse.json({ error: 'Invalid signature' }, { status: 401 });
+      console.error('Signature mismatch on webhook request');
+      return NextResponse.json({ 
+        error: 'Invalid signature',
+        message: 'The signature from LemonSqueezy did not match the secret on Vercel.',
+        usedSecret: secret ? `${secret.substring(0, 5)}...` : 'none'
+      }, { status: 401 });
     }
 
     const payload = JSON.parse(rawBody);
@@ -33,7 +38,10 @@ export async function POST(req: Request) {
 
     if (!supabaseServiceKey) {
       console.error('SUPABASE_SERVICE_ROLE_KEY is missing on server environment!');
-      return NextResponse.json({ error: 'Server configuration error' }, { status: 500 });
+      return NextResponse.json({ 
+        error: 'Server configuration error',
+        message: 'SUPABASE_SERVICE_ROLE_KEY environment variable is NOT configured in Vercel!'
+      }, { status: 500 });
     }
 
     const supabaseAdmin = createClient(supabaseUrl, supabaseServiceKey, {
