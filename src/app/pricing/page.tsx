@@ -107,6 +107,17 @@ export default function Pricing() {
           </a>
         </motion.div>
       </div>
+
+      <div className="mt-12 text-center max-w-3xl mx-auto px-6 py-4 bg-muted/20 border border-border rounded-xl">
+        <p className="text-sm text-muted-foreground font-sans flex items-start text-left">
+          <span className="mr-3 mt-0.5">ℹ️</span>
+          <span>
+            <strong>Installation Note for Windows Users:</strong> We are currently pending our Extended Validation (EV) Code Signing Certificate. 
+            When opening the installer, Windows SmartScreen might show a blue warning. 
+            Simply click <strong>"More info"</strong> and then <strong>"Run anyway"</strong> to install safely.
+          </span>
+        </p>
+      </div>
     </div>
   );
 }
