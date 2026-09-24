@@ -16,7 +16,7 @@ export default function UiKit() {
   return (
     <div className="pt-16">
       <Section>
-        <SectionHeading as="h1" eyebrow="Internal" title="Find the rhyme." accent="Keep the flow." lead="The building blocks of rhymehelper.store, straight from the brand guide." />
+        <SectionHeading as="h1" eyebrow="Internal" title="Find the rhyme." accent="Keep the flow." accentTone="iris" lead="The building blocks of rhymehelper.store, straight from the brand guide." />
         <RhymeStrip className="mt-10 w-60" />
       </Section>
 
