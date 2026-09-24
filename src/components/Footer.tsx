@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { Logo } from './ui/Logo';
 
 export default function Footer() {
   return (
@@ -6,10 +7,7 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-8">
         <div>
           <div className="flex items-center gap-2 mb-4">
-            <img src="/logo.png" alt="RhymeHelper Logo" className="h-8 w-8 object-contain rounded-md" />
-            <h3 className="text-xl font-display font-bold tracking-wider text-foreground">
-              Rhyme<span className="text-primary">Helper</span>
-            </h3>
+            <Logo size={28} />
           </div>
           <p className="text-sm text-muted-foreground font-sans">
             The distraction-free writer's notepad for lyricists, rappers, and poets.

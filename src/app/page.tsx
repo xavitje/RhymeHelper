@@ -153,30 +153,6 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Case Studies */}
-        <section className="max-w-7xl mx-auto px-6 mb-32">
-          <div className="mb-16 text-center">
-            <h2 className="text-4xl md:text-5xl font-display font-bold uppercase tracking-tight text-foreground mb-4">Trusted in the <span className="text-primary">Booth</span></h2>
-            <p className="text-muted-foreground font-sans">Hear from artists who leveled up their pen game.</p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {[
-              { name: "MC Vertex", title: "Independent Artist", quote: "I used to have 15 browser tabs open for rhyming dictionaries. RymeHelper keeps me in the zone. My writing speed doubled." },
-              { name: "Sarah J", title: "Spoken Word Poet", quote: "The syllable counter is a game changer for pacing. I can visually map out my entire stanza before I even speak it." },
-              { name: "K-Flow", title: "Producer / Writer", quote: "Writing hooks for other artists is so much faster now. It suggests slant rhymes I wouldn't have thought of." }
-            ].map((study, i) => (
-              <div key={i} className="bg-muted/5 border border-border p-8 rounded-xl flex flex-col justify-between">
-                <p className="font-sans text-muted-foreground italic mb-8">"{study.quote}"</p>
-                <div>
-                  <p className="font-mono text-foreground">{study.name}</p>
-                  <p className="text-xs text-primary uppercase tracking-widest">{study.title}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
-
         {/* FAQs */}
         <section className="max-w-3xl mx-auto px-6 mb-32">
           <div className="mb-12 text-center">

@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://rhymehelper.store/sitemap.xml
