@@ -1,200 +1,264 @@
-"use client";
-import { motion } from 'framer-motion';
-import { Download, Zap, PenTool, ArrowRight, ChevronDown } from 'lucide-react';
+import type { Metadata } from 'next';
+import Image from 'next/image';
 import Link from 'next/link';
+import {
+  ArrowRight, Check, Cloud, Columns2, Command, Download, History, Languages, Maximize2, Printer, StickyNote, Sparkles,
+} from 'lucide-react';
+import type { LucideIcon } from 'lucide-react';
+import { APP_CONFIG } from '../config';
+import { FAQS } from '../content/faq';
+import { FadeIn } from '../components/FadeIn';
+import { FaqList } from '../components/home/FaqList';
+import { Badge, ButtonLink, Container, Kbd, RhymeStrip, RhymeWord, Section, SectionHeading } from '../components/ui';
 
-import { useState } from 'react';
+export const metadata: Metadata = {
+  alternates: { canonical: '/' },
+};
 
-const FAQS = [
+const SPOTLIGHTS: {
+  id: string; eyebrow: string; title: string; accent: string; body: string; points: React.ReactNode[];
+  image: { src: string; w: number; h: number; alt: string };
+}[] = [
   {
-    question: "Does RymeHelper work offline?",
-    answer: "Yes, the core editor and syllable counter work entirely offline. The advanced multi-word rhyme dictionary requires an internet connection to query our extensive rhyming database."
+    id: 'rhymes',
+    eyebrow: 'Rhymes',
+    title: 'Rhymes right where',
+    accent: 'you write.',
+    body: 'Select a word and rhymes appear above it. Click one to swap it in. No browser tabs, no losing your place.',
+    points: [
+      <>Hold <Kbd keys={['Ctrl']} /> and click a rhyme to add it after your word</>,
+      <>The side panel groups rhymes by syllables, next to your notes</>,
+      <>Near rhymes, synonyms and multi-syllable phrases with Pro</>,
+    ],
+    image: { src: '/screens/app-rhymes.webp', w: 1720, h: 810, alt: 'The word “light” is selected in the editor. A small menu above it shows rhymes: night, fight, height, tight, bright, flight.' },
   },
   {
-    question: "Is it a one-time purchase or a subscription?",
-    answer: "RymeHelper Pro is a one-time purchase. You get lifetime access to the current version, including all minor updates and bug fixes."
+    id: 'flow',
+    eyebrow: 'Flow',
+    title: 'Every line,',
+    accent: 'counted.',
+    body: 'Rhyme Helper counts the syllables of every line while you type and colours the words that rhyme. You see your flow before you say it out loud.',
+    points: [
+      <>Syllables per line, with an average per verse and chorus</>,
+      <>Rhyme scheme in colour: the same colour means the same rhyme</>,
+      <>BPM and key on every song</>,
+    ],
+    image: { src: '/screens/app-syllables.webp', w: 1610, h: 680, alt: 'A verse with syllable counts per line (9, 10, 12, 12) and the rhyming words light, fight, height and night marked in amber, the chorus rhymes fold, told and gold in green.' },
   },
   {
-    question: "Can I use it on multiple computers?",
-    answer: "Yes, your license allows you to activate RymeHelper Pro on up to two devices (e.g., a studio desktop and a writing laptop)."
+    id: 'studio',
+    eyebrow: 'Studio',
+    title: 'Your beat,',
+    accent: 'right there.',
+    body: 'Drop a beat into the app and write while it plays. Play and pause with one shortcut, without leaving your lyrics.',
+    points: [
+      <>Play and pause with <Kbd keys={['Ctrl', 'Space']} /></>,
+      <>Loop, set timestamps and export synced lyrics as .lrc</>,
+      <>Save your lyrics into the MP3 itself</>,
+    ],
+    image: { src: '/screens/app-studio.webp', w: 1560, h: 490, alt: 'The chorus of a song with the Studio player below it: a play button, the beat “Late Night 92bpm”, a waveform and the time 0:09 of 0:41.' },
   },
-  {
-    question: "Does it support languages other than English?",
-    answer: "Currently, our advanced syllable parsing and rhyme database are optimized specifically for the English language."
-  },
-  {
-    question: "How do I get my license key after purchasing?",
-    answer: "Your license key will be emailed to you immediately after purchase. You can also view it by logging into your account on this website."
-  }
 ];
 
-export default function Home() {
-  const [openFaq, setOpenFaq] = useState<number | null>(null);
+const FEATURES: { icon: LucideIcon; title: string; body: React.ReactNode; pro?: boolean }[] = [
+  { icon: History, title: 'Autosave and history', body: 'Every change is saved within a second. Go back to any earlier version.' },
+  { icon: Maximize2, title: 'Focus mode', body: <>Hide everything but your lyrics with <Kbd keys={['F11']} />.</> },
+  { icon: Command, title: 'Command palette', body: <>Find any song, rhyme or action with <Kbd keys={['Ctrl', 'K']} />.</> },
+  { icon: StickyNote, title: 'Idea board', body: 'Park alternate bars and concepts next to your song, not in it.' },
+  { icon: Languages, title: 'English and Dutch', body: 'The app, the rhymes and the syllable counts work in both.' },
+  { icon: Printer, title: 'Print and PDF', body: 'Clean lyric sheets with line numbers, without any app chrome.' },
+  { icon: Columns2, title: 'Tabs and split screen', body: 'Keep several songs open and write two side by side.', pro: true },
+  { icon: Cloud, title: 'Cloud sync', body: 'Your songs on every computer you write on.', pro: true },
+];
 
+const AUDIENCE = [
+  { who: 'Rappers', what: 'Find multi-syllable rhymes fast and keep every bar on count.' },
+  { who: 'Singers and songwriters', what: 'Structure verses and choruses and match syllables to your melody.' },
+  { who: 'Producers', what: 'Play the instrumental in the app and leave notes on the song structure.' },
+  { who: 'Poets', what: 'Use synonyms and near rhymes to find the exact word.' },
+];
+
+const FREE = ['Full editor with formatting', 'Perfect rhymes', 'Syllable counts per line', 'Idea board and notes', 'Autosave and version history', 'Print and export to PDF'];
+const PRO = ['Near rhymes and sounds-like', 'Synonyms and saved words', 'AI rhyme suggestions', 'Multi-syllable phrase search', 'Tabs and split screen', 'Cloud sync across devices'];
+
+export default function Home() {
   return (
     <>
-      <div className="pt-10 pb-16">
-        {/* Hero Section (CTA Above the Fold) */}
-        <section className="relative max-w-7xl mx-auto px-6 pt-12 lg:pt-24 pb-20 flex flex-col items-center text-center">
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary/20 blur-[120px] rounded-full pointer-events-none -z-10" />
-
-          <motion.h1
-            className="text-6xl md:text-8xl lg:text-9xl font-display font-bold uppercase tracking-tight text-foreground leading-[0.9]"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-          >
-            Never Break <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-primary/50">Your Flow.</span>
-          </motion.h1>
-
-          <motion.p
-            className="mt-8 text-xl md:text-2xl text-muted-foreground font-sans max-w-2xl"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.3, duration: 0.8 }}
-          >
-            A specialized, distraction-free writing environment built specifically for rappers, lyricists, and poets.
-          </motion.p>
-
-          <motion.div
-            className="mt-12 flex flex-col sm:flex-row items-center gap-6"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.5, duration: 0.8 }}
-          >
-            <Link href="/pricing" className="group relative px-8 py-4 bg-primary text-white font-mono text-lg rounded-md hover:bg-primary/90 transition-all flex items-center gap-3 overflow-hidden shadow-[0_0_30px_rgba(168,85,247,0.3)]">
-              <span className="relative z-10 flex items-center gap-2">
-                <Download className="w-5 h-5" />
-                Get RymeHelper
-              </span>
-              <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out" />
-            </Link>
-            <a href="#features" className="px-8 py-4 border border-border text-foreground font-mono text-lg rounded-md hover:bg-muted hover:border-muted-foreground transition-all flex items-center gap-3">
-              Explore Features
-            </a>
-          </motion.div>
-          <div className="mt-8 text-sm text-muted-foreground font-sans">
-            Available for Windows and macOS. <Link href="/pricing" className="text-primary hover:underline">View Pricing options.</Link>
-          </div>
-        </section>
-
-        {/* Interface Showcase */}
-        <section className="relative w-full max-w-[1400px] mx-auto px-6 mb-32 z-10">
-          <motion.div
-            className="relative rounded-xl overflow-hidden border border-border/50 shadow-2xl bg-[#121212] p-2 aspect-[16/9] flex items-center justify-center"
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 1 }}
-          >
-            {/* Main Editor Area */}
-            <div className="w-full h-full border border-border/30 rounded-lg overflow-hidden flex bg-[#161616] relative shadow-inner">
-              <div className="flex-1 p-6 md:p-12 text-muted-foreground font-sans text-lg md:text-2xl leading-relaxed">
-                <div className="flex items-center gap-6 mb-6">
-                  <span className="font-mono text-sm text-border">1</span>
-                  <p>Lock into the studio and never break your flow,</p>
-                  <span className="ml-auto font-mono text-sm bg-muted/30 px-3 py-1 rounded-full text-primary/70 hidden sm:block">13</span>
-                </div>
-                <div className="flex items-center gap-6 mb-6 relative">
-                  <span className="font-mono text-sm text-border">5</span>
-                  <p>The sharpest writer's notepad that the booth has ever <span className="bg-primary text-white px-1">seen.</span></p>
-                  <span className="ml-auto font-mono text-sm bg-muted/30 px-3 py-1 rounded-full text-primary/70 hidden sm:block">15</span>
-                </div>
-              </div>
-
-              {/* Sidebar Rhyme Dictionary */}
-              <div className="w-[300px] border-l border-border/30 bg-[#121212] p-6 hidden md:block">
-                <div className="text-xl font-sans mb-6 text-foreground">Words for "seen"</div>
-                <div className="flex flex-wrap gap-2 mb-6">
-                  <span className="border border-[#22c55e] text-[#22c55e] rounded-full px-3 py-1 text-sm">keen</span>
-                  <span className="border border-[#22c55e] text-[#22c55e] rounded-full px-3 py-1 text-sm">mean</span>
-                </div>
-              </div>
+      {/* Hero */}
+      <section className="relative overflow-hidden pt-16 sm:pt-24">
+        <div aria-hidden className="pointer-events-none absolute -top-40 left-1/2 h-[720px] w-[1100px] -translate-x-1/2 bg-[radial-gradient(closest-side,rgb(124_108_255/0.22),transparent)]" />
+        <Container className="relative text-center">
+          <div>
+            <h1 className="mx-auto max-w-4xl text-5xl font-semibold leading-[1.02] tracking-[-0.035em] sm:text-7xl lg:text-display">
+              Find the rhyme. <span className="text-iris-text">Keep the flow.</span>
+            </h1>
+            <p className="mx-auto mt-6 max-w-2xl text-lg text-text-muted sm:text-lead">
+              The writing app for lyrics. Rhymes, syllable counts and your beat, together in one quiet window.
+            </p>
+            <div className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
+              <ButtonLink href={APP_CONFIG.WINDOWS_DOWNLOAD_URL} size="lg" icon={Download}>Download free for Windows</ButtonLink>
+              <ButtonLink href="/pricing" size="lg" variant="secondary" iconRight={ArrowRight}>See Pro</ButtonLink>
             </div>
-          </motion.div>
-        </section>
-
-        {/* Marquee Strip */}
-        <div className="w-full bg-primary/5 border-y border-primary/20 py-4 overflow-hidden mb-32 flex whitespace-nowrap">
-          <div className="animate-[marquee_20s_linear_infinite] flex items-center gap-12 text-primary font-mono text-xl tracking-widest uppercase opacity-80">
-            <span>Bars</span> <span>•</span> <span>Flow</span> <span>•</span> <span>Syllables</span> <span>•</span> <span>Multi-rhymes</span> <span>•</span>
-            <span>Bars</span> <span>•</span> <span>Flow</span> <span>•</span> <span>Syllables</span> <span>•</span> <span>Multi-rhymes</span> <span>•</span>
-          </div>
-        </div>
-
-        {/* Features */}
-        <section id="features" className="max-w-7xl mx-auto px-6 mb-32 scroll-mt-24">
-          <div className="mb-16">
-            <h2 className="text-5xl md:text-7xl font-display font-bold uppercase tracking-tight text-foreground">The Studio <span className="text-primary">Setup</span></h2>
-            <p className="mt-6 text-xl text-muted-foreground font-sans max-w-2xl">Everything you need to map out complex schemes and reorganize your bars.</p>
+            <p className="mt-4 text-sm text-text-muted">
+              Windows 10 and 11 · Free forever · Pro {APP_CONFIG.SALE_PRICE} one-time
+            </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div className="bg-muted/10 border border-border p-8 md:p-12 group hover:border-primary/50 transition-colors">
-              <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center text-primary mb-8 group-hover:scale-110 transition-transform">
-                <PenTool className="w-6 h-6" />
-              </div>
-              <h3 className="text-2xl font-display uppercase tracking-wide mb-4 text-foreground">Rich Text Editor</h3>
-              <p className="text-muted-foreground font-sans leading-relaxed">
-                A meticulously designed writing canvas that stays out of your way. Highlight multisyllabic rhymes, structure your verses, and keep your focus purely on the flow.
-              </p>
-            </div>
-
-            <div className="bg-muted/10 border border-border p-8 md:p-12 group hover:border-primary/50 transition-colors">
-              <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center text-primary mb-8 group-hover:scale-110 transition-transform">
-                <Zap className="w-6 h-6" />
-              </div>
-              <h3 className="text-2xl font-display uppercase tracking-wide mb-4 text-foreground">Instant Rhyme Popup</h3>
-              <p className="text-muted-foreground font-sans leading-relaxed">
-                Never leave the editor to find a word. Highlight any word and instantly see perfect matches, slant rhymes, and assonance right at your cursor.
-              </p>
+          <div className="mt-14 sm:mt-20">
+            <div className="relative mx-auto max-w-[1120px] rounded-xl border border-border-strong bg-surface p-1.5 shadow-modal sm:rounded-2xl sm:p-2">
+              <Image
+                src="/screens/app-editor.webp"
+                width={2880}
+                height={1800}
+                priority
+                sizes="(min-width: 1200px) 1104px, 100vw"
+                alt="Rhyme Helper with the song “Midnight Pen”: lyrics with syllable counts per line, rhyming words in colour and the rhyme panel for “light” on the right."
+                className="h-auto w-full rounded-lg sm:rounded-xl"
+              />
             </div>
           </div>
-        </section>
+        </Container>
+      </section>
 
-        {/* FAQs */}
-        <section className="max-w-3xl mx-auto px-6 mb-32">
-          <div className="mb-12 text-center">
-            <h2 className="text-4xl md:text-5xl font-display font-bold uppercase tracking-tight text-foreground mb-4">Frequently Asked <span className="text-primary">Questions</span></h2>
-          </div>
-
-          <div className="space-y-4">
-            {FAQS.map((faq, index) => (
-              <div key={index} className="border border-border rounded-lg overflow-hidden bg-muted/5">
-                <button
-                  onClick={() => setOpenFaq(openFaq === index ? null : index)}
-                  className="w-full px-6 py-4 flex items-center justify-between text-left focus:outline-none hover:bg-muted/10 transition-colors"
-                >
-                  <span className="font-sans font-medium text-foreground">{faq.question}</span>
-                  <ChevronDown className={`w-5 h-5 text-muted-foreground transition-transform ${openFaq === index ? 'rotate-180' : ''}`} />
-                </button>
-                {openFaq === index && (
-                  <div className="px-6 pb-4 pt-2 text-muted-foreground font-sans text-sm border-t border-border/50">
-                    {faq.answer}
+      {/* Uitgelicht */}
+      <Section id="features" className="scroll-mt-16">
+        <SectionHeading
+          title="Built for writing,"
+          accent="nothing else."
+          lead="Everything you reach for while writing a song, inside the page you're writing on."
+        />
+        <div className="mt-16 space-y-24 sm:mt-20 sm:space-y-32">
+          {SPOTLIGHTS.map((s, i) => (
+            <FadeIn key={s.id}>
+              <div id={s.id} className={`grid scroll-mt-24 items-center gap-10 lg:gap-16 ${i % 2 === 1 ? 'lg:grid-cols-[minmax(0,7fr)_minmax(0,5fr)]' : 'lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)]'}`}>
+                <div className={i % 2 === 1 ? 'lg:order-2' : undefined}>
+                  <p className="text-[13px] font-medium text-iris-text">{s.eyebrow}</p>
+                  <h3 className="mt-3 text-3xl font-semibold leading-[1.1] tracking-[-0.03em] sm:text-[40px]">
+                    {s.title} <span className="text-text-muted">{s.accent}</span>
+                  </h3>
+                  <p className="mt-4 text-[17px] leading-relaxed text-text-muted">{s.body}</p>
+                  <ul className="mt-6 space-y-3 text-[15px]">
+                    {s.points.map((p, j) => (
+                      <li key={j} className="flex gap-3">
+                        <Check aria-hidden strokeWidth={1.75} className="mt-0.5 size-4 shrink-0 text-iris-text" />
+                        <span>{p}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <div className={i % 2 === 1 ? 'lg:order-1' : undefined}>
+                  <div className="overflow-hidden rounded-xl border border-border bg-bg shadow-float">
+                    <Image src={s.image.src} width={s.image.w} height={s.image.h} alt={s.image.alt} sizes="(min-width: 1024px) 680px, 100vw" className="h-auto w-full" />
                   </div>
-                )}
+                </div>
+              </div>
+            </FadeIn>
+          ))}
+        </div>
+      </Section>
+
+      {/* Alles erbij */}
+      <Section className="border-t border-border">
+        <SectionHeading title="And everything" accent="around it." lead="The small things that keep you writing instead of searching." />
+        <ul className="mt-12 grid gap-px overflow-hidden rounded-xl border border-border bg-border sm:grid-cols-2 lg:grid-cols-4">
+          {FEATURES.map((f) => (
+            <li key={f.title} className="bg-surface p-6">
+              <div className="flex items-center justify-between">
+                <f.icon aria-hidden strokeWidth={1.75} className="size-5 text-text-muted" />
+                {f.pro && <Badge tone="accent">Pro</Badge>}
+              </div>
+              <h3 className="mt-5 text-[15px] font-semibold">{f.title}</h3>
+              <p className="mt-1.5 text-sm leading-relaxed text-text-muted">{f.body}</p>
+            </li>
+          ))}
+        </ul>
+      </Section>
+
+      {/* Voor wie */}
+      <Section className="border-t border-border">
+        <div className="grid gap-12 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-16">
+          <div>
+            <SectionHeading title="For everyone" accent="who writes to a beat." />
+            <p className="mt-8 text-[17px] leading-relaxed text-text-muted">
+              I been up all <RhymeWord family={1}>night</RhymeWord> chasing the <RhymeWord family={1}>light</RhymeWord>,
+              <br />every line on the <RhymeWord family={2}>page</RhymeWord> feels like a <RhymeWord family={2}>stage</RhymeWord>.
+            </p>
+          </div>
+          <dl className="grid gap-px overflow-hidden rounded-xl border border-border bg-border sm:grid-cols-2">
+            {AUDIENCE.map((a) => (
+              <div key={a.who} className="bg-surface p-6">
+                <dt className="text-lg font-semibold tracking-[-0.02em]">{a.who}</dt>
+                <dd className="mt-2 text-[15px] leading-relaxed text-text-muted">{a.what}</dd>
               </div>
             ))}
-          </div>
-          
-          <div className="mt-8 text-center">
-            <Link href="/faq" className="inline-flex items-center gap-2 text-primary hover:text-primary/80 transition-colors font-mono font-medium">
-              View All FAQs <ArrowRight className="w-4 h-4" />
-            </Link>
-          </div>
-        </section>
+          </dl>
+        </div>
+      </Section>
 
-        {/* Final CTA */}
-        <section className="max-w-4xl mx-auto px-6 mb-20 text-center bg-primary/10 border border-primary/20 rounded-2xl p-12 relative overflow-hidden">
-          <div className="absolute top-0 right-0 w-64 h-64 bg-primary/20 blur-[80px] rounded-full pointer-events-none" />
-          <h2 className="text-4xl md:text-5xl font-display font-bold uppercase tracking-tight text-foreground mb-6">Ready to elevate your craft?</h2>
-          <p className="text-lg text-muted-foreground font-sans mb-10 max-w-xl mx-auto">Join the writers who have already switched to a professional, distraction-free environment.</p>
-          <Link href="/pricing" className="inline-flex items-center gap-2 px-8 py-4 bg-primary text-white font-mono text-lg rounded-md hover:bg-primary/90 transition-all shadow-[0_0_20px_rgba(168,85,247,0.4)]">
-            Get Pro Access <ArrowRight className="w-5 h-5" />
-          </Link>
-        </section>
-      </div>
+      {/* Free en Pro */}
+      <Section className="border-t border-border" id="pricing">
+        <SectionHeading align="center" title="Free to write." accent="Pro to go further." lead="Start with the free version. Upgrade once, whenever you're ready." />
+        <div className="mx-auto mt-12 grid max-w-4xl gap-6 md:grid-cols-2">
+          <div className="flex flex-col rounded-xl border border-border bg-surface p-7">
+            <div className="flex items-baseline justify-between">
+              <h3 className="text-xl font-semibold">Free</h3>
+              <p className="text-2xl font-semibold tracking-[-0.02em]">€0</p>
+            </div>
+            <p className="mt-1 text-sm text-text-muted">Everything you need to write.</p>
+            <ul className="mt-6 flex-1 space-y-3 text-[15px]">
+              {FREE.map((f) => (
+                <li key={f} className="flex gap-3"><Check aria-hidden strokeWidth={1.75} className="mt-0.5 size-4 shrink-0 text-text-muted" />{f}</li>
+              ))}
+            </ul>
+            <ButtonLink href={APP_CONFIG.WINDOWS_DOWNLOAD_URL} variant="secondary" size="lg" icon={Download} fullWidth className="mt-8">Download free</ButtonLink>
+          </div>
+          <div className="flex flex-col rounded-xl border border-iris/60 bg-surface p-7 shadow-[0_0_0_1px_rgb(124_108_255/0.25)]">
+            <div className="flex items-baseline justify-between">
+              <h3 className="flex items-center gap-2 text-xl font-semibold">Pro <Badge tone="accent">Launch deal</Badge></h3>
+              <p className="text-2xl font-semibold tracking-[-0.02em]">
+                {APP_CONFIG.SALE_PRICE} <span className="text-base font-normal text-text-muted line-through">{APP_CONFIG.PRICE}</span>
+              </p>
+            </div>
+            <p className="mt-1 text-sm text-text-muted">One-time purchase. Everything in Free, plus:</p>
+            <ul className="mt-6 flex-1 space-y-3 text-[15px]">
+              {PRO.map((f) => (
+                <li key={f} className="flex gap-3"><Sparkles aria-hidden strokeWidth={1.75} className="mt-0.5 size-4 shrink-0 text-iris-text" />{f}</li>
+              ))}
+            </ul>
+            <ButtonLink href="/pricing" size="lg" iconRight={ArrowRight} fullWidth className="mt-8">Get Pro</ButtonLink>
+          </div>
+        </div>
+        <p className="mt-6 text-center text-sm text-text-muted">
+          <Link href="/pricing" className="text-iris-text hover:underline">Compare everything</Link> in Free and Pro.
+        </p>
+      </Section>
+
+      {/* FAQ */}
+      <Section className="border-t border-border" narrow>
+        <SectionHeading align="center" title="Questions," accent="answered." />
+        <FaqList items={FAQS.slice(0, 5)} className="mt-10" />
+        <p className="mt-6 text-center text-sm text-text-muted">
+          More in the <Link href="/faq" className="text-iris-text hover:underline">FAQ</Link> and the <Link href="/resources" className="text-iris-text hover:underline">docs</Link>.
+        </p>
+      </Section>
+
+      {/* Afsluiter */}
+      <section className="pb-8">
+        <Container>
+          <div className="overflow-hidden rounded-2xl border border-border bg-surface">
+            <RhymeStrip className="h-1 rounded-none" />
+            <div className="flex flex-col items-start gap-8 px-7 py-12 sm:px-12 md:flex-row md:items-center md:justify-between">
+              <div>
+                <h2 className="text-3xl font-semibold leading-[1.1] tracking-[-0.03em] sm:text-[40px]">
+                  Your next verse <span className="text-text-muted">starts here.</span>
+                </h2>
+                <p className="mt-3 text-[17px] text-text-muted">Free for Windows. No account needed.</p>
+              </div>
+              <ButtonLink href={APP_CONFIG.WINDOWS_DOWNLOAD_URL} variant="pill" size="lg" icon={Download}>Download free</ButtonLink>
+            </div>
+          </div>
+        </Container>
+      </section>
     </>
   );
 }
