@@ -4,7 +4,7 @@ export default function Resources() {
   return (
     <>
       
-      <div className="pt-24 pb-16 max-w-4xl mx-auto px-6">
+      <div className="pt-10 pb-16 max-w-4xl mx-auto px-6">
         <Breadcrumbs items={[{ label: 'Home', path: '/' }, { label: 'Documentation' }]} />
 
         <h1 className="text-4xl md:text-5xl font-display uppercase tracking-wide mb-4 mt-6">

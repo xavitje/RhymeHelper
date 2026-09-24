@@ -96,7 +96,7 @@ export default function Dashboard() {
   const hasLicense = !!user?.user_metadata?.license_key;
 
   return (
-    <div className="pt-24 pb-16 max-w-4xl mx-auto px-6">
+    <div className="pt-10 pb-16 max-w-4xl mx-auto px-6">
       <div className="flex items-center justify-between mb-12 border-b border-border/50 pb-6">
         <div>
           <h1 className="text-4xl font-display uppercase tracking-wide">Studio <span className="text-primary">Dashboard</span></h1>

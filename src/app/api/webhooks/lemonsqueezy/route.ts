@@ -10,7 +10,12 @@ export async function POST(req: Request) {
   try {
     const rawBody = await req.text();
     const signature = req.headers.get('x-signature');
-    const secret = process.env.LEMONSQUEEZY_WEBHOOK_SECRET || 'rhyme_secret_982371982371';
+    const secret = process.env.LEMONSQUEEZY_WEBHOOK_SECRET;
+
+    if (!secret) {
+      console.error('LEMONSQUEEZY_WEBHOOK_SECRET is not configured');
+      return NextResponse.json({ error: 'Server configuration error' }, { status: 500 });
+    }
 
     if (!signature) {
       return NextResponse.json({ error: 'Missing signature' }, { status: 400 });
@@ -23,11 +28,7 @@ export async function POST(req: Request) {
 
     if (digest.length !== signatureBuffer.length || !crypto.timingSafeEqual(digest, signatureBuffer)) {
       console.error('Signature mismatch on webhook request');
-      return NextResponse.json({
-        error: 'Invalid signature',
-        message: 'The signature from LemonSqueezy did not match the secret on Vercel.',
-        usedSecret: secret ? `${secret.substring(0, 5)}...` : 'none'
-      }, { status: 401 });
+      return NextResponse.json({ error: 'Invalid signature' }, { status: 401 });
     }
 
     const payload = JSON.parse(rawBody);
@@ -38,10 +39,7 @@ export async function POST(req: Request) {
 
     if (!supabaseServiceKey) {
       console.error('SUPABASE_SERVICE_ROLE_KEY is missing on server environment!');
-      return NextResponse.json({
-        error: 'Server configuration error',
-        message: 'SUPABASE_SERVICE_ROLE_KEY environment variable is NOT configured in Vercel!'
-      }, { status: 500 });
+      return NextResponse.json({ error: 'Server configuration error' }, { status: 500 });
     }
 
     const supabaseAdmin = createClient(supabaseUrl, supabaseServiceKey, {

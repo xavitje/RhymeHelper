@@ -3,7 +3,7 @@ import Breadcrumbs from '../../components/Breadcrumbs';
 export default function PrivacyPolicy() {
   return (
     <>
-      <div className="pt-24 pb-16 max-w-3xl mx-auto px-6">
+      <div className="pt-10 pb-16 max-w-3xl mx-auto px-6">
         <Breadcrumbs items={[{ label: 'Home', path: '/' }, { label: 'Privacy Policy' }]} />
 
         <h1 className="text-4xl font-display uppercase tracking-wide mb-8 mt-6">Privacy <span className="text-primary">Policy</span></h1>
