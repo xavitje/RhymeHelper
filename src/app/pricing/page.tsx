@@ -5,7 +5,7 @@ import { APP_CONFIG } from '../../config';
 
 export default function Pricing() {
   return (
-    <div className="pt-32 pb-24 max-w-7xl mx-auto px-6">
+    <div className="pt-16 pb-24 max-w-7xl mx-auto px-6">
       <div className="text-center mb-20">
         <h1 className="text-5xl md:text-7xl font-display font-bold uppercase tracking-tight mb-6">Upgrade Your <span className="text-primary">Flow</span></h1>
         <p className="text-xl text-muted-foreground font-sans max-w-2xl mx-auto">Get the full studio experience and never search for a rhyme again.</p>

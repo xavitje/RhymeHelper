@@ -1,42 +1,38 @@
-"use client";
-import Link from 'next/link';
+import type { Metadata } from 'next';
+import { ArrowLeft, BookOpen } from 'lucide-react';
+import { ButtonLink } from '../components/ui/Button';
+import { SongCard } from '../components/ui/SongCard';
 
-import { Home, ArrowRight } from 'lucide-react';
-import { motion } from 'framer-motion';
+export const metadata: Metadata = { title: 'Page not found' };
 
 export default function NotFound() {
   return (
-    <>
-      <div className="min-h-[80vh] flex flex-col items-center justify-center px-6 text-center">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="max-w-md"
-        >
-          <h1 className="text-9xl font-display text-primary/20 mb-4 tracking-tighter">404</h1>
-          <h2 className="text-3xl font-display uppercase tracking-wide mb-6">Lost in the <span className="text-primary">Studio</span>?</h2>
-          <p className="text-muted-foreground font-sans mb-8">
-            The track you're looking for doesn't exist, has been moved, or is currently unreleased.
+    <div className="relative overflow-hidden">
+      <div aria-hidden className="pointer-events-none absolute -top-64 left-1/2 h-[560px] w-[900px] -translate-x-1/2 bg-[radial-gradient(closest-side,rgb(124_108_255/0.18),transparent)]" />
+      <div className="relative mx-auto grid min-h-[70vh] w-full max-w-[1200px] items-center gap-12 px-5 py-20 sm:px-8 lg:grid-cols-[1fr_440px]">
+        <div>
+          <p className="font-mono text-sm text-text-muted">404</p>
+          <h1 className="mt-4 text-5xl font-semibold leading-[1.04] tracking-[-0.035em] sm:text-headline">
+            This page <span className="text-iris-text">missed the beat.</span>
+          </h1>
+          <p className="mt-5 max-w-lg text-lg text-text-muted sm:text-lead">
+            The page you're looking for doesn't exist or has moved. Let's get you back to writing.
           </p>
-
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Link
-              href="/"
-              className="w-full sm:w-auto px-8 py-4 bg-primary text-white font-mono rounded-md hover:bg-primary/90 transition-colors flex items-center justify-center gap-2"
-            >
-              <Home className="w-4 h-4" />
-              Back Home
-            </Link>
-            <Link
-              href="/pricing"
-              className="w-full sm:w-auto px-8 py-4 border border-border text-foreground font-mono rounded-md hover:bg-muted transition-colors flex items-center justify-center gap-2"
-            >
-              View Pricing
-              <ArrowRight className="w-4 h-4" />
-            </Link>
+          <div className="mt-8 flex flex-wrap gap-3">
+            <ButtonLink href="/" size="lg" icon={ArrowLeft}>Back to home</ButtonLink>
+            <ButtonLink href="/resources" size="lg" variant="secondary" icon={BookOpen}>Read the docs</ButtonLink>
           </div>
-        </motion.div>
+        </div>
+        <SongCard
+          title="Lost Verse"
+          meta="2 lines · 1 missing"
+          badge="404"
+          lines={[
+            { parts: ['Looked all over for this ', { w: 'page', f: 1 }], syllables: 7 },
+            { parts: ['but it already left the ', { w: 'stage', f: 1 }], syllables: 7 },
+          ]}
+        />
       </div>
-    </>
+    </div>
   );
 }

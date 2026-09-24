@@ -33,7 +33,7 @@ export default function Home() {
 
   return (
     <>
-      <div className="pt-24 pb-16">
+      <div className="pt-10 pb-16">
         {/* Hero Section (CTA Above the Fold) */}
         <section className="relative max-w-7xl mx-auto px-6 pt-12 lg:pt-24 pb-20 flex flex-col items-center text-center">
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary/20 blur-[120px] rounded-full pointer-events-none -z-10" />

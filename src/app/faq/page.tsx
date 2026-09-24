@@ -32,7 +32,7 @@ export default function Faq() {
   return (
     <>
       
-      <div className="pt-24 pb-16 max-w-3xl mx-auto px-6">
+      <div className="pt-10 pb-16 max-w-3xl mx-auto px-6">
         <Breadcrumbs items={[{ label: 'Home', path: '/' }, { label: 'FAQ' }]} />
 
         <h1 className="text-4xl font-display uppercase tracking-wide mb-8 mt-6">Frequently Asked <span className="text-primary">Questions</span></h1>

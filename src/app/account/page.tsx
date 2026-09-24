@@ -101,7 +101,7 @@ export default function Account() {
   const customerPortalUrl = user?.user_metadata?.customer_portal_url;
 
   return (
-    <div className="pt-24 pb-16 max-w-3xl mx-auto px-6">
+    <div className="pt-10 pb-16 max-w-3xl mx-auto px-6">
       <div className="flex items-center gap-4 mb-12 border-b border-border/50 pb-6">
         <div className="p-3 bg-primary/10 text-primary rounded-xl">
           <User className="w-8 h-8" />
