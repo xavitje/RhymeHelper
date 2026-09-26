@@ -1,196 +1,174 @@
 "use client";
-import { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
+import { useState } from 'react';
+import Link from 'next/link';
+import { ArrowRight, Check, Cloud, Copy, Download, Eye, EyeOff, KeyRound, Sparkles } from 'lucide-react';
 import { supabase } from '../../lib/supabaseClient';
-import { motion } from 'framer-motion';
-import { Key, Download, AlertCircle } from 'lucide-react';
+import { useSessionUser } from '../../lib/useSessionUser';
 import { APP_CONFIG } from '../../config';
-import { sanitize } from '../../lib/sanitize';
+import { AccountHeader, AccountSkeleton } from '../../components/account/AccountHeader';
+import { Alert, Badge, Button, ButtonLink, Card, Field, Input } from '../../components/ui';
+
+function mask(key: string) {
+  const tail = key.slice(-4);
+  return `${'•'.repeat(Math.max(4, Math.min(16, key.length - 4)))}${tail}`;
+}
 
 export default function Dashboard() {
-  const [user, setUser] = useState<any>(null);
-  const [loading, setLoading] = useState(true);
+  const { user, setUser, loading } = useSessionUser();
   const [licenseInput, setLicenseInput] = useState('');
   const [activating, setActivating] = useState(false);
-  const [message, setMessage] = useState({ type: '', text: '' });
-  const router = useRouter();
+  const [message, setMessage] = useState<{ tone: 'error' | 'success'; text: string } | null>(null);
+  const [reveal, setReveal] = useState(false);
+  const [copied, setCopied] = useState(false);
 
-  useEffect(() => {
-    const checkSession = async () => {
-      const { data: { session } } = await supabase.auth.getSession();
-      if (!session) {
-        router.push('/login');
-      } else {
-        setUser(session.user);
-      }
-      setLoading(false);
-    };
-    checkSession();
-  }, [router.push]);
+  if (loading || !user) return <AccountSkeleton />;
 
+  const licenseKey: string | undefined = user.user_metadata?.license_key;
+  const hasLicense = !!licenseKey;
+  const cloudActive = !!user.user_metadata?.cloud_sync_active;
+
+  // Koppelt een sleutel aan dit account. We valideren (niet activeren) bij Lemon Squeezy,
+  // zodat de website geen van de twee apparaat-activaties opgebruikt.
   const handleActivate = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!licenseInput.trim()) return;
-
+    const key = licenseInput.trim();
+    if (!key) return;
     setActivating(true);
-    setMessage({ type: '', text: '' });
-
+    setMessage(null);
     try {
-      // Direct call to Lemon Squeezy to validate/activate the license
-      const response = await fetch('https://api.lemonsqueezy.com/v1/licenses/activate', {
+      const res = await fetch('https://api.lemonsqueezy.com/v1/licenses/validate', {
         method: 'POST',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/x-www-form-urlencoded'
-        },
-        body: new URLSearchParams({
-          license_key: licenseInput.trim(),
-          instance_name: 'RymeHelper Web Portal'
-        })
+        headers: { Accept: 'application/json', 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams({ license_key: key }),
       });
-
-      const data = await response.json();
-
-      // Ensure the logged-in user actually owns this license
-      if (data.meta?.customer_email && data.meta.customer_email.toLowerCase() !== user?.email?.toLowerCase()) {
-        throw new Error('This license key belongs to a different email address.');
+      const data = await res.json();
+      if (!data.valid) throw new Error(data.error || 'This license key is not valid.');
+      const owner = data.meta?.customer_email?.toLowerCase();
+      if (owner && owner !== user.email?.toLowerCase()) {
+        throw new Error('This license key belongs to a different email address. Log in with the email you used to buy Pro.');
       }
-
-      if (data.activated || (data.error && data.error.includes('already activated'))) {
-        // Save the valid license key to the user's Supabase metadata
-        // The desktop app reads it from session.user.user_metadata.license_key
-        const { error } = await supabase.auth.updateUser({
-          data: { license_key: licenseInput.trim() }
-        });
-
-        if (error) throw error;
-
-        // Update local state
-        setUser({
-          ...user,
-          user_metadata: {
-            ...user?.user_metadata,
-            license_key: licenseInput.trim()
-          }
-        });
-        setMessage({ type: 'success', text: 'License activated successfully!' });
-      } else {
-        throw new Error(data.error || 'Invalid license key.');
-      }
-    } catch (err: any) {
-      setMessage({ type: 'error', text: err.message || 'Failed to activate license.' });
+      const { data: updated, error } = await supabase.auth.updateUser({ data: { license_key: key } });
+      if (error) throw error;
+      if (updated?.user) setUser(updated.user);
+      setLicenseInput('');
+      setMessage({ tone: 'success', text: 'Pro is linked to your account. Log in to the app with the same account to use it.' });
+    } catch (err) {
+      setMessage({ tone: 'error', text: err instanceof Error ? err.message : 'Could not check this license key.' });
     } finally {
       setActivating(false);
     }
   };
 
-  const handleLogout = async () => {
-    await supabase.auth.signOut();
-    router.push('/');
+  const copyKey = async () => {
+    if (!licenseKey) return;
+    try {
+      await navigator.clipboard.writeText(licenseKey);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 1800);
+    } catch {
+      setReveal(true);
+    }
   };
 
-  if (loading) {
-    return <div className="min-h-[80vh] flex items-center justify-center font-mono">Loading...</div>;
-  }
-
-  const hasLicense = !!user?.user_metadata?.license_key;
-
   return (
-    <div className="pt-10 pb-16 max-w-4xl mx-auto px-6">
-      <div className="flex items-center justify-between mb-12 border-b border-border/50 pb-6">
-        <div>
-          <h1 className="text-4xl font-display uppercase tracking-wide">Studio <span className="text-primary">Dashboard</span></h1>
-          <p className="text-muted-foreground font-mono text-sm mt-2">{user?.email}</p>
-        </div>
-        <button
-          onClick={handleLogout}
-          className="px-4 py-2 text-sm font-mono border border-border text-foreground hover:bg-muted rounded-md transition-colors"
-        >
-          Sign Out
-        </button>
+    <div className="mx-auto w-full max-w-4xl px-5 py-12 sm:px-8 sm:py-16">
+      <AccountHeader title="Your dashboard" email={user.email} />
+
+      <div className="mt-10 grid gap-6 md:grid-cols-2">
+        {/* Licentie */}
+        <Card className="flex flex-col">
+          <div className="flex items-center justify-between">
+            <h2 className="flex items-center gap-2.5 text-lg font-semibold">
+              <KeyRound aria-hidden strokeWidth={1.75} className="size-5 text-text-muted" /> Pro license
+            </h2>
+            {hasLicense ? <Badge tone="success">Active</Badge> : <Badge>Free</Badge>}
+          </div>
+
+          {hasLicense ? (
+            <>
+              <p className="mt-3 text-[15px] leading-relaxed text-text-muted">
+                Pro is linked to this account. In the app, log in with the same account or paste this key under Upgrade to Pro.
+              </p>
+              <div className="mt-5 flex items-center gap-2 rounded-md border border-border-strong bg-raised px-3 py-2">
+                <code className="min-w-0 flex-1 truncate font-mono text-sm text-text" aria-label="License key">
+                  {reveal ? licenseKey : mask(licenseKey!)}
+                </code>
+                <button type="button" onClick={() => setReveal((r) => !r)} aria-label={reveal ? 'Hide key' : 'Show key'} className="rounded-sm p-1 text-text-muted hover:text-text">
+                  {reveal ? <EyeOff aria-hidden strokeWidth={1.75} className="size-4" /> : <Eye aria-hidden strokeWidth={1.75} className="size-4" />}
+                </button>
+                <button type="button" onClick={copyKey} aria-label="Copy key" className="rounded-sm p-1 text-text-muted hover:text-text">
+                  {copied ? <Check aria-hidden strokeWidth={1.75} className="size-4 text-success" /> : <Copy aria-hidden strokeWidth={1.75} className="size-4" />}
+                </button>
+              </div>
+              <p className="mt-2 text-xs text-text-muted" aria-live="polite">{copied ? 'Copied to clipboard.' : 'Keep this key private.'}</p>
+            </>
+          ) : (
+            <>
+              <p className="mt-3 text-[15px] leading-relaxed text-text-muted">
+                Bought Pro? Paste the license key from your email to link it to this account.
+              </p>
+              <form onSubmit={handleActivate} className="mt-5 grid gap-3">
+                <Field label="License key">
+                  {(id) => (
+                    <Input id={id} mono required value={licenseInput} onChange={(e) => setLicenseInput(e.target.value)} placeholder="XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX" autoComplete="off" spellCheck={false} />
+                  )}
+                </Field>
+                {message && <Alert tone={message.tone}>{message.text}</Alert>}
+                <Button type="submit" variant="secondary" disabled={activating}>{activating ? 'Checking…' : 'Link license'}</Button>
+              </form>
+              <p className="mt-5 text-sm text-text-muted">
+                No key yet? <Link href="/pricing" className="font-medium text-text hover:underline">Get Pro for {APP_CONFIG.SALE_PRICE}</Link>
+              </p>
+            </>
+          )}
+          {hasLicense && message?.tone === 'success' && <Alert tone="success" className="mt-4">{message.text}</Alert>}
+        </Card>
+
+        {/* Download */}
+        <Card className="flex flex-col">
+          <h2 className="flex items-center gap-2.5 text-lg font-semibold">
+            <Download aria-hidden strokeWidth={1.75} className="size-5 text-text-muted" /> Download
+          </h2>
+          <p className="mt-3 text-[15px] leading-relaxed text-text-muted">
+            The latest version of Rhyme Helper for Windows 10 and 11. The app updates itself after that.
+          </p>
+          <ButtonLink href={APP_CONFIG.WINDOWS_DOWNLOAD_URL} size="lg" icon={Download} className="mt-5">Download for Windows</ButtonLink>
+          <p className="mt-3 text-sm text-text-muted">macOS: not yet available.</p>
+          <p className="mt-auto pt-5 text-xs leading-relaxed text-text-muted">
+            Windows may show a SmartScreen warning the first time. Click More info, then Run anyway.
+          </p>
+        </Card>
       </div>
 
-      <div className={`grid grid-cols-1 ${hasLicense ? '' : 'md:grid-cols-2'} gap-8`}>
-        {/* License Section - Only visible if they don't have a license */}
+      {/* Onderste rij */}
+      <div className="mt-6 grid gap-6 md:grid-cols-2">
+        <Card className="flex items-start gap-4">
+          <Cloud aria-hidden strokeWidth={1.75} className="mt-0.5 size-5 shrink-0 text-text-muted" />
+          <div className="flex-1">
+            <div className="flex items-center justify-between gap-3">
+              <h2 className="font-semibold">Cloud Sync</h2>
+              {cloudActive ? <Badge tone="success">On</Badge> : <Badge>Off</Badge>}
+            </div>
+            <p className="mt-1 text-sm leading-relaxed text-text-muted">
+              {cloudActive ? 'Your songs are backed up and in sync on every computer.' : `Back up your songs and sync them across computers for ${APP_CONFIG.CLOUD_SYNC_PRICE} a month.`}
+            </p>
+            <Link href="/account" className="mt-3 inline-flex items-center gap-1.5 text-sm font-medium text-text hover:underline">
+              {cloudActive ? 'Manage' : 'Set up'} <ArrowRight aria-hidden strokeWidth={1.75} className="size-3.5" />
+            </Link>
+          </div>
+        </Card>
         {!hasLicense && (
-          <motion.div
-            className="bg-muted/5 border border-border p-8 rounded-xl"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-          >
-            <div className="flex items-center gap-3 mb-6">
-              <div className="bg-primary/10 text-primary p-2 rounded-lg">
-                <Key className="w-5 h-5" />
-              </div>
-              <h2 className="text-2xl font-display uppercase tracking-wide">Pro License</h2>
+          <Card className="flex items-start gap-4">
+            <Sparkles aria-hidden strokeWidth={1.75} className="mt-0.5 size-5 shrink-0 text-iris-text" />
+            <div className="flex-1">
+              <h2 className="font-semibold">What you get with Pro</h2>
+              <p className="mt-1 text-sm leading-relaxed text-text-muted">Near rhymes, AI suggestions, multi-syllable search, Studio, tabs and split screen. One-time {APP_CONFIG.SALE_PRICE}.</p>
+              <Link href="/pricing" className="mt-3 inline-flex items-center gap-1.5 text-sm font-medium text-text hover:underline">
+                Compare plans <ArrowRight aria-hidden strokeWidth={1.75} className="size-3.5" />
+              </Link>
             </div>
-
-            <div>
-              <p className="text-muted-foreground font-sans text-sm mb-6">
-                Enter your Lemon Squeezy license key to unlock Pro features on the desktop app.
-              </p>
-
-              {message.text && (
-                <div className={`p-3 rounded-md mb-6 font-mono text-xs flex items-start gap-2 ${message.type === 'error' ? 'bg-red-500/10 text-red-400 border border-red-500/20' : 'bg-[#22c55e]/10 text-[#22c55e] border border-[#22c55e]/20'}`}>
-                  {message.type === 'error' && <AlertCircle className="w-4 h-4 shrink-0 mt-0.5" />}
-                  {message.text}
-                </div>
-              )}
-
-              <form onSubmit={handleActivate} className="flex gap-2">
-                <input
-                  type="text"
-                  required
-                  value={licenseInput}
-                  onChange={(e) => setLicenseInput(sanitize(e.target.value))}
-                  placeholder="XXXX-XXXX-XXXX-XXXX"
-                  className="flex-1 bg-background border border-border rounded-md px-4 py-2 text-foreground focus:outline-none focus:border-primary transition-colors font-mono text-sm"
-                />
-                <button
-                  type="submit"
-                  disabled={activating}
-                  className="px-6 py-2 bg-primary text-white font-mono text-sm rounded-md hover:bg-primary/90 transition-colors disabled:opacity-50 whitespace-nowrap"
-                >
-                  {activating ? 'Validating...' : 'Activate'}
-                </button>
-              </form>
-            </div>
-          </motion.div>
+          </Card>
         )}
-
-        {/* Downloads Section */}
-        <motion.div
-          className="bg-muted/5 border border-border p-8 rounded-xl"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.1 }}
-        >
-          <div className="flex items-center gap-3 mb-6">
-            <div className="p-2 rounded-lg bg-foreground/10 text-foreground">
-              <Download className="w-5 h-5" />
-            </div>
-            <h2 className="text-2xl font-display uppercase tracking-wide">Downloads</h2>
-          </div>
-
-          <p className="text-muted-foreground font-sans text-sm mb-6">
-            Download the desktop application for your operating system.
-          </p>
-
-          <div className="space-y-3">
-            <button disabled className="w-full flex items-center justify-between p-4 border border-border/30 bg-muted/10 rounded-md text-muted-foreground opacity-60 cursor-not-allowed group">
-              <span className="font-mono">Mac (Apple Silicon)</span>
-              <span className="text-xs uppercase tracking-widest border border-border px-2 py-0.5 rounded">Coming Soon</span>
-            </button>
-            <button disabled className="w-full flex items-center justify-between p-4 border border-border/30 bg-muted/10 rounded-md text-muted-foreground opacity-60 cursor-not-allowed group">
-              <span className="font-mono">Mac (Intel)</span>
-              <span className="text-xs uppercase tracking-widest border border-border px-2 py-0.5 rounded">Coming Soon</span>
-            </button>
-            <a href={APP_CONFIG.WINDOWS_DOWNLOAD_URL} download className="w-full flex items-center justify-between p-4 border border-border rounded-md hover:border-foreground transition-colors group">
-              <span className="font-mono text-foreground group-hover:text-primary transition-colors">Windows (x64)</span>
-              <Download className="w-4 h-4 text-muted-foreground group-hover:text-primary transition-colors" />
-            </a>
-          </div>
-        </motion.div>
       </div>
     </div>
   );

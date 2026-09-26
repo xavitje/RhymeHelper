@@ -69,7 +69,7 @@ const FEATURES: { icon: LucideIcon; title: string; body: React.ReactNode; pro?: 
   { icon: Languages, title: 'English and Dutch', body: 'The app, the rhymes and the syllable counts work in both.' },
   { icon: Printer, title: 'Print and PDF', body: 'Clean lyric sheets with line numbers, without any app chrome.' },
   { icon: Columns2, title: 'Tabs and split screen', body: 'Keep several songs open and write two side by side.', pro: true },
-  { icon: Cloud, title: 'Cloud sync', body: 'Your songs on every computer you write on.', pro: true },
+  { icon: Cloud, title: 'Cloud Sync', body: `Your songs backed up and on every computer you write on. Optional, ${APP_CONFIG.CLOUD_SYNC_PRICE} a month.` },
 ];
 
 const AUDIENCE = [
