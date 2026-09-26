@@ -162,7 +162,7 @@ export default function Dashboard() {
             <Sparkles aria-hidden strokeWidth={1.75} className="mt-0.5 size-5 shrink-0 text-iris-text" />
             <div className="flex-1">
               <h2 className="font-semibold">What you get with Pro</h2>
-              <p className="mt-1 text-sm leading-relaxed text-text-muted">Near rhymes, AI suggestions, multi-syllable search, Studio, tabs and split screen. One-time {APP_CONFIG.SALE_PRICE}.</p>
+              <p className="mt-1 text-sm leading-relaxed text-text-muted">Near rhymes, AI suggestions, multi-syllable search, Studio, your full song library, tabs and split screen. One-time {APP_CONFIG.SALE_PRICE}.</p>
               <Link href="/pricing" className="mt-3 inline-flex items-center gap-1.5 text-sm font-medium text-text hover:underline">
                 Compare plans <ArrowRight aria-hidden strokeWidth={1.75} className="size-3.5" />
               </Link>

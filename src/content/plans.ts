@@ -18,7 +18,9 @@ export const PRO_HIGHLIGHTS = [
   'AI rhyme suggestions',
   'Multi-syllable phrase search',
   'Studio: play your beat while you write',
+  'Your full song library, with search',
   'Tabs and split screen',
+  'Extra accent colours and styles',
 ];
 
 export type CompareRow = { feature: string; free: boolean; pro: boolean; note?: string };
@@ -59,8 +61,17 @@ export const COMPARISON: CompareGroup[] = [
   {
     title: 'Workspace',
     rows: [
+      { feature: 'Songs you have open, in the sidebar', free: true, pro: true },
+      { feature: 'Full song library: every song you wrote, searchable by title and lyrics', free: false, pro: true },
       { feature: 'Several songs open in tabs', free: false, pro: true },
       { feature: 'Split screen, two songs side by side', free: false, pro: true },
+    ],
+  },
+  {
+    title: 'Look',
+    rows: [
+      { feature: 'Dark and light theme with the Iris accent', free: true, pro: true },
+      { feature: 'Extra accents (Blue, Lime, Coral) and background styles (Midnight, Onyx, Paper)', free: false, pro: true },
     ],
   },
 ];

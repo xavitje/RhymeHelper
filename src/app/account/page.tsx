@@ -106,8 +106,8 @@ export default function Account() {
           </div>
           <p className="mt-3 flex-1 text-[15px] leading-relaxed text-text-muted">
             {isPro
-              ? 'All Pro features are unlocked: advanced rhymes, AI suggestions, Studio, tabs and split screen.'
-              : `Near rhymes, AI suggestions, multi-syllable search, Studio, tabs and split screen. One-time ${APP_CONFIG.SALE_PRICE}.`}
+              ? 'All Pro features are unlocked: advanced rhymes, AI suggestions, Studio, your full song library, tabs, split screen and extra styles.'
+              : `Near rhymes, AI suggestions, multi-syllable search, Studio, your full song library, tabs and split screen. One-time ${APP_CONFIG.SALE_PRICE}.`}
           </p>
           {!isPro && (
             <ButtonLink href={withUser(APP_CONFIG.LEMON_SQUEEZY_CHECKOUT_URL)} external target="_blank" rel="noopener noreferrer" iconRight={ExternalLink} className="mt-5">

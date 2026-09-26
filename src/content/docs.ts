@@ -46,11 +46,13 @@ export const DOCS: DocSection[] = [
     id: 'songs',
     title: 'Songs and files',
     items: [
-      ['Library', 'The sidebar lists your songs. Search by title or lyrics, and right-click a song for more options.'],
+      ['Open songs', 'The sidebar shows the songs you have open. Right-click a song for more options. Your songs are always saved on your computer.'],
+      ['Song library', 'See every song you ever wrote in the sidebar, search them by title or lyrics, and open any of them again with one click.', true],
       ['Autosave and history', 'Every change is saved on your computer. Edit → Version history takes you back to an earlier save.'],
       ['Save a copy', '{Ctrl+S} saves the song as a file. {Ctrl+O} opens a .txt, .md or .lrc file.'],
       ['Print and PDF', '{Ctrl+P} prints a clean lyric sheet with line numbers. Choose Save as PDF in the print window for a PDF.'],
       ['Tabs and split screen', 'Open several songs as tabs, and drag a tab to the right to see two songs side by side.', true],
+      ['Colours and styles', 'Change the theme and accent under Settings → Appearance. Blue, Lime and Coral accents and the Midnight, Onyx and Paper styles come with Pro.', true],
     ],
   },
   {
