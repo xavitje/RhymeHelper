@@ -4,6 +4,7 @@ import { useRouter } from 'next/navigation';
 import { Cloud, ExternalLink, Lock, Mail, Sparkles, Trash2 } from 'lucide-react';
 import { supabase } from '../../lib/supabaseClient';
 import { useSessionUser } from '../../lib/useSessionUser';
+import { isPro, hasCloudSync, cloudSyncEndsAt, customerPortalUrl } from '../../lib/entitlements';
 import { APP_CONFIG } from '../../config';
 import { AccountHeader, AccountSkeleton } from '../../components/account/AccountHeader';
 import { Alert, Badge, Button, ButtonLink, Card, Field, Input } from '../../components/ui';
@@ -40,9 +41,10 @@ export default function Account() {
 
   if (loading || !user) return <AccountSkeleton />;
 
-  const isPro = !!user.user_metadata?.is_pro || !!user.user_metadata?.license_key;
-  const cloudActive = !!user.user_metadata?.cloud_sync_active;
-  const portalUrl: string | undefined = user.user_metadata?.customer_portal_url;
+  const pro = isPro(user);
+  const cloudActive = hasCloudSync(user);
+  const cloudEnds = cloudSyncEndsAt(user);
+  const portalUrl = customerPortalUrl(user);
   const withUser = (url: string) => `${url}${url.includes('?') ? '&' : '?'}checkout[custom][user_id]=${user.id}`;
 
   const updateEmail = async (e: React.FormEvent) => {
@@ -102,14 +104,14 @@ export default function Account() {
             <h2 className="flex items-center gap-2.5 text-lg font-semibold">
               <Sparkles aria-hidden strokeWidth={1.75} className="size-5 text-text-muted" /> Rhyme Helper Pro
             </h2>
-            {isPro ? <Badge tone="success">Active</Badge> : <Badge>Free</Badge>}
+            {pro ? <Badge tone="success">Active</Badge> : <Badge>Free</Badge>}
           </div>
           <p className="mt-3 flex-1 text-[15px] leading-relaxed text-text-muted">
-            {isPro
+            {pro
               ? 'All Pro features are unlocked: advanced rhymes, AI suggestions, Studio, your full song library, tabs, split screen and extra styles.'
               : `Near rhymes, AI suggestions, multi-syllable search, Studio, your full song library, tabs and split screen. One-time ${APP_CONFIG.SALE_PRICE}.`}
           </p>
-          {!isPro && (
+          {!pro && (
             <ButtonLink href={withUser(APP_CONFIG.LEMON_SQUEEZY_CHECKOUT_URL)} external target="_blank" rel="noopener noreferrer" iconRight={ExternalLink} className="mt-5">
               Get Pro for {APP_CONFIG.SALE_PRICE}
             </ButtonLink>
@@ -124,7 +126,9 @@ export default function Account() {
             {cloudActive ? <Badge tone="success">On</Badge> : <Badge>Off</Badge>}
           </div>
           <p className="mt-3 flex-1 text-[15px] leading-relaxed text-text-muted">
-            {cloudActive
+            {cloudActive && cloudEnds
+              ? `Cancelled. Cloud Sync keeps working until ${cloudEnds.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}.`
+              : cloudActive
               ? 'Your songs are backed up and in sync on every computer you log in on.'
               : `Automatic backups and your songs on every computer. ${APP_CONFIG.CLOUD_SYNC_PRICE} a month, cancel any time.`}
           </p>

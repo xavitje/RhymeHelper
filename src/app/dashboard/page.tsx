@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { ArrowRight, Check, Cloud, Copy, Download, Eye, EyeOff, KeyRound, Sparkles } from 'lucide-react';
 import { supabase } from '../../lib/supabaseClient';
 import { useSessionUser } from '../../lib/useSessionUser';
+import { isPro, hasCloudSync, licenseKey as licenseKeyOf } from '../../lib/entitlements';
 import { APP_CONFIG } from '../../config';
 import { AccountHeader, AccountSkeleton } from '../../components/account/AccountHeader';
 import { Alert, Badge, Button, ButtonLink, Card, Field, Input } from '../../components/ui';
@@ -23,9 +24,9 @@ export default function Dashboard() {
 
   if (loading || !user) return <AccountSkeleton />;
 
-  const licenseKey: string | undefined = user.user_metadata?.license_key;
-  const hasLicense = !!licenseKey;
-  const cloudActive = !!user.user_metadata?.cloud_sync_active;
+  const licenseKey = licenseKeyOf(user);
+  const hasLicense = isPro(user);
+  const cloudActive = hasCloudSync(user);
 
   // Koppelt een sleutel aan dit account. We valideren (niet activeren) bij Lemon Squeezy,
   // zodat de website geen van de twee apparaat-activaties opgebruikt.
@@ -36,20 +37,19 @@ export default function Dashboard() {
     setActivating(true);
     setMessage(null);
     try {
-      const res = await fetch('https://api.lemonsqueezy.com/v1/licenses/validate', {
-        method: 'POST',
-        headers: { Accept: 'application/json', 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: new URLSearchParams({ license_key: key }),
-      });
-      const data = await res.json();
-      if (!data.valid) throw new Error(data.error || 'This license key is not valid.');
-      const owner = data.meta?.customer_email?.toLowerCase();
-      if (owner && owner !== user.email?.toLowerCase()) {
-        throw new Error('This license key belongs to a different email address. Log in with the email you used to buy Pro.');
+      // De server (Edge Function activate-license) controleert de sleutel bij Lemon Squeezy en zet Pro.
+      // Mode "link": alleen valideren, gebruikt geen van de twee apparaatplekken.
+      const { error } = await supabase.functions.invoke('activate-license', { body: { license_key: key, mode: 'link' } });
+      if (error) {
+        let msg = error.message;
+        try {
+          const body = await (error as { context?: Response }).context?.json();
+          if (body?.error) msg = body.error;
+        } catch { /* geen JSON */ }
+        throw new Error(msg);
       }
-      const { data: updated, error } = await supabase.auth.updateUser({ data: { license_key: key } });
-      if (error) throw error;
-      if (updated?.user) setUser(updated.user);
+      const { data: refreshed } = await supabase.auth.refreshSession();
+      if (refreshed?.user) setUser(refreshed.user);
       setLicenseInput('');
       setMessage({ tone: 'success', text: 'Pro is linked to your account. Log in to the app with the same account to use it.' });
     } catch (err) {
@@ -87,8 +87,11 @@ export default function Dashboard() {
           {hasLicense ? (
             <>
               <p className="mt-3 text-[15px] leading-relaxed text-text-muted">
-                Pro is linked to this account. In the app, log in with the same account or paste this key under Upgrade to Pro.
+                {licenseKey
+                  ? 'Pro is linked to this account. In the app, log in with the same account or paste this key under Upgrade to Pro.'
+                  : 'Pro is active on this account. Log in to the app with the same account to use it.'}
               </p>
+              {licenseKey && (<>
               <div className="mt-5 flex items-center gap-2 rounded-md border border-border-strong bg-raised px-3 py-2">
                 <code className="min-w-0 flex-1 truncate font-mono text-sm text-text" aria-label="License key">
                   {reveal ? licenseKey : mask(licenseKey!)}
@@ -101,6 +104,7 @@ export default function Dashboard() {
                 </button>
               </div>
               <p className="mt-2 text-xs text-text-muted" aria-live="polite">{copied ? 'Copied to clipboard.' : 'Keep this key private.'}</p>
+              </>)}
             </>
           ) : (
             <>

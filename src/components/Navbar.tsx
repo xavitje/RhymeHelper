@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from 'react';
 import { Download, Menu, X } from 'lucide-react';
 import type { User } from '@supabase/supabase-js';
 import { supabase } from '../lib/supabaseClient';
+import { isPro } from '../lib/entitlements';
 import { APP_CONFIG } from '../config';
 import { ButtonLink } from './ui/Button';
 import { Logo } from './ui/Logo';
@@ -68,7 +69,7 @@ export default function Navbar() {
     };
   }, [open]);
 
-  const hasLicense = !!user?.user_metadata?.license_key;
+  const hasLicense = isPro(user);
   const isActive = (match: string) => !match.startsWith('/#') && (pathname === match || pathname.startsWith(`${match}/`));
 
   return (
