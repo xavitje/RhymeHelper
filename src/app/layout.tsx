@@ -3,6 +3,7 @@ import localFont from 'next/font/local';
 import './globals.css';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
+import { Analytics } from '../components/Analytics';
 import { SITE } from '../config';
 
 // Geist en Geist Mono, zelf gehost (dezelfde bestanden als de app; SIL Open Font License).
@@ -69,6 +70,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           {children}
         </main>
         <Footer />
+        <Analytics />
       </body>
     </html>
   );

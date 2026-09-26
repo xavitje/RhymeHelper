@@ -1,106 +1,96 @@
-import Breadcrumbs from '../../components/Breadcrumbs';
+import type { Metadata } from 'next';
+import Link from 'next/link';
+import { Mail } from 'lucide-react';
+import { DOCS, SHORTCUTS } from '../../content/docs';
+import { SITE } from '../../config';
+import { DocHeader } from '../../components/docs/DocPage';
+import { KeyCombo, RichText } from '../../components/docs/RichText';
+import { Badge, ButtonLink, Container } from '../../components/ui';
 
-export default function Resources() {
+export const metadata: Metadata = {
+  title: 'Docs',
+  description: 'How to use Rhyme Helper: writing, finding rhymes, songs and files, Studio, Pro and Cloud Sync, plus every keyboard shortcut.',
+  alternates: { canonical: '/resources' },
+};
+
+const TOC = [...DOCS.map((s) => ({ id: s.id, title: s.title })), { id: 'shortcuts', title: 'Keyboard shortcuts' }];
+
+export default function Docs() {
   return (
-    <>
-      
-      <div className="pt-10 pb-16 max-w-4xl mx-auto px-6">
-        <Breadcrumbs items={[{ label: 'Home', path: '/' }, { label: 'Documentation' }]} />
+    <Container className="py-12 sm:py-16">
+      <DocHeader
+        crumb="Docs"
+        title={<>How Rhyme Helper <span className="text-text-muted">works.</span></>}
+        lead="Everything you need to know to write faster, from your first song to Studio."
+      />
 
-        <h1 className="text-4xl md:text-5xl font-display uppercase tracking-wide mb-4 mt-6">
-          RymeHelper <span className="text-primary">Documentation</span>
-        </h1>
-        <p className="text-muted-foreground font-sans text-lg mb-12">
-          Welcome to the official documentation for RymeHelper, the ultimate songwriting text editor and rhyming dictionary. 
-          This document provides a comprehensive overview of the application's architecture, features, and usage.
-        </p>
-
-        <div className="prose prose-invert max-w-none font-sans text-muted-foreground space-y-6">
-          <h2 className="text-2xl font-display uppercase text-foreground mt-8 mb-4">Introduction</h2>
-          <p>
-            RymeHelper is a dedicated desktop application built with React, Vite, and Electron, designed specifically for songwriters, poets, and vocalists. It bridges the gap between a distraction-free writing environment and a powerful linguistic analysis tool, allowing creators to find perfect rhymes, count syllables, and manage multiple projects simultaneously without ever breaking their creative flow.
-          </p>
-
-          <h2 className="text-2xl font-display uppercase text-foreground mt-8 mb-4">Core Editor Features</h2>
-          <p>
-            At the heart of RymeHelper is a robust, rich-text editor powered by Tiptap/ProseMirror. It includes standard formatting tools as well as custom extensions tailored for songwriting.
-          </p>
-          <ul className="list-disc pl-5 space-y-2">
-            <li><strong>Rich Text Formatting:</strong> Standard support for bold, italic, underline, strikethrough, highlighting, and text alignment.</li>
-            <li><strong>Syllable Counter:</strong> Automatically calculates and displays syllable counts for lines, helping you maintain consistent rhythm and meter.</li>
-            <li><strong>Auto-Rhyme Highlighter:</strong> Intelligently highlights words at the end of lines that rhyme, giving you a visual representation of your rhyme scheme.</li>
-            <li><strong>Line Manipulation:</strong> Dedicated tools for shifting, rearranging, and formatting stanzas and verses efficiently.</li>
-            <li><strong>Auto-Scroll:</strong> A built-in teleprompter feature that smoothly scrolls your lyrics during recording or practice sessions. The speed can be adjusted via the footer interface.</li>
+      <div className="mt-12 grid gap-12 lg:grid-cols-[200px_minmax(0,1fr)] lg:gap-16">
+        <nav aria-label="On this page" className="lg:sticky lg:top-24 lg:self-start">
+          <p className="text-[13px] font-semibold text-text">On this page</p>
+          <ul className="mt-3 flex flex-wrap gap-2 lg:flex-col lg:gap-0.5">
+            {TOC.map((t) => (
+              <li key={t.id}>
+                <a href={`#${t.id}`} className="block rounded-md px-2.5 py-1.5 text-sm text-text-muted transition-colors hover:bg-raised hover:text-text max-lg:border max-lg:border-border">
+                  {t.title}
+                </a>
+              </li>
+            ))}
           </ul>
+        </nav>
 
-          <h2 className="text-2xl font-display uppercase text-foreground mt-8 mb-4">Rhyming & Dictionary Tools</h2>
-          <p>
-            RymeHelper integrates seamlessly with linguistic databases (via the Datamuse API) to provide instant lyrical inspiration directly within the editor.
-          </p>
-          <ul className="list-disc pl-5 space-y-2">
-            <li><strong>Instant Word Selection:</strong> Highlight any word in the editor to open the contextual Rhyme Popup.</li>
-            <li><strong>Exact Rhymes:</strong> Find words that perfectly rhyme with your selection.</li>
-            <li><strong>Near Rhymes (Slant Rhymes):</strong> Discover words with similar vowel or consonant sounds to expand your creative options when exact rhymes feel too restrictive.</li>
-            <li><strong>Multisyllabic Rhyming (Pro Feature):</strong> Search for complex, multi-word phrases that rhyme with entire bars or stanzas.</li>
-            <li><strong>Synonyms & Sounds Like:</strong> Broaden your vocabulary by finding synonyms or words that have a phonetic resemblance to your target word.</li>
-            <li><strong>Side Panel Dictionary:</strong> A dedicated, persistent side panel that allows you to search the dictionary without losing your place in the editor.</li>
-          </ul>
+        <div className="min-w-0 max-w-3xl">
+          {DOCS.map((section) => (
+            <section key={section.id} id={section.id} aria-labelledby={`${section.id}-h`} className="scroll-mt-24 border-b border-border pb-12 mb-12 last:border-0">
+              <h2 id={`${section.id}-h`} className="text-2xl font-semibold tracking-[-0.02em]">{section.title}</h2>
+              {section.intro && <p className="mt-3 text-[17px] leading-relaxed text-text-muted">{section.intro}</p>}
+              <dl className="mt-6 divide-y divide-border overflow-hidden rounded-xl border border-border bg-surface">
+                {section.items.map(([term, text, pro]) => (
+                  <div key={term} className="grid gap-1.5 px-5 py-4 sm:grid-cols-[200px_minmax(0,1fr)] sm:gap-6 sm:px-6">
+                    <dt className="flex items-center gap-2 text-[15px] font-medium text-text">
+                      {term} {pro && <Badge tone="accent">Pro</Badge>}
+                    </dt>
+                    <dd className="text-[15px] leading-relaxed text-text-muted"><RichText text={text} /></dd>
+                  </div>
+                ))}
+              </dl>
+            </section>
+          ))}
 
-          <h2 className="text-2xl font-display uppercase text-foreground mt-8 mb-4">Project Management</h2>
-          <p>
-            Managing multiple songs, verses, and ideas is streamlined through the Project Sidebar and Tab System.
-          </p>
-          <ul className="list-disc pl-5 space-y-2">
-            <li><strong>Local File System Integration:</strong> Projects can be saved directly to your hard drive (e.g., .txt or .md files) using modern File System Access APIs.</li>
-            <li><strong>Auto-Save:</strong> Any changes made in the editor are automatically debounced and saved locally to prevent data loss.</li>
-            <li><strong>Tabbed Interface:</strong> Open multiple songs at once using the top tab bar.</li>
-            <li><strong>Split-Screen View:</strong> Compare two songs, verses, or reference tracks side-by-side. You can easily drag and drop tabs between the left and right panels.</li>
-            <li><strong>Project Sidebar:</strong> A centralized hub to create new songs, switch between recent projects, or permanently delete old drafts.</li>
-          </ul>
+          <section id="shortcuts" aria-labelledby="shortcuts-h" className="scroll-mt-24">
+            <h2 id="shortcuts-h" className="text-2xl font-semibold tracking-[-0.02em]">Keyboard shortcuts</h2>
+            <p className="mt-3 text-[17px] leading-relaxed text-text-muted">
+              On a Mac keyboard, use ⌘ instead of Ctrl. You can see every shortcut in the app under Help → Keyboard shortcuts.
+            </p>
+            <div className="mt-6 grid gap-6 md:grid-cols-2">
+              {SHORTCUTS.map((g) => (
+                <div key={g.group} className="overflow-hidden rounded-xl border border-border bg-surface">
+                  <h3 className="border-b border-border bg-bg-subtle px-5 py-3 text-[13px] font-semibold">{g.group}</h3>
+                  <table className="w-full text-sm">
+                    <tbody className="divide-y divide-border">
+                      {g.items.map(([label, keys]) => (
+                        <tr key={label}>
+                          <th scope="row" className="px-5 py-2.5 text-left font-normal text-text-muted">{label}</th>
+                          <td className="px-5 py-2.5 text-right"><KeyCombo combo={keys} /></td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              ))}
+            </div>
+          </section>
 
-          <h2 className="text-2xl font-display uppercase text-foreground mt-8 mb-4">Workspace Modes</h2>
-          <p>
-            RymeHelper adapts to the different phases of the songwriting process through specialized workspace modes.
-          </p>
-          <ul className="list-disc pl-5 space-y-2">
-            <li><strong>Focus Mode:</strong> Activated via F11 or the menu bar. This mode strips away all sidebars, menus, and distractions, leaving only the text editor and a dark background for deep, uninterrupted writing.</li>
-            <li><strong>Studio Mode:</strong> Designed for the recording booth. It exposes the built-in Audio Player, allowing you to load beats or reference tracks and play them directly within the app while writing or recording.</li>
-          </ul>
-
-          <h2 className="text-2xl font-display uppercase text-foreground mt-8 mb-4">Account & Licensing</h2>
-          <p>
-            RymeHelper offers both a robust free version and a premium "Pro" tier for serious artists.
-          </p>
-          <ul className="list-disc pl-5 space-y-2">
-            <li><strong>Authentication:</strong> Secure user accounts managed via Supabase. Users can sign up and log in via email.</li>
-            <li><strong>Password Recovery:</strong> Built-in password reset flows accessible directly from the login screen.</li>
-            <li><strong>Pro Features (Studio Pass):</strong> Advanced features, such as Multisyllabic Rhyme searching, are unlocked via a license key. License keys are securely validated and managed through LemonSqueezy integration.</li>
-            <li><strong>Offline Capabilities:</strong> The app requires an internet connection for dictionary queries and initial login, but the core writing and file-saving functionalities are fully supported offline.</li>
-          </ul>
-
-          <h2 className="text-2xl font-display uppercase text-foreground mt-8 mb-4">Security & Resilience</h2>
-          <p>
-            RymeHelper is built with modern desktop security practices to ensure your data and system remain safe.
-          </p>
-          <ul className="list-disc pl-5 space-y-2">
-            <li><strong>Context Isolation:</strong> The Electron wrapper uses strict context isolation and disables Node integration in the renderer process to prevent malicious code execution.</li>
-            <li><strong>XSS Protection:</strong> All loaded project content is heavily sanitized using DOMPurify before rendering.</li>
-            <li><strong>API Rate Limiting:</strong> Built-in LRU (Least Recently Used) memory caching prevents duplicate queries to external dictionary APIs, ensuring fast responses and preventing rate limits.</li>
-            <li><strong>Graceful Error Handling:</strong> Comprehensive React Error Boundaries and file-system fallbacks ensure that unexpected errors do not crash the application or result in lost lyrics.</li>
-          </ul>
-        </div>
-        
-        {/* Support CTA */}
-        <div className="mt-16 bg-primary/10 border border-primary/20 p-8 rounded-xl text-center">
-          <h2 className="text-2xl font-display uppercase tracking-wide mb-4">Need More Help?</h2>
-          <p className="text-muted-foreground font-sans mb-6 max-w-lg mx-auto">
-            Can't find what you're looking for? Our support team is here to help you get the most out of RymeHelper.
-          </p>
-          <a href="mailto:support@rhymehelper.store" className="inline-block px-6 py-3 bg-primary text-white font-mono rounded-md hover:bg-primary/90 transition-colors">
-            Contact Support
-          </a>
+          <div className="mt-16 flex flex-col gap-5 rounded-xl border border-border bg-surface p-6 sm:flex-row sm:items-center sm:justify-between sm:p-7">
+            <div>
+              <h2 className="text-lg font-semibold">Still stuck?</h2>
+              <p className="mt-1 text-[15px] text-text-muted">
+                Check the <Link href="/faq" className="text-text underline-offset-4 hover:underline">FAQ</Link> or send us a message. We read every email.
+              </p>
+            </div>
+            <ButtonLink href={`mailto:${SITE.contactEmail}`} variant="secondary" icon={Mail}>Email us</ButtonLink>
+          </div>
         </div>
       </div>
-    </>
+    </Container>
   );
 }
