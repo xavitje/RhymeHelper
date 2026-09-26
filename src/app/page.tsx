@@ -2,12 +2,13 @@ import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import {
-  ArrowRight, Check, Cloud, Columns2, Command, Download, History, Languages, Maximize2, Printer, StickyNote, Sparkles,
+  ArrowRight, Check, Cloud, Columns2, Command, Download, History, Languages, Maximize2, Printer, StickyNote,
 } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
 import { APP_CONFIG } from '../config';
 import { FAQS } from '../content/faq';
 import { FadeIn } from '../components/FadeIn';
+import { PlanCards } from '../components/PlanCards';
 import { FaqList } from '../components/home/FaqList';
 import { Badge, ButtonLink, Container, Kbd, RhymeStrip, RhymeWord, Section, SectionHeading } from '../components/ui';
 
@@ -47,7 +48,7 @@ const SPOTLIGHTS: {
   },
   {
     id: 'studio',
-    eyebrow: 'Studio',
+    eyebrow: 'Studio · Pro',
     title: 'Your beat,',
     accent: 'right there.',
     body: 'Drop a beat into the app and write while it plays. Play and pause with one shortcut, without leaving your lyrics.',
@@ -78,8 +79,6 @@ const AUDIENCE = [
   { who: 'Poets', what: 'Use synonyms and near rhymes to find the exact word.' },
 ];
 
-const FREE = ['Full editor with formatting', 'Perfect rhymes', 'Syllable counts per line', 'Idea board and notes', 'Autosave and version history', 'Print and export to PDF'];
-const PRO = ['Near rhymes and sounds-like', 'Synonyms and saved words', 'AI rhyme suggestions', 'Multi-syllable phrase search', 'Tabs and split screen', 'Cloud sync across devices'];
 
 export default function Home() {
   return (
@@ -198,36 +197,7 @@ export default function Home() {
       {/* Free en Pro */}
       <Section className="border-t border-border" id="pricing">
         <SectionHeading align="center" title="Free to write." accent="Pro to go further." lead="Start with the free version. Upgrade once, whenever you're ready." />
-        <div className="mx-auto mt-12 grid max-w-4xl gap-6 md:grid-cols-2">
-          <div className="flex flex-col rounded-xl border border-border bg-surface p-7">
-            <div className="flex items-baseline justify-between">
-              <h3 className="text-xl font-semibold">Free</h3>
-              <p className="text-2xl font-semibold tracking-[-0.02em]">€0</p>
-            </div>
-            <p className="mt-1 text-sm text-text-muted">Everything you need to write.</p>
-            <ul className="mt-6 flex-1 space-y-3 text-[15px]">
-              {FREE.map((f) => (
-                <li key={f} className="flex gap-3"><Check aria-hidden strokeWidth={1.75} className="mt-0.5 size-4 shrink-0 text-text-muted" />{f}</li>
-              ))}
-            </ul>
-            <ButtonLink href={APP_CONFIG.WINDOWS_DOWNLOAD_URL} variant="secondary" size="lg" icon={Download} fullWidth className="mt-8">Download free</ButtonLink>
-          </div>
-          <div className="flex flex-col rounded-xl border border-iris/60 bg-surface p-7 shadow-[0_0_0_1px_rgb(124_108_255/0.25)]">
-            <div className="flex items-baseline justify-between">
-              <h3 className="flex items-center gap-2 text-xl font-semibold">Pro <Badge tone="accent">Launch deal</Badge></h3>
-              <p className="text-2xl font-semibold tracking-[-0.02em]">
-                {APP_CONFIG.SALE_PRICE} <span className="text-base font-normal text-text-muted line-through">{APP_CONFIG.PRICE}</span>
-              </p>
-            </div>
-            <p className="mt-1 text-sm text-text-muted">One-time purchase. Everything in Free, plus:</p>
-            <ul className="mt-6 flex-1 space-y-3 text-[15px]">
-              {PRO.map((f) => (
-                <li key={f} className="flex gap-3"><Sparkles aria-hidden strokeWidth={1.75} className="mt-0.5 size-4 shrink-0 text-iris-text" />{f}</li>
-              ))}
-            </ul>
-            <ButtonLink href="/pricing" size="lg" iconRight={ArrowRight} fullWidth className="mt-8">Get Pro</ButtonLink>
-          </div>
-        </div>
+        <PlanCards className="mt-12" />
         <p className="mt-6 text-center text-sm text-text-muted">
           <Link href="/pricing" className="text-iris-text hover:underline">Compare everything</Link> in Free and Pro.
         </p>

@@ -22,7 +22,7 @@ export function SectionHeading({
   align?: 'left' | 'center'; as?: 'h1' | 'h2'; className?: string;
 }) {
   return (
-    <div className={cn('max-w-2xl', align === 'center' && 'mx-auto text-center', className)}>
+    <div className={cn(Tag === 'h1' ? 'max-w-4xl' : 'max-w-2xl', align === 'center' && 'mx-auto text-center', className)}>
       {eyebrow && <p className="mb-4 text-[13px] font-medium text-iris-text">{eyebrow}</p>}
       <Tag className={cn(Tag === 'h1' ? 'text-5xl sm:text-7xl lg:text-display' : 'text-4xl sm:text-headline', 'font-semibold tracking-[-0.035em] leading-[1.04]')}>
         {title}
