@@ -10,7 +10,7 @@ export const FAQS: FaqItem[] = [
   },
   {
     question: 'Is Pro a one-time purchase or a subscription?',
-    answer: `A one-time purchase. Pay ${APP_CONFIG.SALE_PRICE} once and Pro is yours, including updates.`,
+    answer: `A one-time purchase. Pay ${APP_CONFIG.SALE_PRICE} once and Pro is yours, including updates. The only subscription is Cloud Sync (${APP_CONFIG.CLOUD_SYNC_PRICE} a month), and that is optional.`,
   },
   {
     question: 'Which languages does it support?',
@@ -27,6 +27,10 @@ export const FAQS: FaqItem[] = [
   {
     question: 'Can I use Pro on more than one computer?',
     answer: 'Yes, you can activate your license on up to two devices, for example a studio desktop and a laptop.',
+  },
+  {
+    question: 'What is Cloud Sync?',
+    answer: `An optional subscription of ${APP_CONFIG.CLOUD_SYNC_PRICE} a month that backs up your songs and keeps them in sync on every computer you write on. You need a free account for it. It works with Free and Pro.`,
   },
   {
     question: 'Windows shows a blue SmartScreen warning. Is that safe?',

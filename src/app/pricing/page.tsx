@@ -1,20 +1,20 @@
 import type { Metadata } from 'next';
-import { Check, Info, Minus } from 'lucide-react';
+import { Check, Cloud, Info, Minus } from 'lucide-react';
 import { APP_CONFIG } from '../../config';
 import { COMPARISON } from '../../content/plans';
 import { FAQS } from '../../content/faq';
 import { PlanCards } from '../../components/PlanCards';
 import { FaqList } from '../../components/home/FaqList';
-import { Badge, Container, Section, SectionHeading } from '../../components/ui';
+import { Badge, ButtonLink, Container, Section, SectionHeading } from '../../components/ui';
 
 export const metadata: Metadata = {
   title: 'Pricing',
-  description: `Rhyme Helper is free to use. Pro is a one-time purchase of ${APP_CONFIG.SALE_PRICE}: near rhymes, AI suggestions, Studio, tabs and cloud sync.`,
+  description: `Rhyme Helper is free to use. Pro is a one-time purchase of ${APP_CONFIG.SALE_PRICE}: near rhymes, AI suggestions, Studio, tabs and split screen.`,
   alternates: { canonical: '/pricing' },
 };
 
 const PRICING_FAQ = FAQS.filter((f) =>
-  /one-time|license key|more than one computer|really free/i.test(f.question),
+  /one-time|license key|more than one computer|Cloud Sync/i.test(f.question),
 );
 
 function Cell({ on, plan }: { on: boolean; plan: string }) {
@@ -37,12 +37,28 @@ export default function Pricing() {
             align="center"
             title="Free to write."
             accent="Pay once for Pro."
-            lead={`Rhyme Helper is free, with no trial and no time limit. Pro is a one-time purchase of ${APP_CONFIG.SALE_PRICE}. No subscription.`}
+            lead={`Rhyme Helper is free, with no trial and no time limit. Pro is a one-time purchase of ${APP_CONFIG.SALE_PRICE}, not a subscription.`}
           />
           <PlanCards checkout className="mt-14" />
           <p className="mt-6 text-center text-sm text-text-muted">
             Secure checkout by Lemon Squeezy.
           </p>
+
+          <div className="mx-auto mt-10 flex max-w-4xl flex-col gap-5 rounded-xl border border-border bg-surface p-6 sm:flex-row sm:items-center sm:justify-between sm:p-7">
+            <div className="flex gap-4">
+              <Cloud aria-hidden strokeWidth={1.75} className="mt-1 size-5 shrink-0 text-text-muted" />
+              <div>
+                <h2 className="flex items-center gap-2 text-lg font-semibold">Cloud Sync <Badge>Optional add-on</Badge></h2>
+                <p className="mt-1 max-w-xl text-[15px] leading-relaxed text-text-muted">
+                  Automatic backups and your songs in sync on every computer. Works with Free and Pro. You need a free account.
+                </p>
+              </div>
+            </div>
+            <div className="flex shrink-0 items-center gap-4 sm:flex-col sm:items-end sm:gap-2">
+              <p className="text-lg font-semibold">{APP_CONFIG.CLOUD_SYNC_PRICE}<span className="text-sm font-normal text-text-muted"> / month</span></p>
+              <ButtonLink href="/account" variant="secondary" size="sm">Set up in your account</ButtonLink>
+            </div>
+          </div>
         </Container>
       </section>
 

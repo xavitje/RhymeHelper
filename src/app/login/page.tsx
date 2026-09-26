@@ -1,169 +1,144 @@
 "use client";
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { ArrowLeft, Lock, Mail } from 'lucide-react';
 import { supabase } from '../../lib/supabaseClient';
-import { motion } from 'framer-motion';
-import { sanitize } from '../../lib/sanitize';
+import { AuthCard, GoogleLogo } from '../../components/auth/AuthCard';
+import { Alert, Button, Field, Input } from '../../components/ui';
+import { cn } from '../../lib/cn';
+
+type Mode = 'signin' | 'signup' | 'forgot';
+
+const TITLES: Record<Mode, { title: string; sub: string; submit: string; busy: string }> = {
+  signin: { title: 'Welcome back', sub: 'Log in to see your license and downloads.', submit: 'Log in', busy: 'Logging in…' },
+  signup: { title: 'Create your account', sub: 'You need an account for Pro and Cloud Sync. Writing in the app works without one.', submit: 'Create account', busy: 'Creating account…' },
+  forgot: { title: 'Reset your password', sub: 'We’ll email you a link to choose a new password.', submit: 'Send reset link', busy: 'Sending…' },
+};
 
 export default function Login() {
+  const router = useRouter();
+  const [mode, setMode] = useState<Mode>('signin');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [isSignUp, setIsSignUp] = useState(false);
-  const [isForgotPassword, setIsForgotPassword] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [message, setMessage] = useState({ type: '', text: '' });
-  const router = useRouter();
+  const [message, setMessage] = useState<{ tone: 'error' | 'success'; text: string } | null>(null);
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
-      if (session) router.push('/dashboard');
+      if (session) router.replace('/dashboard');
     });
-  }, [router.push]);
+  }, [router]);
 
-  const handleAuth = async (e: React.FormEvent) => {
+  const switchMode = (next: Mode) => {
+    setMode(next);
+    setMessage(null);
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    setMessage({ type: '', text: '' });
-
+    setMessage(null);
+    const mail = email.trim();
     try {
-      if (isForgotPassword) {
-        const { error } = await supabase.auth.resetPasswordForEmail(email, {
-          redirectTo: `${window.location.origin}/reset-password`,
-        });
+      if (mode === 'forgot') {
+        const { error } = await supabase.auth.resetPasswordForEmail(mail, { redirectTo: `${window.location.origin}/reset-password` });
         if (error) throw error;
-        setMessage({ type: 'success', text: 'Password reset link sent! Check your email.' });
-      } else if (isSignUp) {
-        const { error } = await supabase.auth.signUp({ email, password });
+        setMessage({ tone: 'success', text: 'Check your email for a link to reset your password.' });
+      } else if (mode === 'signup') {
+        const { error } = await supabase.auth.signUp({ email: mail, password });
         if (error) throw error;
-        setMessage({ type: 'success', text: 'Check your email for the confirmation link!' });
+        setMessage({ tone: 'success', text: 'Almost there. Check your email to confirm your account.' });
       } else {
-        const { error } = await supabase.auth.signInWithPassword({ email, password });
+        const { error } = await supabase.auth.signInWithPassword({ email: mail, password });
         if (error) throw error;
         router.push('/dashboard');
       }
-    } catch (error: any) {
-      setMessage({ type: 'error', text: error.message || 'An error occurred' });
+    } catch (err) {
+      setMessage({ tone: 'error', text: err instanceof Error ? err.message : 'Something went wrong. Please try again.' });
     } finally {
       setLoading(false);
     }
   };
 
+  const signInWithGoogle = async () => {
+    setLoading(true);
+    setMessage(null);
+    const { error } = await supabase.auth.signInWithOAuth({ provider: 'google' });
+    if (error) {
+      setMessage({ tone: 'error', text: error.message });
+      setLoading(false);
+    }
+  };
+
+  const t = TITLES[mode];
+
   return (
-    <div className="min-h-[80vh] flex items-center justify-center px-6">
-      <motion.div
-        className="w-full max-w-md bg-muted/5 border border-border p-8 rounded-xl shadow-2xl"
-        initial={{ opacity: 0, scale: 0.95 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.4 }}
-      >
-        <h2 className="text-3xl font-display uppercase tracking-wider mb-6 text-center">
-          {isForgotPassword ? 'Reset Password' : (isSignUp ? 'Create Studio Pass' : 'Enter Studio')}
-        </h2>
-
-        {message.text && (
-          <div className={`p-4 rounded-md mb-6 font-mono text-sm ${message.type === 'error' ? 'bg-red-500/10 text-red-400 border border-red-500/20' : 'bg-[#22c55e]/10 text-[#22c55e] border border-[#22c55e]/20'}`}>
-            {message.text}
+    <AuthCard
+      title={t.title}
+      sub={t.sub}
+      footer={
+        mode === 'forgot' ? (
+          <button type="button" onClick={() => switchMode('signin')} className="inline-flex items-center gap-1.5 rounded-sm font-medium text-text hover:underline">
+            <ArrowLeft aria-hidden strokeWidth={1.75} className="size-3.5" /> Back to log in
+          </button>
+        ) : (
+          <>
+            {mode === 'signin' ? 'New to Rhyme Helper?' : 'Already have an account?'}{' '}
+            <button type="button" onClick={() => switchMode(mode === 'signin' ? 'signup' : 'signin')} className="rounded-sm font-medium text-text hover:underline">
+              {mode === 'signin' ? 'Create an account' : 'Log in'}
+            </button>
+          </>
+        )
+      }
+    >
+      {mode !== 'forgot' && (
+        <>
+          <button
+            type="button"
+            onClick={signInWithGoogle}
+            disabled={loading}
+            className="flex h-11 w-full items-center justify-center gap-2.5 rounded-[10px] border border-border-strong bg-bg text-sm font-medium text-text transition-colors hover:bg-raised disabled:opacity-60"
+          >
+            <GoogleLogo /> Continue with Google
+          </button>
+          <div className="my-5 flex items-center gap-3 text-xs text-text-faint">
+            <span className="h-px flex-1 bg-border" /> or <span className="h-px flex-1 bg-border" />
           </div>
-        )}
+        </>
+      )}
 
-        <form onSubmit={handleAuth} className="space-y-4">
-          <div>
-            <label className="block font-mono text-xs text-muted-foreground mb-2 uppercase tracking-widest">Email Address</label>
-            <input
-              type="email"
-              required
-              value={email}
-              onChange={(e) => setEmail(sanitize(e.target.value))}
-              className="w-full bg-background border border-border rounded-md px-4 py-3 text-foreground focus:outline-none focus:border-primary transition-colors font-sans"
-              placeholder="producer@studio.com"
-            />
-          </div>
-          {!isForgotPassword && (
-            <div>
-              <label className="block font-mono text-xs text-muted-foreground mb-2 uppercase tracking-widest">Password</label>
-              <input
+      <form onSubmit={handleSubmit} className="grid gap-4" noValidate={false}>
+        <Field label="Email">
+          {(id) => <Input id={id} icon={Mail} type="email" required autoComplete="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="you@example.com" />}
+        </Field>
+        {mode !== 'forgot' && (
+          <Field label="Password" hint={mode === 'signup' ? 'At least 6 characters.' : undefined}>
+            {(id) => (
+              <Input
+                id={id}
+                icon={Lock}
                 type="password"
                 required
+                minLength={6}
+                autoComplete={mode === 'signup' ? 'new-password' : 'current-password'}
                 value={password}
-                onChange={(e) => setPassword(sanitize(e.target.value))}
-                className="w-full bg-background border border-border rounded-md px-4 py-3 text-foreground focus:outline-none focus:border-primary transition-colors font-sans"
-                placeholder="••••••••"
+                onChange={(e) => setPassword(e.target.value)}
               />
-            </div>
-          )}
-          
-          {!isForgotPassword && !isSignUp && (
-            <div className="flex justify-end">
-              <button
-                type="button"
-                onClick={() => setIsForgotPassword(true)}
-                className="text-xs text-muted-foreground hover:text-primary transition-colors focus:outline-none"
-              >
-                Forgot Password?
-              </button>
-            </div>
-          )}
-
-          <button
-            type="submit"
-            disabled={loading}
-            className="w-full py-4 bg-primary text-white font-mono text-lg rounded-md hover:bg-primary/90 transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-[0_0_15px_rgba(168,85,247,0.2)] mt-6 mb-4"
-          >
-            {loading ? 'Processing...' : (isForgotPassword ? 'Send Reset Link' : (isSignUp ? 'Sign Up' : 'Login'))}
+            )}
+          </Field>
+        )}
+        {mode === 'signin' && (
+          <button type="button" onClick={() => switchMode('forgot')} className="-mt-2 justify-self-end rounded-sm text-xs text-text-muted hover:text-text">
+            Forgot password?
           </button>
+        )}
 
-          {!isForgotPassword && (
-            <>
-              <div className="flex items-center my-6">
-                <div className="flex-1 h-px bg-border/50"></div>
-                <span className="px-4 text-xs font-mono text-muted-foreground uppercase tracking-widest">or</span>
-                <div className="flex-1 h-px bg-border/50"></div>
-              </div>
+        {message && <Alert tone={message.tone}>{message.text}</Alert>}
 
-              <button
-                type="button"
-                disabled={loading}
-                onClick={async () => {
-                  setLoading(true);
-                  try {
-                    const { error } = await supabase.auth.signInWithOAuth({ provider: 'google' });
-                    if (error) throw error;
-                  } catch (err: any) {
-                    setMessage({ type: 'error', text: err.message });
-                  } finally {
-                    setLoading(false);
-                  }
-                }}
-                className="w-full py-4 bg-white text-gray-800 font-sans text-md font-semibold rounded-xl hover:bg-gray-50 transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-3 border border-gray-200 shadow-[0_2px_10px_rgba(255,255,255,0.05)] hover:-translate-y-[1px]"
-              >
-                <img src="https://www.google.com/favicon.ico" alt="Google" className="w-5 h-5" />
-                Continue with Google
-              </button>
-            </>
-          )}
-        </form>
-
-        <div className="mt-8 text-center text-sm font-sans text-muted-foreground border-t border-border/50 pt-6">
-          {isForgotPassword ? (
-            <button
-              onClick={() => setIsForgotPassword(false)}
-              className="text-primary hover:underline focus:outline-none"
-            >
-              Back to Login
-            </button>
-          ) : (
-            <>
-              {isSignUp ? 'Already have access?' : "Don't have a pass yet?"}{' '}
-              <button
-                onClick={() => setIsSignUp(!isSignUp)}
-                className="text-primary hover:underline focus:outline-none"
-              >
-                {isSignUp ? 'Login' : 'Sign Up'}
-              </button>
-            </>
-          )}
-        </div>
-      </motion.div>
-    </div>
+        <Button type="submit" size="lg" fullWidth disabled={loading} className={cn(mode === 'signin' && '-mt-1')}>
+          {loading ? t.busy : t.submit}
+        </Button>
+      </form>
+    </AuthCard>
   );
 }

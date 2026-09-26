@@ -1,4 +1,7 @@
-/** Wat zit in Free en Pro. Bron: de app-code (fase 5–6) + besluit Studio = Pro (26 sep 2026). */
+/**
+ * Wat zit in Free en Pro. Bron: de app-code (fase 5–6) + besluit Studio = Pro (26 sep 2026).
+ * Cloud Sync is een los abonnement (app: CloudSyncModal, €2.99/maand), niet onderdeel van Pro.
+ */
 
 export const FREE_HIGHLIGHTS = [
   'Full editor with formatting',
@@ -15,7 +18,7 @@ export const PRO_HIGHLIGHTS = [
   'AI rhyme suggestions',
   'Multi-syllable phrase search',
   'Studio: play your beat while you write',
-  'Tabs, split screen and cloud sync',
+  'Tabs and split screen',
 ];
 
 export type CompareRow = { feature: string; free: boolean; pro: boolean; note?: string };
@@ -58,7 +61,6 @@ export const COMPARISON: CompareGroup[] = [
     rows: [
       { feature: 'Several songs open in tabs', free: false, pro: true },
       { feature: 'Split screen, two songs side by side', free: false, pro: true },
-      { feature: 'Cloud sync across devices', free: false, pro: true },
     ],
   },
 ];

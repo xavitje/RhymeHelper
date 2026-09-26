@@ -8,3 +8,4 @@ export { RhymeWord, RhymeStrip } from './Rhyme';
 export { SongCard, SAMPLE_LYRICS } from './SongCard';
 export type { LyricLine, LyricSegment } from './SongCard';
 export { Logo, LogoMark } from './Logo';
+export { Input, Field, Alert } from './Field';
