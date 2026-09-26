@@ -43,7 +43,7 @@ export default function ThankYou() {
           <ol>
           {STEPS.map((s, i) => (
             <li key={s.title} className="flex gap-5 border-t border-border p-5 first-of-type:border-t-0 sm:p-6">
-              <span aria-hidden className="font-mono text-sm text-text-faint">{String(i + 1).padStart(2, '0')}</span>
+              <span aria-hidden className="font-mono text-sm text-text-muted">{String(i + 1).padStart(2, '0')}</span>
               <div>
                 <h2 className="text-[17px] font-semibold tracking-[-0.01em]">{s.title}</h2>
                 <p className="mt-1 text-[15px] leading-relaxed text-text-muted">{s.body}</p>
@@ -60,7 +60,7 @@ export default function ThankYou() {
 
         <p className="mt-10 text-sm text-text-muted">
           Tip: press <Kbd keys={['Ctrl', 'K']} /> in the app to find any song, rhyme or action. Questions? Mail{' '}
-          <a href={`mailto:${SITE.contactEmail}`} className="text-text underline-offset-4 hover:underline">{SITE.contactEmail}</a>.
+          <a href={`mailto:${SITE.contactEmail}`} className="text-text underline decoration-text-faint underline-offset-4 hover:decoration-text">{SITE.contactEmail}</a>.
         </p>
       </Container>
     </div>

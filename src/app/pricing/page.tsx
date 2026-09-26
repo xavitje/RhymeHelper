@@ -39,7 +39,7 @@ export default function Pricing() {
             accent="Pay once for Pro."
             lead={`Rhyme Helper is free, with no trial and no time limit. Pro is a one-time purchase of ${APP_CONFIG.SALE_PRICE}, not a subscription.`}
           />
-          <PlanCards checkout className="mt-14" />
+          <PlanCards checkout headingLevel={2} className="mt-14" />
           <p className="mt-6 text-center text-sm text-text-muted">
             Secure checkout by Lemon Squeezy.
           </p>

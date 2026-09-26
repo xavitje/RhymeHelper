@@ -199,7 +199,7 @@ export default function Home() {
         <SectionHeading align="center" title="Free to write." accent="Pro to go further." lead="Start with the free version. Upgrade once, whenever you're ready." />
         <PlanCards className="mt-12" />
         <p className="mt-6 text-center text-sm text-text-muted">
-          <Link href="/pricing" className="text-iris-text hover:underline">Compare everything</Link> in Free and Pro.
+          <Link href="/pricing" className="text-iris-text underline decoration-iris-text/40 underline-offset-4 hover:decoration-iris-text">Compare everything</Link> in Free and Pro.
         </p>
       </Section>
 
@@ -208,7 +208,7 @@ export default function Home() {
         <SectionHeading align="center" title="Questions," accent="answered." />
         <FaqList items={FAQS.slice(0, 5)} className="mt-10" />
         <p className="mt-6 text-center text-sm text-text-muted">
-          More in the <Link href="/faq" className="text-iris-text hover:underline">FAQ</Link> and the <Link href="/resources" className="text-iris-text hover:underline">docs</Link>.
+          More in the <Link href="/faq" className="text-iris-text underline decoration-iris-text/40 underline-offset-4 hover:decoration-iris-text">FAQ</Link> and the <Link href="/resources" className="text-iris-text underline decoration-iris-text/40 underline-offset-4 hover:decoration-iris-text">docs</Link>.
         </p>
       </Section>
 

@@ -84,7 +84,7 @@ export default function Docs() {
             <div>
               <h2 className="text-lg font-semibold">Still stuck?</h2>
               <p className="mt-1 text-[15px] text-text-muted">
-                Check the <Link href="/faq" className="text-text underline-offset-4 hover:underline">FAQ</Link> or send us a message. We read every email.
+                Check the <Link href="/faq" className="text-text underline decoration-text-faint underline-offset-4 hover:decoration-text">FAQ</Link> or send us a message. We read every email.
               </p>
             </div>
             <ButtonLink href={`mailto:${SITE.contactEmail}`} variant="secondary" icon={Mail}>Email us</ButtonLink>

@@ -62,7 +62,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className={`${geist.variable} ${geistMono.variable}`}>
       <body className="min-h-screen flex flex-col bg-bg text-text font-sans antialiased">
-        <a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:rounded-md focus:bg-iris focus:px-4 focus:py-2 focus:text-on-iris">
+        <a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:rounded-md focus:bg-iris-deep focus:px-4 focus:py-2 focus:text-on-iris">
           Skip to content
         </a>
         <Navbar />

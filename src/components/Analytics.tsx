@@ -82,7 +82,7 @@ export function Analytics() {
           <p className="text-[15px] font-semibold">Can we count your visit?</p>
           <p className="mt-1.5 text-sm leading-relaxed text-text-muted">
             We’d like to use Google Analytics to see how people find Rhyme Helper. It only runs if you allow it.{' '}
-            <Link href="/privacy#analytics" className="text-text underline-offset-4 hover:underline">Privacy policy</Link>
+            <Link href="/privacy#analytics" className="text-text underline decoration-text-faint underline-offset-4 hover:decoration-text">Privacy policy</Link>
           </p>
           <div className="mt-4 flex gap-2">
             <Button size="sm" variant="secondary" onClick={() => choose('granted')}>Allow</Button>

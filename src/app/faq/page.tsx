@@ -27,9 +27,9 @@ export default function Faq() {
       <DocHeader
         crumb="FAQ"
         title={<>Questions, <span className="text-text-muted">answered.</span></>}
-        lead={<>The short answers. For how-tos, see the <Link href="/resources" className="text-text underline-offset-4 hover:underline">docs</Link>.</>}
+        lead={<>The short answers. For how-tos, see the <Link href="/resources" className="text-text underline decoration-text-faint underline-offset-4 hover:decoration-text">docs</Link>.</>}
       />
-      <FaqList items={FAQS} className="mt-10" />
+      <FaqList items={FAQS} headingLevel={2} className="mt-10" />
       <div className="mt-10 flex flex-col gap-5 rounded-xl border border-border bg-surface p-6 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <h2 className="text-lg font-semibold">Didn’t find your answer?</h2>

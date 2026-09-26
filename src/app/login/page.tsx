@@ -101,7 +101,7 @@ export default function Login() {
           >
             <GoogleLogo /> Continue with Google
           </button>
-          <div className="my-5 flex items-center gap-3 text-xs text-text-faint">
+          <div className="my-5 flex items-center gap-3 text-xs text-text-muted">
             <span className="h-px flex-1 bg-border" /> or <span className="h-px flex-1 bg-border" />
           </div>
         </>
