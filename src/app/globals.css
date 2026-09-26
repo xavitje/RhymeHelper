@@ -42,17 +42,6 @@
   --color-warning: #F59E0B;
   --color-danger: #F87171;
 
-  /* Overgangslaag: oude klassen van vóór de redesign wijzen naar de merk-tokens.
-     Verdwijnt zodra alle pagina's zijn omgebouwd (W1–W5). */
-  --color-background: #0B0B0D;
-  --color-foreground: #EDEDEF;
-  --color-primary: #7C6CFF;
-  --color-primary-foreground: #FFFFFF;
-  --color-muted: #1B1B20;
-  --color-muted-foreground: #9A9AA3;
-  --color-accent: #7C6CFF;
-  --color-accent-foreground: #FFFFFF;
-
   /* Vorm */
   --radius-sm: 6px;
   --radius-md: 8px;

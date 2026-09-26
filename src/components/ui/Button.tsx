@@ -5,7 +5,7 @@ import { cn } from '../../lib/cn';
 
 /**
  * Knop volgens de brand guide.
- * primary = de ene actie per scherm (Iris) · secondary = raised + haarlijn · ghost = laag · pill = marketing-CTA (iris-deep, 48px).
+ * primary = de ene actie per scherm (Iris; vlak #6B5AF5 zodat witte tekst 4.8:1 haalt) · secondary = raised + haarlijn · ghost = laag · pill = marketing-CTA (iris-deep, 48px).
  */
 export type ButtonVariant = 'primary' | 'secondary' | 'ghost' | 'pill';
 export type ButtonSize = 'sm' | 'md' | 'lg';
@@ -16,7 +16,7 @@ const base =
   'focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-iris';
 
 const variants: Record<ButtonVariant, string> = {
-  primary: 'bg-iris text-on-iris hover:bg-iris-hover shadow-[inset_0_1px_0_rgb(255_255_255/0.18),0_1px_2px_rgb(0_0_0/0.25)]',
+  primary: 'bg-iris-hover text-on-iris hover:bg-iris-deep shadow-[inset_0_1px_0_rgb(255_255_255/0.18),0_1px_2px_rgb(0_0_0/0.25)]',
   secondary: 'bg-raised text-text border-border hover:bg-hover',
   ghost: 'bg-transparent text-text-muted hover:bg-raised hover:text-text',
   pill: 'bg-iris-deep text-on-iris hover:bg-iris rounded-full font-semibold',

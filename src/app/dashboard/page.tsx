@@ -117,7 +117,7 @@ export default function Dashboard() {
                 <Button type="submit" variant="secondary" disabled={activating}>{activating ? 'Checking…' : 'Link license'}</Button>
               </form>
               <p className="mt-5 text-sm text-text-muted">
-                No key yet? <Link href="/pricing" className="font-medium text-text hover:underline">Get Pro for {APP_CONFIG.SALE_PRICE}</Link>
+                No key yet? <Link href="/pricing" className="font-medium text-text underline decoration-text-faint underline-offset-4 hover:decoration-text">Get Pro for {APP_CONFIG.SALE_PRICE}</Link>
               </p>
             </>
           )}

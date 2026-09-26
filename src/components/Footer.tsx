@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { APP_CONFIG, SITE } from '../config';
 import { Logo } from './ui/Logo';
 import { RhymeStrip } from './ui/Rhyme';
+import { CookieSettingsButton } from './Analytics';
 
 const COLUMNS = [
   {
@@ -62,7 +63,10 @@ export default function Footer() {
       </div>
       <div className="mx-auto flex w-full max-w-[1200px] flex-col gap-2 border-t border-border px-5 py-6 text-[13px] text-text-muted sm:flex-row sm:items-center sm:justify-between sm:px-8">
         <p>© {new Date().getFullYear()} Rhyme Helper. Built for creatives by creatives.</p>
-        <a href={`mailto:${SITE.contactEmail}`} className="transition-colors hover:text-text">{SITE.contactEmail}</a>
+        <div className="flex flex-wrap items-center gap-x-5 gap-y-2">
+          <CookieSettingsButton className="rounded-sm transition-colors hover:text-text" />
+          <a href={`mailto:${SITE.contactEmail}`} className="transition-colors hover:text-text">{SITE.contactEmail}</a>
+        </div>
       </div>
     </footer>
   );

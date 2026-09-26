@@ -5,7 +5,8 @@ import type { FaqItem } from '../../content/faq';
 import { cn } from '../../lib/cn';
 
 /** Accordeon: één vraag tegelijk open, knoppen met aria-expanded. */
-export function FaqList({ items, className }: { items: FaqItem[]; className?: string }) {
+export function FaqList({ items, className, headingLevel = 3 }: { items: FaqItem[]; className?: string; headingLevel?: 2 | 3 }) {
+  const H = headingLevel === 2 ? 'h2' : 'h3';
   const [open, setOpen] = useState<number | null>(0);
   const base = useId();
   return (
@@ -15,7 +16,7 @@ export function FaqList({ items, className }: { items: FaqItem[]; className?: st
         const id = `${base}-${i}`;
         return (
           <div key={item.question}>
-            <h3>
+            <H>
               <button
                 type="button"
                 aria-expanded={isOpen}
@@ -27,7 +28,7 @@ export function FaqList({ items, className }: { items: FaqItem[]; className?: st
                 {item.question}
                 <ChevronDown aria-hidden strokeWidth={1.75} className={cn('size-4 shrink-0 text-text-muted transition-transform duration-200', isOpen && 'rotate-180')} />
               </button>
-            </h3>
+            </H>
             <div id={`${id}-a`} role="region" aria-labelledby={`${id}-q`} hidden={!isOpen} className="px-5 pb-5 text-[15px] leading-relaxed text-text-muted sm:px-6">
               {item.answer}
             </div>

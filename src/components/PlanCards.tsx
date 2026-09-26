@@ -9,12 +9,13 @@ import { ButtonLink } from './ui/Button';
  * Free- en Pro-kaart naast elkaar. `checkout` = de Pro-knop gaat direct naar Lemon Squeezy (prijspagina);
  * anders naar /pricing (homepage).
  */
-export function PlanCards({ checkout = false, className }: { checkout?: boolean; className?: string }) {
+export function PlanCards({ checkout = false, className, headingLevel = 3 }: { checkout?: boolean; className?: string; headingLevel?: 2 | 3 }) {
+  const H = headingLevel === 2 ? 'h2' : 'h3';
   return (
     <div className={cn('mx-auto grid max-w-4xl gap-6 md:grid-cols-2', className)}>
       <div className="flex flex-col rounded-xl border border-border bg-surface p-7">
         <div className="flex items-baseline justify-between">
-          <h3 className="text-xl font-semibold">Free</h3>
+          <H className="text-xl font-semibold">Free</H>
           <p className="text-2xl font-semibold tracking-[-0.02em]">€0</p>
         </div>
         <p className="mt-1 text-sm text-text-muted">Everything you need to write. Forever.</p>
@@ -30,7 +31,7 @@ export function PlanCards({ checkout = false, className }: { checkout?: boolean;
 
       <div className="flex flex-col rounded-xl border border-iris/60 bg-surface p-7 shadow-[0_0_0_1px_rgb(124_108_255/0.25)]">
         <div className="flex items-baseline justify-between gap-4">
-          <h3 className="flex items-center gap-2 text-xl font-semibold">Pro <Badge tone="accent">Launch deal</Badge></h3>
+          <H className="flex items-center gap-2 text-xl font-semibold">Pro <Badge tone="accent">Launch deal</Badge></H>
           <p className="text-2xl font-semibold tracking-[-0.02em] whitespace-nowrap">
             {APP_CONFIG.SALE_PRICE}{' '}
             <span className="text-base font-normal text-text-muted line-through" aria-label={`was ${APP_CONFIG.PRICE}`}>{APP_CONFIG.PRICE}</span>

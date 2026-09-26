@@ -3,7 +3,7 @@ export const SITE = {
   url: 'https://rhymehelper.store',
   tagline: 'Find the rhyme. Keep the flow.',
   description: 'The writing app for lyrics, with rhymes, syllables and your beat in one place. Free for Windows.',
-  contactEmail: 'rafi@rhymehelper.store',
+  contactEmail: 'support@rhymehelper.store',
 };
 
 export const APP_CONFIG = {
