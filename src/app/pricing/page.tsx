@@ -1,123 +1,101 @@
-"use client";
-import { motion } from 'framer-motion';
-import { Check, X, Star } from 'lucide-react';
+import type { Metadata } from 'next';
+import { Check, Info, Minus } from 'lucide-react';
 import { APP_CONFIG } from '../../config';
+import { COMPARISON } from '../../content/plans';
+import { FAQS } from '../../content/faq';
+import { PlanCards } from '../../components/PlanCards';
+import { FaqList } from '../../components/home/FaqList';
+import { Badge, Container, Section, SectionHeading } from '../../components/ui';
+
+export const metadata: Metadata = {
+  title: 'Pricing',
+  description: `Rhyme Helper is free to use. Pro is a one-time purchase of ${APP_CONFIG.SALE_PRICE}: near rhymes, AI suggestions, Studio, tabs and cloud sync.`,
+  alternates: { canonical: '/pricing' },
+};
+
+const PRICING_FAQ = FAQS.filter((f) =>
+  /one-time|license key|more than one computer|really free/i.test(f.question),
+);
+
+function Cell({ on, plan }: { on: boolean; plan: string }) {
+  return on ? (
+    <Check strokeWidth={1.75} className="mx-auto size-4 text-text" aria-label={`Included in ${plan}`} role="img" />
+  ) : (
+    <Minus strokeWidth={1.75} className="mx-auto size-4 text-text-faint" aria-label={`Not in ${plan}`} role="img" />
+  );
+}
 
 export default function Pricing() {
   return (
-    <div className="pt-16 pb-24 max-w-7xl mx-auto px-6">
-      <div className="text-center mb-20">
-        <h1 className="text-5xl md:text-7xl font-display font-bold uppercase tracking-tight mb-6">Upgrade Your <span className="text-primary">Flow</span></h1>
-        <p className="text-xl text-muted-foreground font-sans max-w-2xl mx-auto">Get the full studio experience and never search for a rhyme again.</p>
-      </div>
+    <>
+      <section className="relative overflow-hidden pt-16 pb-4 sm:pt-24">
+        <div aria-hidden className="pointer-events-none absolute -top-48 left-1/2 h-[600px] w-[1000px] -translate-x-1/2 bg-[radial-gradient(closest-side,rgb(124_108_255/0.16),transparent)]" />
+        <Container className="relative">
+          <SectionHeading
+            className="[&_p]:mx-auto [&_p]:max-w-2xl"
+            as="h1"
+            align="center"
+            title="Free to write."
+            accent="Pay once for Pro."
+            lead={`Rhyme Helper is free, with no trial and no time limit. Pro is a one-time purchase of ${APP_CONFIG.SALE_PRICE}. No subscription.`}
+          />
+          <PlanCards checkout className="mt-14" />
+          <p className="mt-6 text-center text-sm text-text-muted">
+            Secure checkout by Lemon Squeezy.
+          </p>
+        </Container>
+      </section>
 
-      <div className="grid md:grid-cols-2 gap-8 lg:gap-12 max-w-5xl mx-auto">
-        {/* Free Tier */}
-        <motion.div 
-          className="border border-border bg-muted/5 p-10 flex flex-col rounded-3xl"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-        >
-          <div className="mb-8">
-            <h2 className="text-3xl font-display uppercase tracking-wide mb-2">Basic</h2>
-            <div className="text-4xl font-mono text-foreground mb-4">Free</div>
-            <p className="text-muted-foreground font-sans">For the occasional writer getting their ideas down.</p>
-          </div>
-          
-          <ul className="space-y-4 mb-10 flex-1 font-sans text-muted-foreground">
-            <li className="flex items-start gap-3">
-              <Check className="w-5 h-5 text-primary mt-0.5 shrink-0" />
-              <span>Standard Text Editor</span>
-            </li>
-            <li className="flex items-start gap-3">
-              <Check className="w-5 h-5 text-primary mt-0.5 shrink-0" />
-              <span>Basic Dictionary</span>
-            </li>
-            <li className="flex items-start gap-3 opacity-50">
-              <X className="w-5 h-5 text-red-500 mt-0.5 shrink-0" />
-              <span className="line-through">Instant Rhyme Popups</span>
-            </li>
-            <li className="flex items-start gap-3 opacity-50">
-              <X className="w-5 h-5 text-red-500 mt-0.5 shrink-0" />
-              <span className="line-through">Multisyllabic Search</span>
-            </li>
-            <li className="flex items-start gap-3 opacity-50">
-              <X className="w-5 h-5 text-red-500 mt-0.5 shrink-0" />
-              <span className="line-through">Cloud Project Sync</span>
-            </li>
-          </ul>
-          
-          <a href={APP_CONFIG.WINDOWS_DOWNLOAD_URL} download className="w-full block text-center py-4 border border-border text-foreground font-mono text-lg rounded-2xl hover:bg-muted hover:border-muted-foreground transition-all">
-            Download Free
-          </a>
-        </motion.div>
+      <Section>
+        <SectionHeading align="center" title="Compare" accent="everything." />
+        <div className="mx-auto mt-12 max-w-4xl overflow-hidden rounded-xl border border-border bg-surface">
+          <table className="w-full border-collapse text-left text-[15px]">
+            <caption className="sr-only">What is included in Free and Pro</caption>
+            <thead>
+              <tr className="border-b border-border">
+                <th scope="col" className="px-5 py-4 text-sm font-medium text-text-muted sm:px-6">Feature</th>
+                <th scope="col" className="w-20 px-2 py-4 text-center text-sm font-semibold sm:w-28">Free</th>
+                <th scope="col" className="w-20 px-2 py-4 text-center text-sm font-semibold sm:w-28">
+                  <Badge tone="accent">Pro</Badge>
+                </th>
+              </tr>
+            </thead>
+            {COMPARISON.map((group) => (
+              <tbody key={group.title} className="border-b border-border last:border-b-0">
+                <tr>
+                  <th colSpan={3} scope="colgroup" className="bg-bg-subtle px-5 pt-5 pb-2 text-[13px] font-semibold text-text sm:px-6">
+                    {group.title}
+                  </th>
+                </tr>
+                {group.rows.map((row) => (
+                  <tr key={row.feature} className="border-t border-border first:border-t-0">
+                    <th scope="row" className="px-5 py-3 font-normal text-text-muted sm:px-6">{row.feature}</th>
+                    <td className="px-2 py-3"><Cell on={row.free} plan="Free" /></td>
+                    <td className="px-2 py-3"><Cell on={row.pro} plan="Pro" /></td>
+                  </tr>
+                ))}
+              </tbody>
+            ))}
+          </table>
+        </div>
+      </Section>
 
-        {/* Pro Tier */}
-        <motion.div 
-          className="border border-primary bg-primary/5 p-10 flex flex-col relative overflow-hidden"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.1 }}
-        >
-          <div className="absolute top-0 right-0 bg-primary text-white text-xs font-mono px-3 py-1 tracking-widest uppercase rounded-bl-lg">
-            Pro
-          </div>
-          <div className="mb-8">
-            <h2 className="text-3xl font-display uppercase tracking-wide mb-2 text-primary">Pro</h2>
-            <div className="text-4xl font-mono text-foreground mb-4">
-              {APP_CONFIG.SALE_PRICE ? (
-                <>
-                  {APP_CONFIG.SALE_PRICE}
-                  <span className="text-lg text-muted-foreground line-through ml-2">{APP_CONFIG.PRICE}</span>
-                  <span className="text-xs text-primary font-sans block mt-1 uppercase tracking-wider">Launch Deal</span>
-                </>
-              ) : (
-                APP_CONFIG.PRICE
-              )}
-            </div>
-            <p className="text-muted-foreground font-sans">For professional lyricists building complex schemes.</p>
-          </div>
-          
-          <ul className="space-y-4 mb-10 flex-1 font-sans text-muted-foreground">
-            <li className="flex items-start gap-3">
-              <Check className="w-5 h-5 text-primary mt-0.5 shrink-0" />
-              <span className="text-foreground font-medium">Everything in Free, plus:</span>
-            </li>
-            <li className="flex items-start gap-3">
-              <Star className="w-5 h-5 text-yellow-400 mt-0.5 shrink-0 fill-yellow-400/20" />
-              <span className="text-foreground"><strong>Instant Rhyme Popups:</strong> See rhymes while you type without opening a browser.</span>
-            </li>
-            <li className="flex items-start gap-3">
-              <Star className="w-5 h-5 text-yellow-400 mt-0.5 shrink-0 fill-yellow-400/20" />
-              <span className="text-foreground"><strong>Multisyllabic Search:</strong> Find complex rhymes for entire sentences, not just single words.</span>
-            </li>
-            <li className="flex items-start gap-3">
-              <Star className="w-5 h-5 text-yellow-400 mt-0.5 shrink-0 fill-yellow-400/20" />
-              <span className="text-foreground"><strong>Advanced Filters:</strong> Filter by syllables, assonance, and slant rhymes.</span>
-            </li>
-            <li className="flex items-start gap-3">
-              <Check className="w-5 h-5 text-primary mt-0.5 shrink-0" />
-              <span className="text-foreground">Lifetime Access & Updates</span>
-            </li>
-          </ul>
-          
-          <a href={APP_CONFIG.LEMON_SQUEEZY_CHECKOUT_URL} className="lemonsqueezy-button w-full py-4 bg-primary text-white font-mono text-lg rounded-2xl hover:bg-primary/90 transition-all shadow-[0_0_20px_rgba(168,85,247,0.3)] text-center flex items-center justify-center">
-            Buy Pro License
-          </a>
-        </motion.div>
-      </div>
+      <Section className="border-t border-border" narrow>
+        <SectionHeading align="center" title="Before you" accent="buy." />
+        <FaqList items={PRICING_FAQ} className="mt-10" />
 
-      <div className="mt-12 text-center max-w-3xl mx-auto px-6 py-4 bg-muted/20 border border-border rounded-xl">
-        <p className="text-sm text-muted-foreground font-sans flex items-start text-left">
-          <span className="mr-3 mt-0.5">ℹ️</span>
-          <span>
-            <strong>Installation Note for Windows Users:</strong> We are currently pending our Extended Validation (EV) Code Signing Certificate. 
-            When opening the installer, Windows SmartScreen might show a blue warning. 
-            Simply click <strong>"More info"</strong> and then <strong>"Run anyway"</strong> to install safely.
-          </span>
-        </p>
-      </div>
-    </div>
+        <div className="mt-8 flex gap-4 rounded-xl border border-border bg-surface p-5 sm:p-6">
+          <Info aria-hidden strokeWidth={1.75} className="mt-0.5 size-5 shrink-0 text-text-muted" />
+          <div className="text-[15px] leading-relaxed text-text-muted">
+            <p className="font-medium text-text">Installing on Windows</p>
+            <p className="mt-1">
+              Our code-signing certificate is still being processed, so Windows SmartScreen may show a blue warning the first time.
+              Click <span className="rounded-sm bg-raised px-1.5 py-0.5 text-[13px] text-text">More info</span> and then{' '}
+              <span className="rounded-sm bg-raised px-1.5 py-0.5 text-[13px] text-text">Run anyway</span> to install.
+            </p>
+          </div>
+        </div>
+      </Section>
+    </>
   );
 }
