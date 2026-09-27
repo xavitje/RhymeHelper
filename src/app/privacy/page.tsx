@@ -27,7 +27,7 @@ export default function PrivacyPolicy() {
           <li><strong>Contact data:</strong> your email address when you register an account or make a purchase.</li>
           <li><strong>License data:</strong> license keys generated and linked to your account upon purchase.</li>
           <li><strong>Payment data:</strong> handled by Lemon Squeezy when you buy Pro or subscribe to Cloud Sync. We receive your email, what you bought and your subscription status, never your full card details.</li>
-          <li><strong>Song data (Cloud Sync only):</strong> if you subscribe to Cloud Sync, the songs you sync (such as titles and lyrics) are stored on our servers so they can be backed up and synced to your other computers. Without Cloud Sync, your songs stay on your own computer and we never receive them.</li>
+          <li><strong>Song data (Cloud Sync only):</strong> if you subscribe to Cloud Sync, the songs in your cloud library (titles, lyrics, tempo and key) are stored on our servers so they can be synced to your other computers. With each change we also store when it was made and the name of the computer it was made on (for example “Studio-PC”), so the app can show where a song was last edited. Without Cloud Sync, your songs stay on your own computer and we never receive them.</li>
           <li><strong>Usage data (only with your consent):</strong> how you use our website, such as the pages you visit, the site you came from, your browser and device type, and an approximate location, collected with Google Analytics. See section 7.</li>
         </ul>
 
@@ -56,7 +56,7 @@ export default function PrivacyPolicy() {
         <p>We store your data only for as long as necessary to fulfil the purposes above:</p>
         <ul>
           <li><strong>Account data (email, license):</strong> kept for the lifetime of your account, so you keep access to the software you bought. If you ask us to delete your account, this data is removed within 30 days.</li>
-          <li><strong>Synced songs (Cloud Sync):</strong> kept for as long as you have an account, so you can get them back on a new computer. When you delete your account, your synced songs are deleted within 30 days.</li>
+          <li><strong>Synced songs (Cloud Sync):</strong> kept for as long as you have an account, so you can get them back on a new computer, also after your subscription ends. A song you delete goes to Recently deleted and is removed for good after 30 days, or right away if you choose Delete forever. When you delete your account, your synced songs are deleted within 30 days.</li>
           <li><strong>Transaction records:</strong> kept for up to 7 years, as required by tax regulations.</li>
           <li><strong>Analytics data:</strong> deleted after 14 months.</li>
         </ul>

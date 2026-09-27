@@ -50,7 +50,7 @@ export default function Pricing() {
               <div>
                 <h2 className="flex items-center gap-2 text-lg font-semibold">Cloud Sync <Badge>Optional add-on</Badge></h2>
                 <p className="mt-1 max-w-xl text-[15px] leading-relaxed text-text-muted">
-                  Automatic backups and your songs in sync on every computer. Works with Free and Pro. You need a free account.
+                  Your songs in a cloud library, on every computer you write on. Changes sync in seconds, offline edits catch up later, and deleted songs can be restored for 30 days. Works with Free and Pro. You need a free account.
                 </p>
               </div>
             </div>

@@ -42,7 +42,8 @@ export default function TermsOfService() {
           <li><strong>Cancelling:</strong> you can cancel at any time via Manage subscription in your account. Cloud Sync keeps working until the end of the period you paid for; we do not refund partial months unless the law requires it.</li>
           <li><strong>Right of withdrawal:</strong> if you are a consumer in the European Union, you may withdraw from the subscription within 14 days of subscribing. If you asked us to start Cloud Sync right away, you may be charged for the part of the service already provided.</li>
           <li><strong>Your songs:</strong> the lyrics you sync remain yours. We store and copy them only to provide Cloud Sync, and we do not use them for anything else. Keep your own copies of important work; Cloud Sync is a convenience, not a guarantee against every possible data loss.</li>
-          <li><strong>When Cloud Sync ends:</strong> your songs stay on the computers where they were synced, and you can keep using them in the app.</li>
+          <li><strong>Recently deleted:</strong> songs you delete from your cloud library can be restored for 30 days. After that they are removed for good.</li>
+          <li><strong>When Cloud Sync ends:</strong> your songs stay on the computers where they were synced, and you can keep using them in the app. Your cloud library stays available to download while you have an account, but new changes are no longer uploaded.</li>
           <li><strong>Changes in price:</strong> if we change the price, we will tell you at least 30 days in advance, and you can cancel before the new price applies.</li>
         </ul>
 

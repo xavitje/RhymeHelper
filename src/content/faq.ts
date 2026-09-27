@@ -30,7 +30,23 @@ export const FAQS: FaqItem[] = [
   },
   {
     question: 'What is Cloud Sync?',
-    answer: `An optional subscription of ${APP_CONFIG.CLOUD_SYNC_PRICE} a month that backs up your songs and keeps them in sync on every computer you write on. You need a free account for it. It works with Free and Pro.`,
+    answer: `An optional subscription of ${APP_CONFIG.CLOUD_SYNC_PRICE} a month that gives you a cloud library: your songs are on every computer where you log in, and changes sync within seconds. Start a song on your studio PC and keep writing on your laptop. You need a free account for it. It works with Free and Pro.`,
+  },
+  {
+    question: 'What happens if I edit the same song on two computers?',
+    answer: 'Rhyme Helper never overwrites your work silently. If a song changed in two places before it could sync, the app shows both versions side by side. Keep one, or keep both: your version is then saved as a copy.',
+  },
+  {
+    question: 'Can I write without an internet connection when I use Cloud Sync?',
+    answer: 'Yes. Keep writing as usual. Your changes are saved on your computer and uploaded as soon as you are back online, also after you restart the app.',
+  },
+  {
+    question: 'What happens to my songs if I stop Cloud Sync?',
+    answer: 'Nothing is deleted. Your songs stay on your computers and you can keep using them in the app. Your cloud library stays available to download on a new computer, but new changes are no longer uploaded until you subscribe again.',
+  },
+  {
+    question: 'I deleted a song by accident. Can I get it back?',
+    answer: 'With Cloud Sync, yes. Deleted songs stay in Recently deleted for 30 days. In the app, click the Cloud button in the top bar and choose Recently deleted to restore them.',
   },
   {
     question: 'Windows shows a blue SmartScreen warning. Is that safe?',

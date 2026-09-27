@@ -7,6 +7,7 @@ import { useSessionUser } from '../../lib/useSessionUser';
 import { isPro, hasCloudSync, cloudSyncEndsAt, customerPortalUrl } from '../../lib/entitlements';
 import { APP_CONFIG } from '../../config';
 import { AccountHeader, AccountSkeleton } from '../../components/account/AccountHeader';
+import { CloudLibraryStats } from '../../components/account/CloudLibraryStats';
 import { Alert, Badge, Button, ButtonLink, Card, Field, Input } from '../../components/ui';
 
 type Msg = { tone: 'error' | 'success'; text: string } | null;
@@ -129,9 +130,10 @@ export default function Account() {
             {cloudActive && cloudEnds
               ? `Cancelled. Cloud Sync keeps working until ${cloudEnds.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}.`
               : cloudActive
-              ? 'Your songs are backed up and in sync on every computer you log in on.'
-              : `Automatic backups and your songs on every computer. ${APP_CONFIG.CLOUD_SYNC_PRICE} a month, cancel any time.`}
+              ? 'Your cloud library is on every computer you log in on. Changes sync within seconds.'
+              : `Your songs in a cloud library, on every computer you write on. ${APP_CONFIG.CLOUD_SYNC_PRICE} a month, cancel any time.`}
           </p>
+          <CloudLibraryStats active={cloudActive} />
           {cloudActive ? (
             portalUrl ? (
               <ButtonLink href={portalUrl} external target="_blank" rel="noopener noreferrer" variant="secondary" iconRight={ExternalLink} className="mt-5">

@@ -72,7 +72,10 @@ export const DOCS: DocSection[] = [
       ['Account', 'An account is free. You need one to link Pro and for Cloud Sync. Log in from the app or on this website.'],
       ['Activate Pro', 'After your purchase you get a license key by email. In the app, choose Upgrade to Pro, then “I already have a license key”, and paste it. Or link it in your dashboard on this website and log in to the app with the same account.'],
       ['Devices', 'One Pro license works on up to two computers.'],
-      ['Cloud Sync', 'An optional subscription that backs up your songs and keeps them in sync on every computer you log in on. Set it up in the app or under Account settings on this website.'],
+      ['Cloud Sync', 'An optional subscription that gives you a cloud library: your songs on every computer you log in on. Set it up in the app or under Account settings on this website.'],
+      ['Cloud library', 'Your cloud songs are in the Cloud group in the sidebar, with a small icon that shows if a song is synced, uploading or waiting for a connection. New songs are added automatically. Songs you already had on your computer can be added from the Cloud button in the top bar, or by right-clicking a song.'],
+      ['Syncing and conflicts', 'Changes sync within seconds, also while a song is open on another computer. Offline changes are uploaded when you are back online. If a song changed in two places, you choose which version to keep, or keep both.'],
+      ['Recently deleted', 'Deleted cloud songs stay in Recently deleted for 30 days. Open it from the Cloud button in the top bar to restore a song or delete it for good.'],
     ],
   },
 ];
