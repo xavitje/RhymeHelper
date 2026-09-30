@@ -7,7 +7,7 @@ export const FREE_HIGHLIGHTS = [
   'Full editor with formatting',
   'Perfect rhymes',
   'Syllable counts per line',
-  'Idea board and notes',
+  'Notes for loose ideas and per song',
   'Autosave and version history',
   'Print and export to PDF',
 ];
@@ -33,7 +33,7 @@ export const COMPARISON: CompareGroup[] = [
       { feature: 'Rich text editor with formatting and colours', free: true, pro: true },
       { feature: 'Syllable count per line, average per section', free: true, pro: true },
       { feature: 'Rhyme scheme in colour', free: true, pro: true },
-      { feature: 'Idea board and song notes', free: true, pro: true },
+      { feature: 'Notes: global ideas and song notes', free: true, pro: true },
       { feature: 'Autosave and version history', free: true, pro: true },
       { feature: 'Focus mode and command palette', free: true, pro: true },
       { feature: 'Print and export to PDF', free: true, pro: true },

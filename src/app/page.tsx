@@ -65,7 +65,7 @@ const FEATURES: { icon: LucideIcon; title: string; body: React.ReactNode; pro?: 
   { icon: History, title: 'Autosave and history', body: 'Every change is saved within a second. Go back to any earlier version.' },
   { icon: Maximize2, title: 'Focus mode', body: <>Hide everything but your lyrics with <Kbd keys={['F11']} />.</> },
   { icon: Command, title: 'Command palette', body: <>Find any song, rhyme or action with <Kbd keys={['Ctrl', 'K']} />.</> },
-  { icon: StickyNote, title: 'Idea board', body: 'Park alternate bars and concepts next to your song, not in it.' },
+  { icon: StickyNote, title: 'Notes', body: 'Park alternate bars and loose ideas next to your song, not in it.' },
   { icon: Languages, title: 'English and Dutch', body: 'The app, the rhymes and the syllable counts work in both.' },
   { icon: Printer, title: 'Print and PDF', body: 'Clean lyric sheets with line numbers, without any app chrome.' },
   { icon: Columns2, title: 'Tabs and split screen', body: 'Keep several songs open and write two side by side.', pro: true },
