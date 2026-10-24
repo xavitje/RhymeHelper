@@ -29,6 +29,8 @@ export default function PrivacyPolicy() {
           <li><strong>Payment data:</strong> handled by Lemon Squeezy when you buy Pro or subscribe to Cloud Sync. We receive your email, what you bought and your subscription status, never your full card details.</li>
           <li><strong>Song data (Cloud Sync only):</strong> if you subscribe to Cloud Sync, the songs in your cloud library (titles, lyrics, tempo and key) are stored on our servers so they can be synced to your other computers. With each change we also store when it was made and the name of the computer it was made on (for example “Studio-PC”), so the app can show where a song was last edited. Without Cloud Sync, your songs stay on your own computer and we never receive them.</li>
           <li><strong>Usage data (only with your consent):</strong> how you use our website, such as the pages you visit, the site you came from, your browser and device type, and an approximate location, collected with Google Analytics. See section 7.</li>
+          <li><strong>Download counts:</strong> when you download the app we count the download together with the channel in the link (for example <code>?ref=ig</code>), the website you came from and your country. We do not store your IP address and set no cookies for this.</li>
+          <li><strong>App usage (only with your consent):</strong> if you turn on Share anonymous usage in the app, it sends once a day a random installation ID, the app version, the app language and whether Pro is active. This is not linked to your account and never includes your lyrics. You can turn it off at any time in Settings → Account.</li>
         </ul>
 
         <h2>3. How we use data, and on what legal grounds</h2>
@@ -36,6 +38,8 @@ export default function PrivacyPolicy() {
         <ul>
           <li><strong>Contractual necessity:</strong> processing your email and license key to deliver the software, authenticate your Pro access and provide customer support, and storing and syncing your songs when you subscribe to Cloud Sync.</li>
           <li><strong>Consent:</strong> using Google Analytics on our website to understand how visitors find and use it. You can withdraw your consent at any time.</li>
+          <li><strong>Consent:</strong> the anonymous daily usage signal from the app, if you turn it on.</li>
+          <li><strong>Legitimate interest:</strong> counting downloads per channel, so we know which places help people find Rhyme Helper. We keep this to the minimum described above.</li>
           <li><strong>Legal obligation:</strong> retaining necessary transaction records to comply with tax and accounting laws.</li>
         </ul>
 
@@ -58,7 +62,7 @@ export default function PrivacyPolicy() {
           <li><strong>Account data (email, license):</strong> kept for the lifetime of your account, so you keep access to the software you bought. If you ask us to delete your account, this data is removed within 30 days.</li>
           <li><strong>Synced songs (Cloud Sync):</strong> kept for as long as you have an account, so you can get them back on a new computer, also after your subscription ends. A song you delete goes to Recently deleted and is removed for good after 30 days, or right away if you choose Delete forever. When you delete your account, your synced songs are deleted within 30 days.</li>
           <li><strong>Transaction records:</strong> kept for up to 7 years, as required by tax regulations.</li>
-          <li><strong>Analytics data:</strong> deleted after 14 months.</li>
+          <li><strong>Analytics data, download counts and app usage signals:</strong> deleted after 14 months.</li>
         </ul>
 
         <h2>6. Your rights under the GDPR</h2>

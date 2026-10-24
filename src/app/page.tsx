@@ -13,7 +13,7 @@ import { FaqList } from '../components/home/FaqList';
 import { Badge, ButtonLink, Container, Kbd, RhymeStrip, RhymeWord, Section, SectionHeading } from '../components/ui';
 
 export const metadata: Metadata = {
-  alternates: { canonical: '/' },
+  alternates: { canonical: '/', languages: { en: '/', nl: '/nl' } },
 };
 
 const SPOTLIGHTS: {

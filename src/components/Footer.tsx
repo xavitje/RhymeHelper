@@ -18,6 +18,7 @@ const COLUMNS = [
     links: [
       { href: '/resources', label: 'Docs' },
       { href: '/faq', label: 'FAQ' },
+      { href: '/nl', label: 'Nederlands' },
       { href: `mailto:${SITE.contactEmail}`, label: 'Contact', plain: true },
     ],
   },

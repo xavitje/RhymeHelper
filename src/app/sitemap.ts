@@ -4,6 +4,8 @@ import { SITE } from '../config';
 const PAGES: { path: string; priority: number; changeFrequency: 'weekly' | 'monthly' | 'yearly' }[] = [
   { path: '', priority: 1, changeFrequency: 'weekly' },
   { path: '/pricing', priority: 0.9, changeFrequency: 'monthly' },
+  { path: '/nl', priority: 0.8, changeFrequency: 'monthly' },
+  { path: '/nl/sinterklaasgedicht', priority: 0.7, changeFrequency: 'yearly' },
   { path: '/resources', priority: 0.7, changeFrequency: 'monthly' },
   { path: '/faq', priority: 0.7, changeFrequency: 'monthly' },
   { path: '/login', priority: 0.4, changeFrequency: 'yearly' },

@@ -4,6 +4,7 @@ import './globals.css';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import { Analytics } from '../components/Analytics';
+import { RefTracker } from '../components/RefTracker';
 import { SITE } from '../config';
 
 // Geist en Geist Mono, zelf gehost (dezelfde bestanden als de app; SIL Open Font License).
@@ -71,6 +72,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </main>
         <Footer />
         <Analytics />
+        <RefTracker />
       </body>
     </html>
   );
