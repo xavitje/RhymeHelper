@@ -46,7 +46,7 @@ export default function PrivacyPolicy() {
         <h2>4. Sharing and transfers</h2>
         <p>We do not sell your personal data. We share data only with trusted third-party processors necessary to provide our services:</p>
         <ul>
-          <li><strong>Lemon Squeezy:</strong> acts as our Merchant of Record. They process your payments and handle billing information. Data sent to Lemon Squeezy is subject to their privacy policy.</li>
+          <li><strong>Lemon Squeezy:</strong> acts as our Merchant of Record. They process your payments and handle billing information. Data sent to Lemon Squeezy is subject to their privacy policy. If you allow it in the cookie message, Lemon Squeezy&apos;s referral tracking also runs on our website. See section 7.</li>
           <li><strong>Supabase:</strong> provides our backend database and authentication infrastructure. Account data, and your synced songs if you use Cloud Sync, are stored securely on their servers.</li>
           <li><strong>Vercel:</strong> hosts our website.</li>
           <li><strong>Google (Google Analytics):</strong> measures website visits, only if you allow it.</li>
@@ -82,6 +82,12 @@ export default function PrivacyPolicy() {
           If you choose No thanks, Google Analytics is not loaded and no analytics cookies are set. You can change your choice at any time with
           Cookie settings at the bottom of every page; if you withdraw consent, we stop measuring and remove the analytics cookies.
           Analytics data is kept for 14 months.
+        </p>
+        <p>
+          <strong>Referral tracking (affiliates).</strong> Some creators recommend Rhyme Helper with a referral link (a link with <code>?aff=</code>). If you click Allow,
+          we also load Lemon Squeezy&apos;s referral script. When you arrive through such a link, it places a cookie (<code>ls_aff_ref</code>) and uses technical
+          details of your browser to recognise the visit, so that the creator gets credit if you buy Pro later. It does not tell us who you are. If you choose No thanks
+          or withdraw your consent, the script is not loaded and we remove the cookie.
         </p>
         <p>
           We also use strictly necessary storage in your browser, for example to keep you logged in and to remember your cookie choice. This does not need consent.

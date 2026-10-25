@@ -8,6 +8,7 @@ import { useEffect } from 'react';
  * Stuurt ook een GA-event 'download_click' (alleen als GA na toestemming geladen is).
  */
 const KEY = 'rh-ref';
+const CHECKOUT_HOST = 'checkout.rhymehelper.store';
 const DAYS = 30;
 
 function clean(v: string | null) {
@@ -38,6 +39,17 @@ export function RefTracker() {
       const a = (e.target as HTMLElement | null)?.closest?.('a');
       if (!a) return;
       const url = new URL(a.href, window.location.href);
+
+      // Checkout: affiliate-ID van Lemon Squeezy meegeven (vangnet naast affiliate.js zelf).
+      if (url.hostname === CHECKOUT_HOST && !url.searchParams.has('aff_ref')) {
+        try {
+          const ls = (window as unknown as { LemonSqueezy?: { Affiliate?: { GetID?: () => string | null | undefined } } }).LemonSqueezy;
+          const id = ls?.Affiliate?.GetID?.();
+          if (id) { url.searchParams.set('aff_ref', id); a.href = url.toString(); }
+        } catch { /* script niet geladen of geblokkeerd */ }
+        return;
+      }
+
       if (url.origin !== window.location.origin || !url.pathname.startsWith('/downloads/')) return;
       const ref = fresh || readRef();
       if (ref && !url.searchParams.has('ref')) {
