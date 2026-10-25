@@ -40,9 +40,17 @@ export function AffiliateTracking() {
   return (
     <>
       <Script id="ls-affiliate-config" strategy="afterInteractive">
-        {`window.lemonSqueezyAffiliateConfig = { store: "rhyme", debug: false };`}
+        {`window.lemonSqueezyAffiliateConfig = { store: "rhyme", domains: ["checkout.rhymehelper.store"], debug: false };`}
       </Script>
-      <Script src="https://lmsqueezy.com/affiliate.js" strategy="afterInteractive" />
+      <Script
+        src="https://lmsqueezy.com/affiliate.js"
+        strategy="afterInteractive"
+        onLoad={() => {
+          // affiliate.js start zelf pas bij window 'load'. Laadt het later (na "Allow"), dan zelf starten.
+          const w = window as unknown as { createLemonSqueezyAffiliate?: () => void };
+          if (document.readyState === 'complete') w.createLemonSqueezyAffiliate?.();
+        }}
+      />
     </>
   );
 }

@@ -42,11 +42,9 @@ export function RefTracker() {
 
       // Checkout: affiliate-ID van Lemon Squeezy meegeven (vangnet naast affiliate.js zelf).
       if (url.hostname === CHECKOUT_HOST && !url.searchParams.has('aff_ref')) {
-        try {
-          const ls = (window as unknown as { LemonSqueezy?: { Affiliate?: { GetID?: () => string | null | undefined } } }).LemonSqueezy;
-          const id = ls?.Affiliate?.GetID?.();
-          if (id) { url.searchParams.set('aff_ref', id); a.href = url.toString(); }
-        } catch { /* script niet geladen of geblokkeerd */ }
+        // affiliate.js bewaart de klik als cookie ls_aff_ref (alleen na toestemming).
+        const id = document.cookie.split(';').map((c) => c.trim()).find((c) => c.startsWith('ls_aff_ref='))?.slice('ls_aff_ref='.length);
+        if (id) { url.searchParams.set('aff_ref', decodeURIComponent(id)); a.href = url.toString(); }
         return;
       }
 
