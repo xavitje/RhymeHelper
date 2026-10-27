@@ -1,9 +1,10 @@
-import { ArrowRight, Check, Download, Sparkles } from 'lucide-react';
-import { APP_CONFIG, proPrice } from '../config';
+import { ArrowRight, Check, Sparkles } from 'lucide-react';
+import { proPrice } from '../config';
 import { FREE_HIGHLIGHTS, PRO_HIGHLIGHTS } from '../content/plans';
 import { cn } from '../lib/cn';
 import { Badge } from './ui/Badge';
 import { ButtonLink } from './ui/Button';
+import { GetAppButton } from './GetAppButton';
 
 /**
  * Free- en Pro-kaart naast elkaar. `checkout` = de Pro-knop gaat direct naar Lemon Squeezy (prijspagina);
@@ -25,9 +26,7 @@ export function PlanCards({ checkout = false, className, headingLevel = 3 }: { c
             <li key={f} className="flex gap-3"><Check aria-hidden strokeWidth={1.75} className="mt-0.5 size-4 shrink-0 text-text-muted" />{f}</li>
           ))}
         </ul>
-        <ButtonLink href={APP_CONFIG.WINDOWS_DOWNLOAD_URL} variant="secondary" size="lg" icon={Download} fullWidth className="mt-8">
-          Download free
-        </ButtonLink>
+        <GetAppButton variant="secondary" size="lg" fullWidth short className="mt-8" />
       </div>
 
       <div className="flex flex-col rounded-xl border border-iris/60 bg-surface p-7 shadow-[0_0_0_1px_rgb(124_108_255/0.25)]">

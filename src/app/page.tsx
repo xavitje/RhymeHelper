@@ -2,13 +2,14 @@ import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import {
-  ArrowRight, Check, Cloud, Columns2, Command, Download, History, Languages, Maximize2, Printer, StickyNote,
+  ArrowRight, Check, Cloud, Columns2, Command, History, Languages, Maximize2, Printer, StickyNote,
 } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
 import { APP_CONFIG, proPrice } from '../config';
 import { getFaqs } from '../content/faq';
 import { FadeIn } from '../components/FadeIn';
 import { PlanCards } from '../components/PlanCards';
+import { GetAppButton } from '../components/GetAppButton';
 import { FaqList } from '../components/home/FaqList';
 import { Badge, ButtonLink, Container, Kbd, RhymeStrip, RhymeWord, Section, SectionHeading } from '../components/ui';
 
@@ -97,7 +98,7 @@ export default function Home() {
               The writing app for lyrics. Rhymes, syllable counts and your beat, together in one quiet window.
             </p>
             <div className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
-              <ButtonLink href={APP_CONFIG.WINDOWS_DOWNLOAD_URL} size="lg" icon={Download}>Download free for Windows</ButtonLink>
+              <GetAppButton size="lg" />
               <ButtonLink href="/pricing" size="lg" variant="secondary" iconRight={ArrowRight}>See Pro</ButtonLink>
             </div>
             <p className="mt-4 text-sm text-text-muted">
@@ -226,7 +227,7 @@ export default function Home() {
                 </h2>
                 <p className="mt-3 text-[17px] text-text-muted">Free for Windows. No account needed.</p>
               </div>
-              <ButtonLink href={APP_CONFIG.WINDOWS_DOWNLOAD_URL} variant="pill" size="lg" icon={Download}>Download free</ButtonLink>
+              <GetAppButton variant="pill" size="lg" short />
             </div>
           </div>
         </Container>

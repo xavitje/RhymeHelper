@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import type { ComponentPropsWithoutRef, ReactNode } from 'react';
+import { forwardRef, type ComponentPropsWithoutRef, type ReactNode } from 'react';
 import type { LucideIcon } from 'lucide-react';
 import { cn } from '../../lib/cn';
 
@@ -59,13 +59,15 @@ function Inner({ icon: Icon, iconRight: IconRight, children }: Pick<Common, 'ico
   );
 }
 
-export function Button({ variant, size, icon, iconRight, fullWidth, className, children, ...rest }: Common & ComponentPropsWithoutRef<'button'>) {
+export const Button = forwardRef<HTMLButtonElement, Common & ComponentPropsWithoutRef<'button'>>(function Button(
+  { variant, size, icon, iconRight, fullWidth, className, children, ...rest }, ref,
+) {
   return (
-    <button className={buttonClass({ variant, size, fullWidth, className })} {...rest}>
+    <button ref={ref} className={buttonClass({ variant, size, fullWidth, className })} {...rest}>
       <Inner icon={icon} iconRight={iconRight}>{children}</Inner>
     </button>
   );
-}
+});
 
 /** Link die eruitziet als een knop. Externe of download-links gebruiken <a>, interne next/link. */
 export function ButtonLink({

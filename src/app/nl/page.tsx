@@ -1,11 +1,12 @@
 import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
-import { ArrowRight, AudioLines, Check, Download, Hash, Sparkles } from 'lucide-react';
+import { ArrowRight, AudioLines, Check, Hash, Sparkles } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
 import { APP_CONFIG, SITE, proPrice, nlPrice } from '../../config';
 import type { FaqItem } from '../../content/faq';
 import { FaqList } from '../../components/home/FaqList';
+import { GetAppButton } from '../../components/GetAppButton';
 import { Badge, ButtonLink, Container, RhymeStrip, Section, SectionHeading, SongCard } from '../../components/ui';
 import type { LyricLine } from '../../components/ui';
 
@@ -57,7 +58,7 @@ export default function NlHome() {
             De schrijfapp voor songteksten en raps. Nederlandse rijmen, lettergrepen per regel en je beat, samen in één rustig venster.
           </p>
           <div className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
-            <ButtonLink href={APP_CONFIG.WINDOWS_DOWNLOAD_URL} size="lg" icon={Download}>Gratis downloaden voor Windows</ButtonLink>
+            <GetAppButton lang="nl" size="lg" />
             <ButtonLink href="/pricing" size="lg" variant="secondary" iconRight={ArrowRight}>Bekijk Pro</ButtonLink>
           </div>
           <p className="mt-4 text-sm text-text-muted">
@@ -145,7 +146,7 @@ export default function NlHome() {
                 </h2>
                 <p className="mt-3 text-[17px] text-text-muted">Gratis voor Windows. Geen account nodig.</p>
               </div>
-              <ButtonLink href={APP_CONFIG.WINDOWS_DOWNLOAD_URL} variant="pill" size="lg" icon={Download}>Gratis downloaden</ButtonLink>
+              <GetAppButton lang="nl" variant="pill" size="lg" short />
             </div>
           </div>
         </Container>

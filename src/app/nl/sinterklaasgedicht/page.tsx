@@ -1,10 +1,10 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { Download } from 'lucide-react';
-import { APP_CONFIG, SITE } from '../../../config';
+import { SITE } from '../../../config';
 import type { FaqItem } from '../../../content/faq';
 import { FaqList } from '../../../components/home/FaqList';
-import { ButtonLink, Container, RhymeStrip, Section, SectionHeading, SongCard } from '../../../components/ui';
+import { GetAppButton } from '../../../components/GetAppButton';
+import { Container, RhymeStrip, Section, SectionHeading, SongCard } from '../../../components/ui';
 import type { LyricLine } from '../../../components/ui';
 
 const TITLE = 'Sinterklaasgedicht schrijven met rijmwoorden';
@@ -65,7 +65,7 @@ export default function Sinterklaasgedicht() {
                 Selecteer een woord en de Nederlandse rijmen staan erboven. Achter elke regel zie je de lettergrepen, zodat je gedicht lekker loopt als je het voorleest.
               </p>
               <div className="mt-9 flex flex-col items-start gap-3 sm:flex-row sm:items-center">
-                <ButtonLink href={APP_CONFIG.WINDOWS_DOWNLOAD_URL} size="lg" icon={Download}>Gratis downloaden voor Windows</ButtonLink>
+                <GetAppButton lang="nl" size="lg" />
               </div>
               <p className="mt-4 text-sm text-text-muted">Gratis · Windows 10 en 11 · Werkt offline</p>
             </div>
@@ -118,7 +118,7 @@ export default function Sinterklaasgedicht() {
                 </h2>
                 <p className="mt-3 text-[17px] text-text-muted">Gratis voor Windows. Geen account nodig.</p>
               </div>
-              <ButtonLink href={APP_CONFIG.WINDOWS_DOWNLOAD_URL} variant="pill" size="lg" icon={Download}>Gratis downloaden</ButtonLink>
+              <GetAppButton lang="nl" variant="pill" size="lg" short />
             </div>
           </div>
         </Container>

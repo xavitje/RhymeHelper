@@ -2,12 +2,12 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
-import { Download, Menu, X } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import type { User } from '@supabase/supabase-js';
 import { supabase } from '../lib/supabaseClient';
 import { isPro } from '../lib/entitlements';
-import { APP_CONFIG, proPrice } from '../config';
-import { ButtonLink } from './ui/Button';
+import { proPrice } from '../config';
+import { GetAppButton } from './GetAppButton';
 import { Logo } from './ui/Logo';
 import { cn } from '../lib/cn';
 
@@ -113,9 +113,7 @@ export default function Navbar() {
           >
             {user ? 'Dashboard' : 'Log in'}
           </Link>
-          <ButtonLink href={APP_CONFIG.WINDOWS_DOWNLOAD_URL} size="sm" icon={Download} className="hidden sm:inline-flex">
-            {hasLicense ? 'Download' : 'Download free'}
-          </ButtonLink>
+          <GetAppButton size="sm" short label={hasLicense ? 'Download' : undefined} />
           <button
             ref={toggleRef}
             type="button"
@@ -158,9 +156,7 @@ export default function Navbar() {
               </li>
             </ul>
           </nav>
-          <ButtonLink href={APP_CONFIG.WINDOWS_DOWNLOAD_URL} size="lg" icon={Download} fullWidth className="mt-8">
-            {hasLicense ? 'Download for Windows' : 'Download free for Windows'}
-          </ButtonLink>
+          <GetAppButton size="lg" fullWidth className="mt-8" label={hasLicense ? 'Download for Windows' : undefined} />
           <p className="mt-3 text-center text-sm text-text-muted">Windows 10 and 11 · Free forever, Pro {proPrice().price} once</p>
         </div>
       )}
