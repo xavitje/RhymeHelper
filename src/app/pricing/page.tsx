@@ -1,19 +1,23 @@
 import type { Metadata } from 'next';
 import { Check, Cloud, Info, Minus } from 'lucide-react';
-import { APP_CONFIG } from '../../config';
+import { APP_CONFIG, proPrice } from '../../config';
 import { COMPARISON } from '../../content/plans';
-import { FAQS } from '../../content/faq';
+import { getFaqs } from '../../content/faq';
 import { PlanCards } from '../../components/PlanCards';
 import { FaqList } from '../../components/home/FaqList';
 import { Badge, ButtonLink, Container, Section, SectionHeading } from '../../components/ui';
 
-export const metadata: Metadata = {
-  title: 'Pricing',
-  description: `Rhyme Helper is free to use. Pro is a one-time purchase of ${APP_CONFIG.SALE_PRICE}: near rhymes, AI suggestions, Studio, tabs and split screen.`,
-  alternates: { canonical: '/pricing' },
-};
+export const revalidate = 3600; // prijs wisselt vanzelf na de launch-einddatum (zie PRO_PRICING in config.ts)
 
-const PRICING_FAQ = FAQS.filter((f) =>
+export function generateMetadata(): Metadata {
+  return {
+    title: 'Pricing',
+    description: `Rhyme Helper is free to use. Pro is a one-time purchase of ${proPrice().price}: near rhymes, AI suggestions, Studio, tabs and split screen.`,
+    alternates: { canonical: '/pricing' },
+  };
+}
+
+const pricingFaq = () => getFaqs().filter((f) =>
   /one-time|license key|more than one computer|Cloud Sync/i.test(f.question),
 );
 
@@ -37,7 +41,7 @@ export default function Pricing() {
             align="center"
             title="Free to write."
             accent="Pay once for Pro."
-            lead={`Rhyme Helper is free, with no trial and no time limit. Pro is a one-time purchase of ${APP_CONFIG.SALE_PRICE}, not a subscription.`}
+            lead={`Rhyme Helper is free, with no trial and no time limit. Pro is a one-time purchase of ${proPrice().price}, not a subscription.`}
           />
           <PlanCards checkout headingLevel={2} className="mt-14" />
           <p className="mt-6 text-center text-sm text-text-muted">
@@ -98,7 +102,7 @@ export default function Pricing() {
 
       <Section className="border-t border-border" narrow>
         <SectionHeading align="center" title="Before you" accent="buy." />
-        <FaqList items={PRICING_FAQ} className="mt-10" />
+        <FaqList items={pricingFaq()} className="mt-10" />
 
         <div className="mt-8 flex gap-4 rounded-xl border border-border bg-surface p-5 sm:p-6">
           <Info aria-hidden strokeWidth={1.75} className="mt-0.5 size-5 shrink-0 text-text-muted" />

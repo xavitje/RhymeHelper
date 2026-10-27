@@ -29,8 +29,16 @@ export function FaqList({ items, className, headingLevel = 3 }: { items: FaqItem
                 <ChevronDown aria-hidden strokeWidth={1.75} className={cn('size-4 shrink-0 text-text-muted transition-transform duration-200', isOpen && 'rotate-180')} />
               </button>
             </H>
-            <div id={`${id}-a`} role="region" aria-labelledby={`${id}-q`} hidden={!isOpen} className="px-5 pb-5 text-[15px] leading-relaxed text-text-muted sm:px-6">
-              {item.answer}
+            <div
+              id={`${id}-a`}
+              role="region"
+              aria-labelledby={`${id}-q`}
+              inert={!isOpen}
+              className={cn('faq-panel grid', isOpen ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0')}
+            >
+              <div className="overflow-hidden">
+                <p className="px-5 pb-5 text-[15px] leading-relaxed text-text-muted sm:px-6">{item.answer}</p>
+              </div>
             </div>
           </div>
         );

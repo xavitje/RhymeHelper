@@ -3,7 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowRight, AudioLines, Check, Download, Hash, Sparkles } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
-import { APP_CONFIG, SITE } from '../../config';
+import { APP_CONFIG, SITE, proPrice, nlPrice } from '../../config';
 import type { FaqItem } from '../../content/faq';
 import { FaqList } from '../../components/home/FaqList';
 import { Badge, ButtonLink, Container, RhymeStrip, Section, SectionHeading, SongCard } from '../../components/ui';
@@ -11,6 +11,8 @@ import type { LyricLine } from '../../components/ui';
 
 const TITLE = 'Songteksten schrijven met rijmen en lettergrepen';
 const DESCRIPTION = 'Rhyme Helper is een schrijfapp voor songteksten en raps: Nederlandse en Engelse rijmwoorden, lettergrepen per regel en je beat in één venster. Gratis voor Windows.';
+
+export const revalidate = 3600; // prijs volgt PRO_PRICING in config.ts
 
 export const metadata: Metadata = {
   title: TITLE,
@@ -33,10 +35,10 @@ const POINTS: { icon: LucideIcon; title: string; body: string; pro?: boolean }[]
   { icon: AudioLines, title: 'Je beat erbij', body: 'Sleep je beat in de app en schrijf terwijl hij speelt. Afspelen en pauzeren met Ctrl + Spatie.', pro: true },
 ];
 
-const FAQ_NL: FaqItem[] = [
+const faqNl = (): FaqItem[] => [
   { question: 'Is Rhyme Helper echt gratis?', answer: 'Ja. De gratis versie heeft de volledige editor, perfecte rijmen, lettergrepen per regel, notities, autosave en versiegeschiedenis. Geen proefperiode, geen tijdslimiet.' },
   { question: 'Werken de rijmen echt in het Nederlands?', answer: 'Ja. De app, de rijmwoorden en het tellen van lettergrepen werken in het Nederlands en het Engels. Je kiest de taal bij de eerste start en kunt hem altijd wisselen.' },
-  { question: 'Is Pro een abonnement?', answer: `Nee. Pro koop je één keer voor ${APP_CONFIG.SALE_PRICE.replace('.', ',')}, inclusief updates. Alleen Cloud Sync (${APP_CONFIG.CLOUD_SYNC_PRICE.replace('.', ',')} per maand) is een abonnement, en dat is optioneel.` },
+  { question: 'Is Pro een abonnement?', answer: `Nee. Pro koop je één keer voor ${nlPrice(proPrice().price)}, inclusief updates. Alleen Cloud Sync (${APP_CONFIG.CLOUD_SYNC_PRICE.replace('.', ',')} per maand) is een abonnement, en dat is optioneel.` },
   { question: 'Werkt het op een Mac of telefoon?', answer: 'Nog niet. Rhyme Helper is er nu voor Windows 10 en 11.' },
   { question: 'Windows zegt "Windows heeft uw pc beschermd". Is dat veilig?', answer: 'Die melding krijg je bij nieuwe apps van kleine makers. Klik op "Meer informatie" en dan op "Toch uitvoeren". De installer komt rechtstreeks van onze GitHub-release.' },
 ];
@@ -59,7 +61,7 @@ export default function NlHome() {
             <ButtonLink href="/pricing" size="lg" variant="secondary" iconRight={ArrowRight}>Bekijk Pro</ButtonLink>
           </div>
           <p className="mt-4 text-sm text-text-muted">
-            Windows 10 en 11 · Altijd gratis · Pro {APP_CONFIG.SALE_PRICE.replace('.', ',')} eenmalig
+            Windows 10 en 11 · Altijd gratis · Pro {nlPrice(proPrice().price)} eenmalig
           </p>
           <div className="mt-14 sm:mt-20">
             <div className="relative mx-auto max-w-[1120px] rounded-xl border border-border-strong bg-surface p-1.5 shadow-modal sm:rounded-2xl sm:p-2">
@@ -125,7 +127,7 @@ export default function NlHome() {
       {/* FAQ */}
       <Section className="border-t border-border" narrow>
         <SectionHeading align="center" title="Vragen," accent="beantwoord." />
-        <FaqList items={FAQ_NL} className="mt-10" headingLevel={3} />
+        <FaqList items={faqNl()} className="mt-10" headingLevel={3} />
         <p className="mt-6 text-center text-sm text-text-muted">
           Een Sinterklaasgedicht schrijven? <Link href="/nl/sinterklaasgedicht" className="text-iris-text underline decoration-iris-text/40 underline-offset-4 hover:decoration-iris-text">Zo doe je dat met Rhyme Helper</Link>.
         </p>

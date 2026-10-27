@@ -6,7 +6,7 @@ import { Download, Menu, X } from 'lucide-react';
 import type { User } from '@supabase/supabase-js';
 import { supabase } from '../lib/supabaseClient';
 import { isPro } from '../lib/entitlements';
-import { APP_CONFIG } from '../config';
+import { APP_CONFIG, proPrice } from '../config';
 import { ButtonLink } from './ui/Button';
 import { Logo } from './ui/Logo';
 import { cn } from '../lib/cn';
@@ -76,8 +76,10 @@ export default function Navbar() {
     <>
     <header
       className={cn(
-        'sticky top-0 z-50 border-b transition-colors duration-200',
-        scrolled || open ? 'border-border bg-bg/85 backdrop-blur-md' : 'border-transparent bg-bg',
+        'sticky top-0 z-50 transition-colors duration-200',
+        // Zachte overgang naar de inhoud i.p.v. een harde lijn; alleen zichtbaar na scrollen.
+        "after:pointer-events-none after:absolute after:inset-x-0 after:top-full after:h-6 after:bg-gradient-to-b after:from-bg/70 after:to-transparent after:opacity-0 after:transition-opacity after:duration-200 after:content-['']",
+        scrolled || open ? 'bg-bg/80 backdrop-blur-md backdrop-saturate-150 after:opacity-100' : 'bg-bg',
       )}
     >
       <div className="mx-auto flex h-16 w-full max-w-[1200px] items-center justify-between gap-6 px-5 sm:px-8">
@@ -133,7 +135,7 @@ export default function Navbar() {
         <div
           id="mobile-menu"
           ref={sheetRef}
-          className="fixed inset-x-0 top-16 bottom-0 z-50 overflow-y-auto border-t border-border bg-bg px-5 pt-4 pb-10 md:hidden"
+          className="menu-sheet fixed inset-x-0 top-16 bottom-0 z-50 overflow-y-auto border-t border-border bg-bg px-5 pt-4 pb-10 md:hidden"
         >
           <nav aria-label="Mobile">
             <ul className="divide-y divide-border">
@@ -159,7 +161,7 @@ export default function Navbar() {
           <ButtonLink href={APP_CONFIG.WINDOWS_DOWNLOAD_URL} size="lg" icon={Download} fullWidth className="mt-8">
             {hasLicense ? 'Download for Windows' : 'Download free for Windows'}
           </ButtonLink>
-          <p className="mt-3 text-center text-sm text-text-muted">Windows 10 and 11 · Free forever, Pro {APP_CONFIG.SALE_PRICE} once</p>
+          <p className="mt-3 text-center text-sm text-text-muted">Windows 10 and 11 · Free forever, Pro {proPrice().price} once</p>
         </div>
       )}
     </>

@@ -5,7 +5,7 @@ import { Cloud, ExternalLink, Lock, Mail, Sparkles, Trash2 } from 'lucide-react'
 import { supabase } from '../../lib/supabaseClient';
 import { useSessionUser } from '../../lib/useSessionUser';
 import { isPro, hasCloudSync, cloudSyncEndsAt, customerPortalUrl } from '../../lib/entitlements';
-import { APP_CONFIG } from '../../config';
+import { APP_CONFIG, proPrice } from '../../config';
 import { AccountHeader, AccountSkeleton } from '../../components/account/AccountHeader';
 import { CloudLibraryStats } from '../../components/account/CloudLibraryStats';
 import { Alert, Badge, Button, ButtonLink, Card, Field, Input } from '../../components/ui';
@@ -110,11 +110,11 @@ export default function Account() {
           <p className="mt-3 flex-1 text-[15px] leading-relaxed text-text-muted">
             {pro
               ? 'All Pro features are unlocked: advanced rhymes, AI suggestions, Studio, your full song library, tabs, split screen and extra styles.'
-              : `Near rhymes, AI suggestions, multi-syllable search, Studio, your full song library, tabs and split screen. One-time ${APP_CONFIG.SALE_PRICE}.`}
+              : `Near rhymes, AI suggestions, multi-syllable search, Studio, your full song library, tabs and split screen. One-time ${proPrice().price}.`}
           </p>
           {!pro && (
-            <ButtonLink href={withUser(APP_CONFIG.LEMON_SQUEEZY_CHECKOUT_URL)} external target="_blank" rel="noopener noreferrer" iconRight={ExternalLink} className="mt-5">
-              Get Pro for {APP_CONFIG.SALE_PRICE}
+            <ButtonLink href={withUser(proPrice().checkoutUrl)} external target="_blank" rel="noopener noreferrer" iconRight={ExternalLink} className="mt-5">
+              Get Pro for {proPrice().price}
             </ButtonLink>
           )}
         </Card>

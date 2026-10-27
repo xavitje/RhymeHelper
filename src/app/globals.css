@@ -128,3 +128,18 @@
     }
   }
 }
+
+/* Mobiel menu: schuift 8px van boven in met een fade. Sluiten gaat direct (sneller dan openen). */
+.menu-sheet {
+  transition: opacity 200ms var(--ease-out), translate 200ms var(--ease-out);
+  @starting-style { opacity: 0; translate: 0 -8px; }
+}
+
+/* FAQ-antwoord: uitklappen via grid-rows (geen hoogte meten nodig). */
+.faq-panel {
+  transition: grid-template-rows 200ms var(--ease-out), opacity 150ms ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .menu-sheet { @starting-style { translate: 0 0; } }
+}

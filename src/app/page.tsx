@@ -5,12 +5,14 @@ import {
   ArrowRight, Check, Cloud, Columns2, Command, Download, History, Languages, Maximize2, Printer, StickyNote,
 } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
-import { APP_CONFIG } from '../config';
-import { FAQS } from '../content/faq';
+import { APP_CONFIG, proPrice } from '../config';
+import { getFaqs } from '../content/faq';
 import { FadeIn } from '../components/FadeIn';
 import { PlanCards } from '../components/PlanCards';
 import { FaqList } from '../components/home/FaqList';
 import { Badge, ButtonLink, Container, Kbd, RhymeStrip, RhymeWord, Section, SectionHeading } from '../components/ui';
+
+export const revalidate = 3600; // prijs volgt PRO_PRICING in config.ts
 
 export const metadata: Metadata = {
   alternates: { canonical: '/', languages: { en: '/', nl: '/nl' } },
@@ -99,7 +101,7 @@ export default function Home() {
               <ButtonLink href="/pricing" size="lg" variant="secondary" iconRight={ArrowRight}>See Pro</ButtonLink>
             </div>
             <p className="mt-4 text-sm text-text-muted">
-              Windows 10 and 11 · Free forever · Pro {APP_CONFIG.SALE_PRICE} one-time
+              Windows 10 and 11 · Free forever · Pro {proPrice().price} one-time
             </p>
           </div>
 
@@ -206,7 +208,7 @@ export default function Home() {
       {/* FAQ */}
       <Section className="border-t border-border" narrow>
         <SectionHeading align="center" title="Questions," accent="answered." />
-        <FaqList items={FAQS.slice(0, 5)} className="mt-10" />
+        <FaqList items={getFaqs().slice(0, 5)} className="mt-10" />
         <p className="mt-6 text-center text-sm text-text-muted">
           More in the <Link href="/faq" className="text-iris-text underline decoration-iris-text/40 underline-offset-4 hover:decoration-iris-text">FAQ</Link> and the <Link href="/resources" className="text-iris-text underline decoration-iris-text/40 underline-offset-4 hover:decoration-iris-text">docs</Link>.
         </p>

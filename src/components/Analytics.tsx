@@ -78,14 +78,21 @@ export function Analytics() {
           role="dialog"
           aria-live="polite"
           aria-label="Cookie choice"
-          className="fixed inset-x-3 bottom-3 z-[60] mx-auto max-w-md rounded-xl bg-surface p-5 shadow-modal sm:inset-x-auto sm:left-5 sm:bottom-5 sm:mx-0"
+          className={
+            // Mobiel: smalle balk onderaan, zodat het productbeeld zichtbaar blijft. Vanaf sm: kaart linksonder.
+            'menu-sheet fixed inset-x-0 bottom-0 z-[60] border-t border-border bg-surface px-4 pt-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] ' +
+            'sm:inset-x-auto sm:left-5 sm:bottom-5 sm:max-w-md sm:rounded-xl sm:border-t-0 sm:p-5 sm:shadow-modal'
+          }
         >
-          <p className="text-[15px] font-semibold">Can we count your visit?</p>
-          <p className="mt-1.5 text-sm leading-relaxed text-text-muted">
-            We’d like to use Google Analytics to see how people find Rhyme Helper, and Lemon Squeezy’s referral tracking so creators who recommend us get credit. Both only run if you allow it.{' '}
-            <Link href="/privacy#analytics" className="text-text underline decoration-text-faint underline-offset-4 hover:decoration-text">Privacy policy</Link>
+          <p className="hidden text-[15px] font-semibold sm:block">Can we count your visit?</p>
+          <p className="text-[13px] leading-snug text-text-muted sm:mt-1.5 sm:text-sm sm:leading-relaxed">
+            <span className="sm:hidden">Analytics and referral tracking, only if you allow it.</span>
+            <span className="hidden sm:inline">We’d like to use Google Analytics to see how people find Rhyme Helper, and Lemon Squeezy’s referral tracking so creators who recommend us get credit. Both only run if you allow it.</span>{' '}
+            <Link href="/privacy#analytics" className="text-text underline decoration-text-faint underline-offset-4 hover:decoration-text">
+              <span className="sm:hidden">Details</span><span className="hidden sm:inline">Privacy policy</span>
+            </Link>
           </p>
-          <div className="mt-4 flex gap-2">
+          <div className="mt-2.5 flex gap-2 sm:mt-4">
             <Button size="sm" variant="secondary" onClick={() => choose('granted')}>Allow</Button>
             <Button size="sm" variant="ghost" onClick={() => choose('denied')}>No thanks</Button>
           </div>

@@ -5,7 +5,7 @@ import { ArrowRight, Check, Cloud, Copy, Download, Eye, EyeOff, KeyRound, Sparkl
 import { supabase } from '../../lib/supabaseClient';
 import { useSessionUser } from '../../lib/useSessionUser';
 import { isPro, hasCloudSync, licenseKey as licenseKeyOf } from '../../lib/entitlements';
-import { APP_CONFIG } from '../../config';
+import { APP_CONFIG, proPrice } from '../../config';
 import { AccountHeader, AccountSkeleton } from '../../components/account/AccountHeader';
 import { Alert, Badge, Button, ButtonLink, Card, Field, Input } from '../../components/ui';
 
@@ -121,7 +121,7 @@ export default function Dashboard() {
                 <Button type="submit" variant="secondary" disabled={activating}>{activating ? 'Checking…' : 'Link license'}</Button>
               </form>
               <p className="mt-5 text-sm text-text-muted">
-                No key yet? <Link href="/pricing" className="font-medium text-text underline decoration-text-faint underline-offset-4 hover:decoration-text">Get Pro for {APP_CONFIG.SALE_PRICE}</Link>
+                No key yet? <Link href="/pricing" className="font-medium text-text underline decoration-text-faint underline-offset-4 hover:decoration-text">Get Pro for {proPrice().price}</Link>
               </p>
             </>
           )}
@@ -166,7 +166,7 @@ export default function Dashboard() {
             <Sparkles aria-hidden strokeWidth={1.75} className="mt-0.5 size-5 shrink-0 text-iris-text" />
             <div className="flex-1">
               <h2 className="font-semibold">What you get with Pro</h2>
-              <p className="mt-1 text-sm leading-relaxed text-text-muted">Near rhymes, AI suggestions, multi-syllable search, Studio, your full song library, tabs and split screen. One-time {APP_CONFIG.SALE_PRICE}.</p>
+              <p className="mt-1 text-sm leading-relaxed text-text-muted">Near rhymes, AI suggestions, multi-syllable search, Studio, your full song library, tabs and split screen. One-time {proPrice().price}.</p>
               <Link href="/pricing" className="mt-3 inline-flex items-center gap-1.5 text-sm font-medium text-text hover:underline">
                 Compare plans <ArrowRight aria-hidden strokeWidth={1.75} className="size-3.5" />
               </Link>

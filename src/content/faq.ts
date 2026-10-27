@@ -1,16 +1,16 @@
-import { APP_CONFIG } from '../config';
+import { APP_CONFIG, proPrice } from '../config';
 
 export type FaqItem = { question: string; answer: string };
 
-/** Gedeelde FAQ-tekst (homepage toont de eerste vijf, /faq alles). */
-export const FAQS: FaqItem[] = [
+/** Gedeelde FAQ-tekst (homepage toont de eerste vijf, /faq alles). Functie, zodat de prijs na de launch-einddatum klopt. */
+export const getFaqs = (): FaqItem[] => [
   {
     question: 'Is Rhyme Helper really free?',
     answer: 'Yes. The free version has the full editor, perfect rhymes, syllable counts, notes, autosave and version history. No trial, no time limit. Pro adds the deeper rhyme tools and studio workflow.',
   },
   {
     question: 'Is Pro a one-time purchase or a subscription?',
-    answer: `A one-time purchase. Pay ${APP_CONFIG.SALE_PRICE} once and Pro is yours, including updates. The only subscription is Cloud Sync (${APP_CONFIG.CLOUD_SYNC_PRICE} a month), and that is optional.`,
+    answer: `A one-time purchase. Pay ${proPrice().price} once and Pro is yours, including updates. The only subscription is Cloud Sync (${APP_CONFIG.CLOUD_SYNC_PRICE} a month), and that is optional.`,
   },
   {
     question: 'Which languages does it support?',

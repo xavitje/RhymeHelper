@@ -12,7 +12,8 @@ export type ButtonSize = 'sm' | 'md' | 'lg';
 
 const base =
   'inline-flex items-center justify-center gap-2 whitespace-nowrap font-medium select-none border border-transparent ' +
-  'transition-[background-color,border-color,color] duration-150 ease-out disabled:opacity-50 disabled:cursor-not-allowed ' +
+  'transition-[background-color,border-color,color,scale] duration-150 ease-out active:scale-[0.97] active:duration-100 ' +
+  'disabled:opacity-50 disabled:cursor-not-allowed disabled:active:scale-100 ' +
   'focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-iris';
 
 const variants: Record<ButtonVariant, string> = {
