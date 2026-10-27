@@ -7,24 +7,32 @@ import type { User } from '@supabase/supabase-js';
 import { supabase } from '../lib/supabaseClient';
 import { isPro } from '../lib/entitlements';
 import { proPrice } from '../config';
+import { href, switchPath } from '../i18n/routes';
+import { fmtPrice, ui } from '../i18n/ui';
+import { useLang } from '../i18n/useLang';
 import { GetAppButton } from './GetAppButton';
 import { Logo } from './ui/Logo';
 import { cn } from '../lib/cn';
 
-const LINKS = [
-  { href: '/#features', label: 'Features', match: '/#features' },
-  { href: '/pricing', label: 'Pricing', match: '/pricing' },
-  { href: '/resources', label: 'Docs', match: '/resources' },
-  { href: '/faq', label: 'FAQ', match: '/faq' },
-];
 
 export default function Navbar() {
   const pathname = usePathname() ?? '/';
+  const lang = useLang();
+  const t = ui(lang);
+  const other = lang === 'en' ? 'nl' : 'en';
+  const LINKS = [
+    { href: href(lang, 'features'), label: t.nav.features, match: href(lang, 'features') },
+    { href: href(lang, 'pricing'), label: t.nav.pricing, match: href(lang, 'pricing') },
+    { href: href(lang, 'docs'), label: t.nav.docs, match: href(lang, 'docs') },
+    { href: href(lang, 'faq'), label: t.nav.faq, match: href(lang, 'faq') },
+  ];
   const [user, setUser] = useState<User | null>(null);
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const toggleRef = useRef<HTMLButtonElement>(null);
   const sheetRef = useRef<HTMLDivElement>(null);
+  const accountHref = user ? href(lang, 'dashboard') : href(lang, 'login');
+  const accountLabel = user ? t.nav.dashboard : t.nav.login;
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => setUser(session?.user ?? null));
@@ -70,7 +78,7 @@ export default function Navbar() {
   }, [open]);
 
   const hasLicense = isPro(user);
-  const isActive = (match: string) => !match.startsWith('/#') && (pathname === match || pathname.startsWith(`${match}/`));
+  const isActive = (match: string) => !match.includes('#') && (pathname === match || pathname.startsWith(`${match}/`));
 
   return (
     <>
@@ -83,11 +91,11 @@ export default function Navbar() {
       )}
     >
       <div className="mx-auto flex h-16 w-full max-w-[1200px] items-center justify-between gap-6 px-5 sm:px-8">
-        <Link href="/" aria-label="Rhyme Helper, home" className="rounded-md">
+        <Link href={href(lang, 'home')} aria-label={t.nav.home} className="rounded-md">
           <Logo size={28} />
         </Link>
 
-        <nav aria-label="Main" className="hidden md:block">
+        <nav aria-label={t.nav.main} className="hidden md:block">
           <ul className="flex items-center gap-1">
             {LINKS.map((l) => (
               <li key={l.href}>
@@ -108,10 +116,20 @@ export default function Navbar() {
 
         <div className="flex items-center gap-2">
           <Link
-            href={user ? '/dashboard' : '/login'}
+            href={switchPath(pathname, other)}
+            hrefLang={other}
+            lang={other}
+            aria-label={t.langSwitch.toOther}
+            title={t.langSwitch.toOther}
+            className="hidden rounded-md px-2 py-2 text-[13px] font-semibold tracking-wide text-text-muted transition-colors hover:text-text md:block"
+          >
+            {t.langSwitch.short}
+          </Link>
+          <Link
+            href={accountHref}
             className="hidden rounded-md px-3 py-2 text-sm font-medium text-text-muted transition-colors hover:text-text md:block"
           >
-            {user ? 'Dashboard' : 'Log in'}
+            {accountLabel}
           </Link>
           <GetAppButton size="sm" short label={hasLicense ? 'Download' : undefined} />
           <button
@@ -120,7 +138,7 @@ export default function Navbar() {
             onClick={() => setOpen((o) => !o)}
             aria-expanded={open}
             aria-controls="mobile-menu"
-            aria-label={open ? 'Close menu' : 'Open menu'}
+            aria-label={open ? t.nav.closeMenu : t.nav.openMenu}
             className="inline-flex size-10 items-center justify-center rounded-md text-text-muted transition-colors hover:bg-raised hover:text-text md:hidden"
           >
             {open ? <X className="size-5" strokeWidth={1.75} /> : <Menu className="size-5" strokeWidth={1.75} />}
@@ -135,7 +153,7 @@ export default function Navbar() {
           ref={sheetRef}
           className="menu-sheet fixed inset-x-0 top-16 bottom-0 z-50 overflow-y-auto border-t border-border bg-bg px-5 pt-4 pb-10 md:hidden"
         >
-          <nav aria-label="Mobile">
+          <nav aria-label={t.nav.mobile}>
             <ul className="divide-y divide-border">
               {LINKS.map((l) => (
                 <li key={l.href}>
@@ -150,14 +168,22 @@ export default function Navbar() {
                 </li>
               ))}
               <li>
-                <Link href={user ? '/dashboard' : '/login'} onClick={() => setOpen(false)} className="block py-4 text-2xl font-semibold tracking-[-0.02em] text-text">
-                  {user ? 'Dashboard' : 'Log in'}
+                <Link href={accountHref} onClick={() => setOpen(false)} className="block py-4 text-2xl font-semibold tracking-[-0.02em] text-text">
+                  {accountLabel}
                 </Link>
               </li>
             </ul>
           </nav>
-          <GetAppButton size="lg" fullWidth className="mt-8" label={hasLicense ? 'Download for Windows' : undefined} />
-          <p className="mt-3 text-center text-sm text-text-muted">Windows 10 and 11 · Free forever, Pro {proPrice().price} once</p>
+          <GetAppButton size="lg" fullWidth className="mt-8" label={hasLicense ? (lang === 'nl' ? 'Download voor Windows' : 'Download for Windows') : undefined} />
+          <p className="mt-3 text-center text-sm text-text-muted">{t.priceLine(fmtPrice(lang, proPrice().price))}</p>
+          <Link
+            href={switchPath(pathname, other)}
+            hrefLang={other}
+            lang={other}
+            className="mt-8 block text-center text-sm font-medium text-text-muted underline decoration-text-faint underline-offset-4 hover:text-text"
+          >
+            {t.langSwitch.toOther}
+          </Link>
         </div>
       )}
     </>

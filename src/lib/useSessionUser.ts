@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
+import { href, langFromPath } from '../i18n/routes';
 import type { User } from '@supabase/supabase-js';
 import { supabase } from './supabaseClient';
 
@@ -10,6 +11,7 @@ import { supabase } from './supabaseClient';
  */
 export function useSessionUser() {
   const router = useRouter();
+  const loginPath = href(langFromPath(usePathname()), 'login');
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
 
@@ -18,7 +20,7 @@ export function useSessionUser() {
     (async () => {
       const { data: { session } } = await supabase.auth.getSession();
       if (!session) {
-        router.replace('/login');
+        router.replace(loginPath);
         return;
       }
       if (alive) setUser(session.user);
@@ -29,7 +31,7 @@ export function useSessionUser() {
       }
     })();
     return () => { alive = false; };
-  }, [router]);
+  }, [router, loginPath]);
 
   return { user, setUser, loading };
 }

@@ -2,17 +2,18 @@ import type { Metadata } from 'next';
 import { DocHeader, Prose } from '../../components/docs/DocPage';
 import { Container } from '../../components/ui';
 import { LEGAL_UPDATED } from '../../content/legal';
+import { alternates } from '../../i18n/routes';
 
 export const metadata: Metadata = {
   title: 'Terms of service',
   description: 'The terms for using Rhyme Helper and Rhyme Helper Pro.',
-  alternates: { canonical: '/terms' },
+  alternates: alternates('terms', 'en'),
 };
 
 export default function TermsOfService() {
   return (
     <Container narrow className="py-12 sm:py-16">
-      <DocHeader crumb="Terms of service" title="Terms of service" lead={<span className="text-sm">Last updated: {LEGAL_UPDATED}</span>} />
+      <DocHeader lang="en" crumb="Terms of service" title="Terms of service" lead={<span className="text-sm">Last updated: {LEGAL_UPDATED}</span>} />
       <Prose>
         <p>
           Please read these Terms of Service (“Terms”) carefully before using the Rhyme Helper application (the “Service”) operated by

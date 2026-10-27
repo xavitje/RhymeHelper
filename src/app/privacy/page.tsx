@@ -2,17 +2,18 @@ import type { Metadata } from 'next';
 import { DocHeader, Prose } from '../../components/docs/DocPage';
 import { Container } from '../../components/ui';
 import { LEGAL_UPDATED } from '../../content/legal';
+import { alternates } from '../../i18n/routes';
 
 export const metadata: Metadata = {
   title: 'Privacy policy',
   description: 'How Rhyme Helper collects, uses and protects your personal data.',
-  alternates: { canonical: '/privacy' },
+  alternates: alternates('privacy', 'en'),
 };
 
 export default function PrivacyPolicy() {
   return (
     <Container narrow className="py-12 sm:py-16">
-      <DocHeader crumb="Privacy policy" title="Privacy policy" lead={<span className="text-sm">Last updated: {LEGAL_UPDATED}</span>} />
+      <DocHeader lang="en" crumb="Privacy policy" title="Privacy policy" lead={<span className="text-sm">Last updated: {LEGAL_UPDATED}</span>} />
       <Prose>
         <h2>1. Identity details</h2>
         <p>

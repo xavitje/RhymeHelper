@@ -3,6 +3,7 @@ import { useRef, useState } from 'react';
 import { Download, Send } from 'lucide-react';
 import { APP_CONFIG } from '../config';
 import { usePlatform } from '../lib/usePlatform';
+import { useLang } from '../i18n/useLang';
 import { Button, ButtonLink, type ButtonVariant, type ButtonSize } from './ui/Button';
 import { SendLinkSheet, type SheetLang } from './SendLinkSheet';
 
@@ -16,10 +17,12 @@ const LABELS = {
  * "Stuur me de downloadlink" met een paneel om je e-mailadres in te vullen.
  */
 export function GetAppButton({
-  lang = 'en', short = false, label, variant, size, fullWidth, className,
+  lang: langProp, short = false, label, variant, size, fullWidth, className,
 }: {
   lang?: SheetLang; short?: boolean; label?: string; variant?: ButtonVariant; size?: ButtonSize; fullWidth?: boolean; className?: string;
 }) {
+  const pathLang = useLang();
+  const lang = langProp ?? pathLang;
   const platform = usePlatform();
   const [open, setOpen] = useState(false);
   const triggerRef = useRef<HTMLButtonElement>(null);

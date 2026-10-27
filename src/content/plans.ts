@@ -3,7 +3,9 @@
  * Cloud Sync is een los abonnement (app: CloudSyncModal, €2.99/maand), niet onderdeel van Pro.
  */
 
-export const FREE_HIGHLIGHTS = [
+import type { Lang } from '../i18n/routes';
+
+const FREE_HIGHLIGHTS_EN = [
   'Full editor with formatting',
   'Perfect rhymes',
   'Syllable counts per line',
@@ -12,7 +14,7 @@ export const FREE_HIGHLIGHTS = [
   'Print and export to PDF',
 ];
 
-export const PRO_HIGHLIGHTS = [
+const PRO_HIGHLIGHTS_EN = [
   'Near rhymes and sounds-like',
   'Synonyms and saved words',
   'AI rhyme suggestions',
@@ -26,7 +28,7 @@ export const PRO_HIGHLIGHTS = [
 export type CompareRow = { feature: string; free: boolean; pro: boolean; note?: string };
 export type CompareGroup = { title: string; rows: CompareRow[] };
 
-export const COMPARISON: CompareGroup[] = [
+const COMPARISON_EN: CompareGroup[] = [
   {
     title: 'Writing',
     rows: [
@@ -75,3 +77,77 @@ export const COMPARISON: CompareGroup[] = [
     ],
   },
 ];
+
+const FREE_HIGHLIGHTS_NL = [
+  'Volledige editor met opmaak',
+  'Perfecte rijmen',
+  'Lettergrepen per regel',
+  'Notities voor losse ideeën en per lied',
+  'Autosave en versiegeschiedenis',
+  'Printen en exporteren naar PDF',
+];
+
+const PRO_HIGHLIGHTS_NL = [
+  'Bijna-rijmen en klinkt-als',
+  'Synoniemen en bewaarde woorden',
+  'AI-rijmsuggesties',
+  'Meerlettergrepig zoeken op zinsdelen',
+  'Studio: je beat afspelen terwijl je schrijft',
+  'Je hele liedbibliotheek, doorzoekbaar',
+  'Tabbladen en gesplitst scherm',
+  'Extra accentkleuren en stijlen',
+];
+
+const COMPARISON_NL: CompareGroup[] = [
+  {
+    title: 'Schrijven',
+    rows: [
+      { feature: 'Teksteditor met opmaak en kleuren', free: true, pro: true },
+      { feature: 'Lettergrepen per regel, gemiddelde per sectie', free: true, pro: true },
+      { feature: 'Rijmschema in kleur', free: true, pro: true },
+      { feature: 'Notities: losse ideeën en notities per lied', free: true, pro: true },
+      { feature: 'Autosave en versiegeschiedenis', free: true, pro: true },
+      { feature: 'Focusmodus en opdrachtenpalet', free: true, pro: true },
+      { feature: 'Printen en exporteren naar PDF', free: true, pro: true },
+      { feature: 'Engels en Nederlands', free: true, pro: true },
+    ],
+  },
+  {
+    title: 'Rijmen',
+    rows: [
+      { feature: 'Perfecte rijmen, gegroepeerd op lettergrepen', free: true, pro: true },
+      { feature: 'Bijna-rijmen en klinkt-als', free: false, pro: true },
+      { feature: 'Synoniemen en bewaarde woorden', free: false, pro: true },
+      { feature: 'AI-rijmsuggesties', free: false, pro: true },
+      { feature: 'Meerlettergrepig zoeken op zinsdelen', free: false, pro: true },
+    ],
+  },
+  {
+    title: 'Studio',
+    rows: [
+      { feature: 'Beatspeler met golfvorm', free: false, pro: true },
+      { feature: 'Loop en tijdstempels, gesynchroniseerde tekst exporteren (.lrc)', free: false, pro: true },
+      { feature: 'Je tekst opslaan in de MP3', free: false, pro: true },
+    ],
+  },
+  {
+    title: 'Werkruimte',
+    rows: [
+      { feature: 'Je open liedjes in de zijbalk', free: true, pro: true },
+      { feature: 'Hele liedbibliotheek: elk lied dat je schreef, doorzoekbaar op titel en tekst', free: false, pro: true },
+      { feature: 'Meerdere liedjes open in tabbladen', free: false, pro: true },
+      { feature: 'Gesplitst scherm, twee liedjes naast elkaar', free: false, pro: true },
+    ],
+  },
+  {
+    title: 'Uiterlijk',
+    rows: [
+      { feature: 'Donker en licht thema met het Iris-accent', free: true, pro: true },
+      { feature: 'Extra accenten (Blue, Lime, Coral) en achtergrondstijlen (Midnight, Onyx, Paper)', free: false, pro: true },
+    ],
+  },
+];
+
+export const FREE_HIGHLIGHTS: Record<Lang, string[]> = { en: FREE_HIGHLIGHTS_EN, nl: FREE_HIGHLIGHTS_NL };
+export const PRO_HIGHLIGHTS: Record<Lang, string[]> = { en: PRO_HIGHLIGHTS_EN, nl: PRO_HIGHLIGHTS_NL };
+export const COMPARISON: Record<Lang, CompareGroup[]> = { en: COMPARISON_EN, nl: COMPARISON_NL };

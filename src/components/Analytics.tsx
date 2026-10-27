@@ -3,6 +3,9 @@ import Script from 'next/script';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { Button } from './ui/Button';
+import { href } from '../i18n/routes';
+import { ui } from '../i18n/ui';
+import { useLang } from '../i18n/useLang';
 
 /**
  * Google Analytics 4, alleen na toestemming (AVG/ePrivacy).
@@ -34,6 +37,8 @@ function clearGaCookies() {
 }
 
 export function Analytics() {
+  const lang = useLang();
+  const t = ui(lang).cookie;
   const [consent, setConsent] = useState<Consent>(null);
   const [open, setOpen] = useState(false);
 
@@ -77,24 +82,24 @@ export function Analytics() {
         <div
           role="dialog"
           aria-live="polite"
-          aria-label="Cookie choice"
+          aria-label={t.aria}
           className={
             // Mobiel: smalle balk onderaan, zodat het productbeeld zichtbaar blijft. Vanaf sm: kaart linksonder.
             'menu-sheet fixed inset-x-0 bottom-0 z-[60] border-t border-border bg-surface px-4 pt-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] ' +
             'sm:inset-x-auto sm:left-5 sm:bottom-5 sm:max-w-md sm:rounded-xl sm:border-t-0 sm:p-5 sm:shadow-modal'
           }
         >
-          <p className="hidden text-[15px] font-semibold sm:block">Can we count your visit?</p>
+          <p className="hidden text-[15px] font-semibold sm:block">{t.title}</p>
           <p className="text-[13px] leading-snug text-text-muted sm:mt-1.5 sm:text-sm sm:leading-relaxed">
-            <span className="sm:hidden">Analytics and referral tracking, only if you allow it.</span>
-            <span className="hidden sm:inline">We’d like to use Google Analytics to see how people find Rhyme Helper, and Lemon Squeezy’s referral tracking so creators who recommend us get credit. Both only run if you allow it.</span>{' '}
-            <Link href="/privacy#analytics" className="text-text underline decoration-text-faint underline-offset-4 hover:decoration-text">
-              <span className="sm:hidden">Details</span><span className="hidden sm:inline">Privacy policy</span>
+            <span className="sm:hidden">{t.short}</span>
+            <span className="hidden sm:inline">{t.long}</span>{' '}
+            <Link href={`${href(lang, 'privacy')}#analytics`} className="text-text underline decoration-text-faint underline-offset-4 hover:decoration-text">
+              <span className="sm:hidden">{t.details}</span><span className="hidden sm:inline">{t.policy}</span>
             </Link>
           </p>
           <div className="mt-2.5 flex gap-2 sm:mt-4">
-            <Button size="sm" variant="secondary" onClick={() => choose('granted')}>Allow</Button>
-            <Button size="sm" variant="ghost" onClick={() => choose('denied')}>No thanks</Button>
+            <Button size="sm" variant="secondary" onClick={() => choose('granted')}>{t.allow}</Button>
+            <Button size="sm" variant="ghost" onClick={() => choose('denied')}>{t.deny}</Button>
           </div>
         </div>
       )}
@@ -103,11 +108,11 @@ export function Analytics() {
 }
 
 /** Knop in de footer om de keuze te wijzigen. Alleen zichtbaar als Analytics is ingesteld. */
-export function CookieSettingsButton({ className }: { className?: string }) {
+export function CookieSettingsButton({ className, label = 'Cookie settings' }: { className?: string; label?: string }) {
   if (!GA_ID) return null;
   return (
     <button type="button" className={className} onClick={() => window.dispatchEvent(new Event('rh:cookie-settings'))}>
-      Cookie settings
+      {label}
     </button>
   );
 }

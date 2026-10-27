@@ -1,12 +1,14 @@
 import type { ReactNode } from 'react';
 import Breadcrumbs from '../Breadcrumbs';
 import { cn } from '../../lib/cn';
+import { href, type Lang } from '../../i18n/routes';
+import { ui } from '../../i18n/ui';
 
 /** Kop voor tekstpagina's (docs, FAQ, juridisch): kruimelpad, titel, lead/meta. */
-export function DocHeader({ crumb, title, lead, className }: { crumb: string; title: ReactNode; lead?: ReactNode; className?: string }) {
+export function DocHeader({ crumb, title, lead, className, lang = 'en' }: { crumb: string; title: ReactNode; lead?: ReactNode; className?: string; lang?: Lang }) {
   return (
     <header className={cn('border-b border-border pb-10', className)}>
-      <Breadcrumbs items={[{ label: 'Home', path: '/' }, { label: crumb }]} />
+      <Breadcrumbs items={[{ label: ui(lang).crumbsHome, path: href(lang, 'home') }, { label: crumb }]} />
       <h1 className="mt-6 text-4xl font-semibold leading-[1.06] tracking-[-0.035em] sm:text-5xl">{title}</h1>
       {lead && <div className="mt-4 max-w-2xl text-lg text-text-muted">{lead}</div>}
     </header>

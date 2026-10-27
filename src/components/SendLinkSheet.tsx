@@ -4,6 +4,7 @@ import { createPortal } from 'react-dom';
 import { CheckCircle2, Mail, X } from 'lucide-react';
 import { SITE } from '../config';
 import type { Platform } from '../lib/usePlatform';
+import { href } from '../i18n/routes';
 import { Alert, Field, Input } from './ui/Field';
 import { Button } from './ui/Button';
 
@@ -187,7 +188,7 @@ export function SendLinkSheet({ lang, platform, onClose }: { lang: SheetLang; pl
             </Button>
             <p className="mt-3 text-xs leading-relaxed text-text-muted">
               {t.note}{' '}
-              <a href="/privacy#download-link" className="text-text underline decoration-text-faint underline-offset-4 hover:decoration-text">{t.privacy}</a>
+              <a href={`${href(lang, 'privacy')}#download-link`} className="text-text underline decoration-text-faint underline-offset-4 hover:decoration-text">{t.privacy}</a>
             </p>
           </form>
         )}
