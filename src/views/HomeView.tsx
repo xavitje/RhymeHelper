@@ -12,6 +12,7 @@ import { FadeIn } from '../components/FadeIn';
 import { PlanCards } from '../components/PlanCards';
 import { GetAppButton } from '../components/GetAppButton';
 import { FaqList } from '../components/home/FaqList';
+import { HeroDemo } from '../components/home/HeroDemo';
 import { Badge, ButtonLink, Container, Kbd, RhymeStrip, RhymeWord, Section, SectionHeading } from '../components/ui';
 import type { Lang } from '../i18n/routes';
 import { alternates, href } from '../i18n/routes';
@@ -42,7 +43,6 @@ function content(lang: Lang) {
       lead: 'De schrijfapp voor songteksten en raps. Rijmen, lettergrepen per regel en je beat, samen in één rustig venster. In het Nederlands en het Engels.',
       seePro: 'Bekijk Pro',
       heroMeta: `Windows 10 en 11 · Altijd gratis · Pro ${pro} eenmalig`,
-      heroAlt: 'Rhyme Helper met het lied “Midnight Pen”: songtekst met lettergrepen per regel, rijmwoorden in kleur en rechts het rijmpaneel voor “light”.',
       featTitle: 'Gemaakt om te schrijven,', featAccent: 'verder niets.',
       featLead: 'Alles waar je naar grijpt als je een lied schrijft, op de pagina waarop je schrijft.',
       spotlights: [
@@ -92,7 +92,6 @@ function content(lang: Lang) {
     lead: 'The writing app for lyrics. Rhymes, syllable counts and your beat, together in one quiet window.',
     seePro: 'See Pro',
     heroMeta: `Windows 10 and 11 · Free forever · Pro ${pro} one-time`,
-    heroAlt: 'Rhyme Helper with the song “Midnight Pen”: lyrics with syllable counts per line, rhyming words in colour and the rhyme panel for “light” on the right.',
     featTitle: 'Built for writing,', featAccent: 'nothing else.',
     featLead: "Everything you reach for while writing a song, inside the page you're writing on.",
     spotlights: [
@@ -197,17 +196,7 @@ export function HomeView({ lang }: { lang: Lang }) {
           </div>
 
           <div className="mt-14 sm:mt-20">
-            <div className="relative mx-auto max-w-[1120px] rounded-xl border border-border-strong bg-surface p-1.5 shadow-modal sm:rounded-2xl sm:p-2">
-              <Image
-                src="/screens/app-editor.webp"
-                width={2880}
-                height={1800}
-                priority
-                sizes="(min-width: 1200px) 1104px, 100vw"
-                alt={c.heroAlt}
-                className="h-auto w-full rounded-lg sm:rounded-xl"
-              />
-            </div>
+            <HeroDemo lang={lang} />
           </div>
         </Container>
       </section>
