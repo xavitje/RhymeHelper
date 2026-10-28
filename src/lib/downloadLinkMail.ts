@@ -8,8 +8,18 @@ import { SITE } from '../config';
  *   ZOHO_SMTP_PASS  = een app-wachtwoord uit Zoho (Mijn account → Beveiliging → App-wachtwoorden)
  *   MAIL_FROM       = optioneel, afzender, bijv. "Rhyme Helper <support@rhymehelper.store>" (moet een adres/alias van dat account zijn)
  */
+/** Env-waarden zonder spaties, regeleinden of aanhalingstekens (veelvoorkomend bij plakken in Vercel). */
+const env = (k: string) => (process.env[k] ?? '').trim().replace(/^["']|["']$/g, '').trim();
+
 export function mailConfigured() {
-  return !!(process.env.ZOHO_SMTP_USER && process.env.ZOHO_SMTP_PASS);
+  return !!(env('ZOHO_SMTP_USER') && env('ZOHO_SMTP_PASS'));
+}
+
+/** Afzender: MAIL_FROM alleen als die een echt adres bevat, anders het inlogadres. */
+function sender() {
+  const user = env('ZOHO_SMTP_USER');
+  const custom = env('MAIL_FROM');
+  return { user, from: custom.includes('@') ? custom : `Rhyme Helper <${user}>` };
 }
 
 type Lang = 'en' | 'nl';
@@ -58,18 +68,27 @@ ${wantsMac ? `<p style="margin:0 0 16px;color:#A1A1AA;font-size:14px">${esc(c.ma
 <tr><td style="padding:0 28px 24px;font-size:12px;line-height:1.5;color:#6E6E78">${esc(c.why)}</td></tr>
 </table></td></tr></table></body></html>`;
 
+  const { user, from } = sender();
   const transporter = nodemailer.createTransport({
     host: 'smtp.zoho.eu',
     port: 465,
     secure: true,
-    auth: { user: process.env.ZOHO_SMTP_USER, pass: process.env.ZOHO_SMTP_PASS },
+    auth: { user, pass: env('ZOHO_SMTP_PASS') },
   });
-  await transporter.sendMail({
-    from: process.env.MAIL_FROM || `Rhyme Helper <${process.env.ZOHO_SMTP_USER}>`,
-    to,
-    replyTo: SITE.contactEmail,
-    subject: c.subject,
-    text,
-    html,
-  });
+  try {
+    await transporter.sendMail({
+      from,
+      // Zoho weigert ("Sender is not allowed to relay") als de envelope-afzender niet het inlogadres is.
+      envelope: { from: user, to },
+      to,
+      replyTo: SITE.contactEmail,
+      subject: c.subject,
+      text,
+      html,
+    });
+  } catch (e) {
+    // Geen geheimen loggen; wel de adressen, zodat een verkeerde instelling zichtbaar is in de Vercel-logs.
+    console.error('send-link: smtp context', JSON.stringify({ user, from, replyTo: SITE.contactEmail }));
+    throw e;
+  }
 }
