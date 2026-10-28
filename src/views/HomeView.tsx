@@ -13,6 +13,8 @@ import { PlanCards } from '../components/PlanCards';
 import { GetAppButton } from '../components/GetAppButton';
 import { FaqList } from '../components/home/FaqList';
 import { HeroDemo } from '../components/home/HeroDemo';
+import { MakerBlock } from '../components/home/MakerBlock';
+import { Testimonials } from '../components/home/Testimonials';
 import { Badge, ButtonLink, Container, Kbd, LogoMark, RhymeStrip, RhymeWord, Section, SectionHeading } from '../components/ui';
 import type { Lang } from '../i18n/routes';
 import { alternates, href } from '../i18n/routes';
@@ -336,6 +338,9 @@ export function HomeView({ lang }: { lang: Lang }) {
           </dl>
         </div>
       </Section>
+
+      <MakerBlock lang={lang} />
+      <Testimonials lang={lang} />
 
       {/* Free en Pro */}
       <Section className="border-t border-border" id="pricing">
