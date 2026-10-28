@@ -1,7 +1,8 @@
 import type { Metadata } from 'next';
-import { CheckCircle2, Download, LayoutDashboard } from 'lucide-react';
-import { APP_CONFIG, SITE } from '../config';
+import { CheckCircle2, LayoutDashboard } from 'lucide-react';
+import { SITE } from '../config';
 import { ButtonLink, Container, Kbd, RhymeStrip } from '../components/ui';
+import { GetAppButton, MacIntelLink } from '../components/GetAppButton';
 import type { Lang } from '../i18n/routes';
 import { href } from '../i18n/routes';
 
@@ -10,22 +11,22 @@ const T = {
     meta: 'Welcome to Pro',
     steps: [
       { title: 'Find your license key', body: 'We emailed it to you right after your purchase (from Lemon Squeezy). Can’t find it? Check your spam folder or log in to your dashboard.' },
-      { title: 'Open Rhyme Helper', body: 'Download and install the app if you haven’t yet. Windows may show a SmartScreen warning: click More info, then Run anyway.' },
+      { title: 'Open Rhyme Helper', body: 'Download and install the app if you haven’t yet (Windows or Mac). Windows may show a SmartScreen warning: click More info, then Run anyway.' },
       { title: 'Activate Pro', body: 'In the app, choose Upgrade to Pro, then “I already have a license key”, and paste your key. That’s it.' },
     ],
     paid: 'Payment received', h1: 'Welcome to Pro.', h1b: 'Let’s write.', lead: 'Thanks for supporting Rhyme Helper. Three steps and you’re set.',
-    download: 'Download for Windows', dash: 'Go to your dashboard',
+    dash: 'Go to your dashboard',
     tipA: 'Tip: press', tipB: 'in the app to find any song, rhyme or action. Questions? Mail',
   },
   nl: {
     meta: 'Welkom bij Pro',
     steps: [
       { title: 'Zoek je licentiesleutel', body: 'We hebben hem direct na je aankoop gemaild (afzender Lemon Squeezy). Kun je hem niet vinden? Kijk in je spammap of log in op je dashboard.' },
-      { title: 'Open Rhyme Helper', body: 'Download en installeer de app als je dat nog niet hebt gedaan. Windows kan een SmartScreen-melding tonen: klik op Meer informatie en dan op Toch uitvoeren.' },
+      { title: 'Open Rhyme Helper', body: 'Download en installeer de app als je dat nog niet hebt gedaan (Windows of Mac). Windows kan een SmartScreen-melding tonen: klik op Meer informatie en dan op Toch uitvoeren.' },
       { title: 'Activeer Pro', body: 'Kies in de app Upgraden naar Pro, dan “Ik heb al een licentiesleutel”, en plak je sleutel. Klaar.' },
     ],
     paid: 'Betaling ontvangen', h1: 'Welkom bij Pro.', h1b: 'Tijd om te schrijven.', lead: 'Bedankt dat je Rhyme Helper steunt. Nog drie stappen en je bent klaar.',
-    download: 'Download voor Windows', dash: 'Naar je dashboard',
+    dash: 'Naar je dashboard',
     tipA: 'Tip: druk in de app op', tipB: 'om elk lied, rijm of commando te vinden. Vragen? Mail naar',
   },
 } as const;
@@ -64,9 +65,10 @@ export function ThankYouView({ lang }: { lang: Lang }) {
         </div>
 
         <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-          <ButtonLink href={APP_CONFIG.WINDOWS_DOWNLOAD_URL} size="lg" icon={Download}>{t.download}</ButtonLink>
+          <GetAppButton lang={lang} paid size="lg" />
           <ButtonLink href={href(lang, 'dashboard')} size="lg" variant="secondary" icon={LayoutDashboard}>{t.dash}</ButtonLink>
         </div>
+        <MacIntelLink lang={lang} className="mt-3" />
 
         <p className="mt-10 text-sm text-text-muted">
           {t.tipA} <Kbd keys={['Ctrl', 'K']} /> {t.tipB}{' '}

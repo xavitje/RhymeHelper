@@ -25,7 +25,7 @@ export function getFaqs(lang: Lang = 'en'): FaqItem[] {
       { id: 'stopCloud', question: 'Wat gebeurt er met mijn liedjes als ik stop met Cloud Sync?', answer: 'Er wordt niets verwijderd. Je liedjes blijven op je computers en je kunt ze gewoon gebruiken. Je cloudbibliotheek blijft beschikbaar om op een nieuwe computer te downloaden, maar nieuwe wijzigingen worden pas weer geüpload als je opnieuw abonneert.' },
       { id: 'restore', question: 'Ik heb per ongeluk een lied verwijderd. Kan ik het terugkrijgen?', answer: 'Met Cloud Sync wel. Verwijderde liedjes blijven 30 dagen in Onlangs verwijderd. Klik in de app op de Cloud-knop in de bovenbalk en kies Onlangs verwijderd om ze terug te zetten.' },
       { id: 'smartscreen', question: 'Windows toont een blauwe SmartScreen-melding. Is dat veilig?', answer: 'Ja. Rhyme Helper is nieuw en ons code-signing-certificaat wordt nog verwerkt, dus Windows herkent de installer nog niet. Klik op “Meer informatie” en dan op “Toch uitvoeren” om te installeren.' },
-      { id: 'mac', question: 'Is er een Mac-versie?', answer: 'Nog niet. Rhyme Helper draait op Windows 10 en 11. Open deze site op je Mac en kies “Stuur me de downloadlink”: daar kun je aangeven dat je een mail wilt als de Mac-versie er is.' },
+      { id: 'mac', question: 'Is er een Mac-versie?', answer: 'Ja. Rhyme Helper werkt op macOS 12 en nieuwer, op Macs met Apple Silicon (M1 en nieuwer) en met een Intel-chip. Open deze site op je Mac en klik op de downloadknop. Open het .dmg-bestand en sleep Rhyme Helper naar Apps. De Mac-versie is door Apple gecontroleerd, dus hij opent zonder waarschuwing, en hij werkt zichzelf bij.' },
     ];
   }
   return [
@@ -41,6 +41,6 @@ export function getFaqs(lang: Lang = 'en'): FaqItem[] {
     { id: 'stopCloud', question: 'What happens to my songs if I stop Cloud Sync?', answer: 'Nothing is deleted. Your songs stay on your computers and you can keep using them in the app. Your cloud library stays available to download on a new computer, but new changes are no longer uploaded until you subscribe again.' },
     { id: 'restore', question: 'I deleted a song by accident. Can I get it back?', answer: 'With Cloud Sync, yes. Deleted songs stay in Recently deleted for 30 days. In the app, click the Cloud button in the top bar and choose Recently deleted to restore them.' },
     { id: 'smartscreen', question: 'Windows shows a blue SmartScreen warning. Is that safe?', answer: 'Yes. Rhyme Helper is new and our code-signing certificate is still being processed, so Windows does not recognise the installer yet. Click "More info" and then "Run anyway" to install.' },
-    { id: 'mac', question: 'Is there a Mac version?', answer: 'Not yet. Rhyme Helper runs on Windows 10 and 11. Open this site on your Mac and choose "Send me the download link": you can ask to get one email when the Mac version is ready.' },
+    { id: 'mac', question: 'Is there a Mac version?', answer: 'Yes. Rhyme Helper runs on macOS 12 and newer, on Macs with Apple Silicon (M1 and newer) and with an Intel chip. Open this site on your Mac and click the download button. Open the .dmg file and drag Rhyme Helper to Applications. The Mac version is checked by Apple, so it opens without a warning, and it updates itself.' },
   ];
 }

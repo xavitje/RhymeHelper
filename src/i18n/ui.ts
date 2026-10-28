@@ -5,12 +5,12 @@ export const UI = {
   en: {
     skip: 'Skip to content',
     nav: { features: 'Features', pricing: 'Pricing', docs: 'Docs', faq: 'FAQ', login: 'Log in', dashboard: 'Dashboard', main: 'Main', mobile: 'Mobile', openMenu: 'Open menu', closeMenu: 'Close menu', home: 'Rhyme Helper, home' },
-    priceLine: (price: string) => `Windows 10 and 11 · Free forever, Pro ${price} once`,
+    priceLine: (price: string) => `Windows and Mac · Free forever, Pro ${price} once`,
     langSwitch: { label: 'Language', toOther: 'Nederlands', short: 'NL' },
     footer: {
       tagline: 'The writing app for lyrics, with rhymes, syllables and your beat in one place.',
       product: 'Product', help: 'Help', legal: 'Legal',
-      features: 'Features', pricing: 'Pricing', download: 'Download for Windows',
+      features: 'Features', pricing: 'Pricing', download: 'Download for Windows', downloadMac: 'Download for Mac',
       docs: 'Docs', faq: 'FAQ', contact: 'Contact',
       privacy: 'Privacy policy', terms: 'Terms of service',
       rights: (y: number) => `© ${y} Rhyme Helper. Built for creatives by creatives.`,
@@ -27,12 +27,12 @@ export const UI = {
   nl: {
     skip: 'Naar de inhoud',
     nav: { features: 'Functies', pricing: 'Prijzen', docs: 'Handleiding', faq: 'FAQ', login: 'Inloggen', dashboard: 'Dashboard', main: 'Hoofdmenu', mobile: 'Mobiel menu', openMenu: 'Menu openen', closeMenu: 'Menu sluiten', home: 'Rhyme Helper, home' },
-    priceLine: (price: string) => `Windows 10 en 11 · Altijd gratis, Pro ${price} eenmalig`,
+    priceLine: (price: string) => `Windows en Mac · Altijd gratis, Pro ${price} eenmalig`,
     langSwitch: { label: 'Taal', toOther: 'English', short: 'EN' },
     footer: {
       tagline: 'De schrijfapp voor songteksten, met rijmen, lettergrepen en je beat op één plek.',
       product: 'Product', help: 'Hulp', legal: 'Juridisch',
-      features: 'Functies', pricing: 'Prijzen', download: 'Download voor Windows',
+      features: 'Functies', pricing: 'Prijzen', download: 'Download voor Windows', downloadMac: 'Download voor Mac',
       docs: 'Handleiding', faq: 'FAQ', contact: 'Contact',
       privacy: 'Privacyverklaring', terms: 'Voorwaarden',
       rights: (y: number) => `© ${y} Rhyme Helper. Gemaakt door makers, voor makers.`,

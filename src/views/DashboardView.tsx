@@ -9,6 +9,7 @@ import { APP_CONFIG, proPrice } from '../config';
 import { AccountHeader, AccountSkeleton } from '../components/account/AccountHeader';
 import { Alert, Badge, Button, ButtonLink, Card, Field, Input } from '../components/ui';
 import { useLang } from '../i18n/useLang';
+import { GetAppButton } from '../components/GetAppButton';
 import { href } from '../i18n/routes';
 import { fmtPrice } from '../i18n/ui';
 
@@ -21,8 +22,8 @@ const T = {
     keyLabel: 'License key', hide: 'Hide key', show: 'Show key', copy: 'Copy key', copied: 'Copied to clipboard.', private: 'Keep this key private.',
     bought: 'Bought Pro? Paste the license key from your email to link it to this account.', checking: 'Checking…', link: 'Link license',
     noYet: 'No key yet?', getPro: (p: string) => `Get Pro for ${p}`,
-    dlBody: 'The latest version of Rhyme Helper for Windows 10 and 11. The app updates itself after that.', dl: 'Download for Windows',
-    mac: 'macOS: not yet available.', smart: 'Windows may show a SmartScreen warning the first time. Click More info, then Run anyway.',
+    dlBody: 'The latest version of Rhyme Helper for Windows 10 and 11 or macOS 12 and newer. The app updates itself after that.',
+    smart: 'Windows may show a SmartScreen warning the first time. Click More info, then Run anyway.',
     on: 'On', off: 'Off', cloudOn: 'Your songs are backed up and in sync on every computer.',
     cloudOff: (p: string) => `Back up your songs and sync them across computers for ${p} a month.`, manage: 'Manage', setup: 'Set up',
     proTitle: 'What you get with Pro', proBody: (p: string) => `Near rhymes, AI suggestions, multi-syllable search, Studio, your full song library, tabs and split screen. One-time ${p}.`,
@@ -36,8 +37,8 @@ const T = {
     keyLabel: 'Licentiesleutel', hide: 'Sleutel verbergen', show: 'Sleutel tonen', copy: 'Sleutel kopiëren', copied: 'Gekopieerd.', private: 'Houd deze sleutel voor jezelf.',
     bought: 'Pro gekocht? Plak de licentiesleutel uit je mail om hem aan dit account te koppelen.', checking: 'Controleren…', link: 'Licentie koppelen',
     noYet: 'Nog geen sleutel?', getPro: (p: string) => `Koop Pro voor ${p}`,
-    dlBody: 'De nieuwste versie van Rhyme Helper voor Windows 10 en 11. Daarna werkt de app zichzelf bij.', dl: 'Download voor Windows',
-    mac: 'macOS: nog niet beschikbaar.', smart: 'Windows kan de eerste keer een SmartScreen-melding tonen. Klik op Meer informatie en dan op Toch uitvoeren.',
+    dlBody: 'De nieuwste versie van Rhyme Helper voor Windows 10 en 11 of macOS 12 en nieuwer. Daarna werkt de app zichzelf bij.',
+    smart: 'Windows kan de eerste keer een SmartScreen-melding tonen. Klik op Meer informatie en dan op Toch uitvoeren.',
     on: 'Aan', off: 'Uit', cloudOn: 'Je liedjes hebben een back-up en staan gelijk op elke computer.',
     cloudOff: (p: string) => `Maak een back-up van je liedjes en synchroniseer ze tussen computers voor ${p} per maand.`, manage: 'Beheren', setup: 'Instellen',
     proTitle: 'Dit krijg je met Pro', proBody: (p: string) => `Bijna-rijmen, AI-suggesties, meerlettergrepig zoeken, Studio, je hele liedbibliotheek, tabbladen en gesplitst scherm. Eenmalig ${p}.`,
@@ -175,8 +176,14 @@ export function DashboardView() {
           <p className="mt-3 text-[15px] leading-relaxed text-text-muted">
             {t.dlBody}
           </p>
-          <ButtonLink href={APP_CONFIG.WINDOWS_DOWNLOAD_URL} size="lg" icon={Download} className="mt-5">{t.dl}</ButtonLink>
-          <p className="mt-3 text-sm text-text-muted">{t.mac}</p>
+          <GetAppButton lang={lang} paid size="lg" className="mt-5" />
+          <p className="mt-3 text-sm text-text-muted">
+            <a href={APP_CONFIG.WINDOWS_DOWNLOAD_URL} className="underline underline-offset-2 hover:text-text">Windows</a>
+            {' · '}
+            <a href={APP_CONFIG.MAC_DOWNLOAD_URL} className="underline underline-offset-2 hover:text-text">Mac (Apple Silicon)</a>
+            {' · '}
+            <a href={APP_CONFIG.MAC_INTEL_DOWNLOAD_URL} className="underline underline-offset-2 hover:text-text">Mac (Intel)</a>
+          </p>
           <p className="mt-auto pt-5 text-xs leading-relaxed text-text-muted">
             {t.smart}
           </p>

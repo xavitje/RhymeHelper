@@ -11,12 +11,12 @@ import { alternates, href } from '../i18n/routes';
 
 const T = {
   en: {
-    metaDesc: 'Answers about Rhyme Helper: price, Pro, license keys, languages, offline use, Cloud Sync and installing on Windows.',
+    metaDesc: 'Answers about Rhyme Helper: price, Pro, license keys, languages, offline use, Cloud Sync and installing on Windows and Mac.',
     title: 'Questions,', accent: 'answered.', leadA: 'The short answers. For how-tos, see the', docs: 'docs',
     none: 'Didn’t find your answer?', mail: 'Mail us and we’ll get back to you.', email: 'Email us',
   },
   nl: {
-    metaDesc: 'Antwoorden over Rhyme Helper: prijs, Pro, licentiesleutels, talen, offline gebruik, Cloud Sync en installeren op Windows.',
+    metaDesc: 'Antwoorden over Rhyme Helper: prijs, Pro, licentiesleutels, talen, offline gebruik, Cloud Sync en installeren op Windows en Mac.',
     title: 'Vragen,', accent: 'beantwoord.', leadA: 'De korte antwoorden. Voor uitleg over de app, zie de', docs: 'handleiding',
     none: 'Staat je vraag er niet bij?', mail: 'Mail ons, dan krijg je snel antwoord.', email: 'Mail ons',
   },
