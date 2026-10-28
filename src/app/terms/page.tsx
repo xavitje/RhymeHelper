@@ -3,6 +3,7 @@ import { DocHeader, Prose } from '../../components/docs/DocPage';
 import { Container } from '../../components/ui';
 import { LEGAL_UPDATED } from '../../content/legal';
 import { alternates } from '../../i18n/routes';
+import { BUSINESS } from '../../config';
 
 export const metadata: Metadata = {
   title: 'Terms of service',
@@ -16,8 +17,19 @@ export default function TermsOfService() {
       <DocHeader lang="en" crumb="Terms of service" title="Terms of service" lead={<span className="text-sm">Last updated: {LEGAL_UPDATED}</span>} />
       <Prose>
         <p>
-          Please read these Terms of Service (“Terms”) carefully before using the Rhyme Helper application (the “Service”) operated by
-          Rhyme Helper (“us”, “we” or “our”). These Terms comply with the consumer protection laws of the European Union.
+          Please read these Terms of Service (“Terms”) carefully before using the Rhyme Helper application (the “Service”). Rhyme Helper is run by{' '}
+          {BUSINESS.legalName}, an independent business in the Netherlands{BUSINESS.kvk && <> (Chamber of Commerce no. {BUSINESS.kvk})</>} (“us”, “we” or “our”).
+          These Terms comply with the consumer protection laws of the European Union. Dutch law applies, without taking away the protection that the law
+          of the country where you live gives you as a consumer.
+        </p>
+        <p>
+          <strong>Who you buy from.</strong> Rhyme Helper Pro and Cloud Sync are sold by Lemon Squeezy, which acts as reseller (“Merchant of Record”).
+          When you buy, your purchase contract is with Lemon Squeezy and their{' '}
+          <a href="https://www.lemonsqueezy.com/buyer-terms" target="_blank" rel="noopener">buyer terms</a> apply to payment, invoices and refunds.
+          These Terms apply to your use of the software and Cloud Sync.
+        </p>
+        <p>
+          <strong>Age.</strong> You must be 16 or older to create an account or buy Pro or Cloud Sync, or have permission from a parent or guardian.
         </p>
 
         <h2>1. License grant</h2>

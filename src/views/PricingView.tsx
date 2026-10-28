@@ -19,7 +19,7 @@ const T = {
     secure: 'Secure checkout by Lemon Squeezy.',
     addon: 'Optional add-on',
     cloudBody: 'Your songs in a cloud library, on every computer you write on. Changes sync in seconds, offline edits catch up later, and deleted songs can be restored for 30 days. Works with Free and Pro. You need a free account.',
-    month: ' / month', setup: 'Set up in your account',
+    month: ' / month', renews: 'Renews monthly until you cancel. Cancel any time in your account.', setup: 'Set up in your account',
     compare: 'Compare', compareAccent: 'everything.', caption: 'What is included in Free and Pro', feature: 'Feature',
     incl: (p: string) => `Included in ${p}`, notIn: (p: string) => `Not in ${p}`,
     before: 'Before you', beforeAccent: 'buy.',
@@ -35,7 +35,7 @@ const T = {
     secure: 'Veilig afrekenen via Lemon Squeezy.',
     addon: 'Optionele uitbreiding',
     cloudBody: 'Je liedjes in een cloudbibliotheek, op elke computer waarop je schrijft. Wijzigingen staan binnen seconden overal, offline werk wordt later bijgewerkt en verwijderde liedjes kun je 30 dagen terugzetten. Werkt met Free en Pro. Je hebt een gratis account nodig.',
-    month: ' / maand', setup: 'Instellen in je account',
+    month: ' / maand', renews: 'Verlengt elke maand tot je opzegt. Opzeggen kan altijd in je account.', setup: 'Instellen in je account',
     compare: 'Alles', compareAccent: 'vergeleken.', caption: 'Wat zit er in Free en Pro', feature: 'Functie',
     incl: (p: string) => `Zit in ${p}`, notIn: (p: string) => `Niet in ${p}`,
     before: 'Voordat je', beforeAccent: 'koopt.',
@@ -99,6 +99,7 @@ export function PricingView({ lang }: { lang: Lang }) {
             </div>
             <div className="flex shrink-0 items-center gap-4 sm:flex-col sm:items-end sm:gap-2">
               <p className="text-lg font-semibold">{fmtPrice(lang, APP_CONFIG.CLOUD_SYNC_PRICE)}<span className="text-sm font-normal text-text-muted">{t.month}</span></p>
+              <p className="max-w-[15rem] text-xs text-text-muted sm:text-right">{t.renews}</p>
               <ButtonLink href={href(lang, 'account')} variant="secondary" size="sm">{t.setup}</ButtonLink>
             </div>
           </div>

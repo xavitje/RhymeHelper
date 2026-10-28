@@ -73,3 +73,15 @@ export function proPrice(now: Date = new Date()): ProPrice {
 
 /** Prijs in Nederlandse notatie: €9.99 → €9,99. */
 export const nlPrice = (p: string) => p.replace('.', ',');
+
+/**
+ * Bedrijfsgegevens (verplicht op de website, art. 3:15d BW). Vul in zoals ingeschreven bij de KvK.
+ * Lege velden worden niet getoond.
+ */
+export const BUSINESS = {
+  legalName: 'Rafi el Idrissi',
+  tradeName: 'Rhyme Helper',
+  kvk: '',
+  vat: '', // btw-identificatienummer, bijv. NL000000000B01
+  address: '', // vestigingsadres zoals bij de KvK, bijv. 'Straat 1, 1234 AB Plaats'
+};
