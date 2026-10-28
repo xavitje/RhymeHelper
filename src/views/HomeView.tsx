@@ -3,17 +3,17 @@ import type { ReactNode } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import {
-  ArrowRight, Check, Cloud, Columns2, Command, History, Languages, Maximize2, Printer, StickyNote,
+  ArrowRight, Check, HardDrive, History, Languages, Maximize2, PenLine, Play, StickyNote, WifiOff,
 } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
-import { APP_CONFIG, SITE, proPrice } from '../config';
+import { SITE, proPrice } from '../config';
 import { getFaqs } from '../content/faq';
 import { FadeIn } from '../components/FadeIn';
 import { PlanCards } from '../components/PlanCards';
 import { GetAppButton } from '../components/GetAppButton';
 import { FaqList } from '../components/home/FaqList';
 import { HeroDemo } from '../components/home/HeroDemo';
-import { Badge, ButtonLink, Container, Kbd, RhymeStrip, RhymeWord, Section, SectionHeading } from '../components/ui';
+import { Badge, ButtonLink, Container, Kbd, LogoMark, RhymeStrip, RhymeWord, Section, SectionHeading } from '../components/ui';
 import type { Lang } from '../i18n/routes';
 import { alternates, href } from '../i18n/routes';
 import { fmtPrice } from '../i18n/ui';
@@ -34,7 +34,6 @@ const link = 'text-iris-text underline decoration-iris-text/40 underline-offset-
 
 function content(lang: Lang) {
   const pro = fmtPrice(lang, proPrice().price);
-  const cloud = fmtPrice(lang, APP_CONFIG.CLOUD_SYNC_PRICE);
   if (lang === 'nl') {
     return {
       metaTitle: 'Songteksten schrijven met rijmen en lettergrepen',
@@ -43,7 +42,13 @@ function content(lang: Lang) {
       lead: 'De schrijfapp voor songteksten en raps. Rijmen, lettergrepen per regel en je beat, samen in één rustig venster. In het Nederlands en het Engels.',
       seePro: 'Bekijk Pro',
       heroMeta: `Windows 10 en 11 · Altijd gratis · Pro ${pro} eenmalig`,
-      featTitle: 'Gemaakt om te schrijven,', featAccent: 'verder niets.',
+      problemEyebrow: 'Hoe het nu vaak gaat',
+      problemTitle: 'Vijf tabbladen voor één couplet.',
+      problemLead: 'Een rijmsite, een lettergreepteller, een synoniemenlijst, je notities en een beat op YouTube. Bij elke wissel ben je de regel kwijt die je in je hoofd had.',
+      problemTabs: ['rijmwoorden op stil', 'lettergrepen tellen', 'synoniemen nacht', 'Notities: couplet 2', 'donkere piano type beat'],
+      problemAfter: 'Rhyme Helper zet het allemaal in de pagina waarop je schrijft.',
+      problemTabAfter: 'Ochtendlicht · Rhyme Helper',
+      featTitle: 'Alles in één venster.', featAccent: '',
       featLead: 'Alles waar je naar grijpt als je een lied schrijft, op de pagina waarop je schrijft.',
       spotlights: [
         { id: 'rhymes', eyebrow: 'Rijmen', title: 'Rijmen precies daar', accent: 'waar je schrijft.',
@@ -59,16 +64,20 @@ function content(lang: Lang) {
           points: [<>Afspelen en pauzeren met <Kbd keys={['Ctrl', 'Space']} /></>, <>Loopen, tijdstempels zetten en gesynchroniseerde tekst exporteren als .lrc</>, <>Je tekst opslaan in de MP3 zelf</>],
           image: { ...IMG.studio, alt: 'Het refrein van een lied met de Studio-speler eronder: een afspeelknop, de beat “Late Night 92bpm”, een golfvorm en de tijd 0:09 van 0:41.' } },
       ] as Spotlight[],
-      moreTitle: 'En alles', moreAccent: 'eromheen.', moreLead: 'De kleine dingen waardoor je blijft schrijven in plaats van zoeken.',
+      aiEyebrow: 'Jouw woorden',
+      aiTitle: 'Jij schrijft.', aiAccent: 'De app helpt.',
+      aiLead: 'Rhyme Helper schrijft nooit regels voor je. Hij laat opties zien, telt en kleurt. Elke regel op de pagina is van jou.',
+      aiPoints: [
+        { icon: PenLine, title: 'Suggesties, geen ghostwriter', body: 'Rijmen en synoniemen zijn woordenlijsten. Ook de AI-rijmen in Pro stellen alleen woorden voor.' },
+        { icon: HardDrive, title: 'Je teksten blijven bij jou', body: 'Zonder Cloud Sync verlaten je liedjes je eigen computer niet.' },
+        { icon: WifiOff, title: 'Werkt offline', body: 'Schrijven, opslaan en lettergrepen tellen werken zonder internet.' },
+      ] as Feature[],
+      moreTitle: 'Kleine dingen,', moreAccent: 'zodat je blijft schrijven.', moreLead: '',
       features: [
         { icon: History, title: 'Autosave en geschiedenis', body: 'Elke wijziging wordt binnen een seconde bewaard. Ga terug naar elke eerdere versie.' },
         { icon: Maximize2, title: 'Focusmodus', body: <>Verberg alles behalve je tekst met <Kbd keys={['F11']} />.</> },
-        { icon: Command, title: 'Opdrachtenpalet', body: <>Vind elk lied, rijm of commando met <Kbd keys={['Ctrl', 'K']} />.</> },
         { icon: StickyNote, title: 'Notities', body: 'Parkeer alternatieve regels en losse ideeën naast je lied, niet erin.' },
         { icon: Languages, title: 'Nederlands en Engels', body: 'De app, de rijmen en het tellen van lettergrepen werken in allebei.' },
-        { icon: Printer, title: 'Printen en PDF', body: 'Nette tekstvellen met regelnummers, zonder knoppen of menu’s.' },
-        { icon: Columns2, title: 'Tabbladen en gesplitst scherm', body: 'Houd meerdere liedjes open en schrijf er twee naast elkaar.', pro: true },
-        { icon: Cloud, title: 'Cloud Sync', body: `Begin een lied op de ene computer, maak het af op de andere. Je cloudbibliotheek synchroniseert binnen seconden. Optioneel, ${cloud} per maand.` },
       ] as Feature[],
       whoTitle: 'Voor iedereen', whoAccent: 'die op een beat schrijft.',
       whoLyric: <>Ik schrijf tot de ochtend, de stad is nog <RhymeWord family={1}>stil</RhymeWord>,<br />elk woord op papier is precies wat ik <RhymeWord family={1}>wil</RhymeWord>.</>,
@@ -92,7 +101,13 @@ function content(lang: Lang) {
     lead: 'The writing app for lyrics. Rhymes, syllable counts and your beat, together in one quiet window.',
     seePro: 'See Pro',
     heroMeta: `Windows 10 and 11 · Free forever · Pro ${pro} one-time`,
-    featTitle: 'Built for writing,', featAccent: 'nothing else.',
+    problemEyebrow: 'How it usually goes',
+    problemTitle: 'Five tabs for one verse.',
+    problemLead: 'A rhyme site, a syllable counter, a thesaurus, your notes and a beat on YouTube. Every switch costs you the line you were holding in your head.',
+    problemTabs: ['rhymes for light', 'syllable counter', 'synonyms for night', 'Notes: verse 2 ideas', 'dark piano type beat'],
+    problemAfter: "Rhyme Helper puts all of it in the page you're writing on.",
+    problemTabAfter: 'Midnight Pen · Rhyme Helper',
+    featTitle: 'Everything in one window.', featAccent: '',
     featLead: "Everything you reach for while writing a song, inside the page you're writing on.",
     spotlights: [
       { id: 'rhymes', eyebrow: 'Rhymes', title: 'Rhymes right where', accent: 'you write.',
@@ -108,16 +123,20 @@ function content(lang: Lang) {
         points: [<>Play and pause with <Kbd keys={['Ctrl', 'Space']} /></>, <>Loop, set timestamps and export synced lyrics as .lrc</>, <>Save your lyrics into the MP3 itself</>],
         image: { ...IMG.studio, alt: 'The chorus of a song with the Studio player below it: a play button, the beat “Late Night 92bpm”, a waveform and the time 0:09 of 0:41.' } },
     ] as Spotlight[],
-    moreTitle: 'And everything', moreAccent: 'around it.', moreLead: 'The small things that keep you writing instead of searching.',
+    aiEyebrow: 'Your words',
+    aiTitle: 'You write.', aiAccent: 'The app helps.',
+    aiLead: 'Rhyme Helper never writes lines for you. It shows options, counts and colours. Every bar on the page is yours.',
+    aiPoints: [
+      { icon: PenLine, title: 'Suggestions, not ghostwriting', body: 'Rhymes and synonyms are word lists. Even the AI rhymes in Pro only suggest words.' },
+      { icon: HardDrive, title: 'Your lyrics stay with you', body: 'Without Cloud Sync, your songs never leave your own computer.' },
+      { icon: WifiOff, title: 'Works offline', body: 'Writing, saving and syllable counts work without an internet connection.' },
+    ] as Feature[],
+    moreTitle: 'Small things', moreAccent: 'that keep you writing.', moreLead: '',
     features: [
       { icon: History, title: 'Autosave and history', body: 'Every change is saved within a second. Go back to any earlier version.' },
       { icon: Maximize2, title: 'Focus mode', body: <>Hide everything but your lyrics with <Kbd keys={['F11']} />.</> },
-      { icon: Command, title: 'Command palette', body: <>Find any song, rhyme or action with <Kbd keys={['Ctrl', 'K']} />.</> },
       { icon: StickyNote, title: 'Notes', body: 'Park alternate bars and loose ideas next to your song, not in it.' },
       { icon: Languages, title: 'English and Dutch', body: 'The app, the rhymes and the syllable counts work in both.' },
-      { icon: Printer, title: 'Print and PDF', body: 'Clean lyric sheets with line numbers, without any app chrome.' },
-      { icon: Columns2, title: 'Tabs and split screen', body: 'Keep several songs open and write two side by side.', pro: true },
-      { icon: Cloud, title: 'Cloud Sync', body: `Start a song on one computer, finish it on another. Your cloud library syncs in seconds. Optional, ${cloud} a month.` },
     ] as Feature[],
     whoTitle: 'For everyone', whoAccent: 'who writes to a beat.',
     whoLyric: <>I been up all <RhymeWord family={1}>night</RhymeWord> chasing the <RhymeWord family={1}>light</RhymeWord>,<br />every line on the <RhymeWord family={2}>page</RhymeWord> feels like a <RhymeWord family={2}>stage</RhymeWord>.</>,
@@ -201,6 +220,37 @@ export function HomeView({ lang }: { lang: Lang }) {
         </Container>
       </section>
 
+      {/* Het probleem */}
+      <Section className="border-t border-border">
+        <div className="grid items-center gap-12 lg:grid-cols-[minmax(0,5fr)_minmax(0,6fr)] lg:gap-16">
+          <SectionHeading eyebrow={c.problemEyebrow} title={c.problemTitle} lead={c.problemLead} />
+          <div className="min-w-0">
+            <div aria-hidden className="rounded-xl border border-border bg-surface p-2 sm:p-3">
+              <div className="flex gap-1">
+                {c.problemTabs.map((t, k) => (
+                  <span key={t} className={`${k > 2 ? 'hidden sm:flex' : 'flex'} min-w-0 flex-1 items-center gap-1.5 rounded-md px-2 py-2 text-[11px] text-text-muted sm:text-xs ${k === 2 ? 'bg-raised text-text' : 'bg-bg/60'}`}>
+                    {k === 4 ? <Play strokeWidth={1.75} className="size-3 shrink-0 text-text-faint" /> : <span className="size-1.5 shrink-0 rounded-full bg-text-faint" />}
+                    <span className="truncate">{t}</span>
+                  </span>
+                ))}
+              </div>
+              <div className="mt-2 space-y-2 rounded-md bg-bg/60 p-4">
+                <span className="block h-2 w-3/4 rounded-full bg-raised" />
+                <span className="block h-2 w-1/2 rounded-full bg-raised" />
+                <span className="block h-2 w-2/3 rounded-full bg-raised" />
+              </div>
+            </div>
+            <div aria-hidden className="mx-auto my-4 h-8 w-px bg-gradient-to-b from-border to-iris/70" />
+            <div aria-hidden className="rounded-xl border border-iris/60 bg-surface p-2 shadow-[0_0_0_1px_rgb(124_108_255/0.25)] sm:p-3">
+              <span className="flex items-center gap-2 rounded-md bg-raised px-3 py-2 text-xs font-medium text-text sm:text-[13px]">
+                <LogoMark size={16} /> {c.problemTabAfter}
+              </span>
+            </div>
+            <p className="mt-5 text-center text-[17px] text-text">{c.problemAfter}</p>
+          </div>
+        </div>
+      </Section>
+
       {/* Uitgelicht */}
       <Section id="features" className="scroll-mt-16">
         <SectionHeading title={c.featTitle} accent={c.featAccent} lead={c.featLead} />
@@ -231,6 +281,24 @@ export function HomeView({ lang }: { lang: Lang }) {
               </div>
             </FadeIn>
           ))}
+        </div>
+      </Section>
+
+      {/* Jij schrijft */}
+      <Section className="border-t border-border">
+        <div className="grid gap-12 lg:grid-cols-[minmax(0,5fr)_minmax(0,6fr)] lg:gap-16">
+          <SectionHeading eyebrow={c.aiEyebrow} title={c.aiTitle} accent={c.aiAccent} lead={c.aiLead} />
+          <ul className="grid gap-px self-center overflow-hidden rounded-xl border border-border bg-border">
+            {c.aiPoints.map((p) => (
+              <li key={p.title} className="flex gap-4 bg-surface p-6">
+                <p.icon aria-hidden strokeWidth={1.75} className="mt-0.5 size-5 shrink-0 text-iris-text" />
+                <div>
+                  <h3 className="text-[17px] font-semibold tracking-[-0.01em]">{p.title}</h3>
+                  <p className="mt-1 text-[15px] leading-relaxed text-text-muted">{p.body}</p>
+                </div>
+              </li>
+            ))}
+          </ul>
         </div>
       </Section>
 
