@@ -10,7 +10,7 @@ export const UI = {
     footer: {
       tagline: 'The writing app for lyrics, with rhymes, syllables and your beat in one place.',
       product: 'Product', help: 'Help', legal: 'Legal',
-      features: 'Features', pricing: 'Pricing', download: 'Download for Windows', downloadMac: 'Download for Mac',
+      features: 'Features', pricing: 'Pricing', download: 'Download for Windows', downloadMac: 'Download for Mac', webApp: 'Open in your browser',
       docs: 'Docs', faq: 'FAQ', contact: 'Contact',
       privacy: 'Privacy policy', terms: 'Terms of service',
       rights: (y: number) => `© ${y} Rhyme Helper. Built for creatives by creatives.`,
@@ -32,7 +32,7 @@ export const UI = {
     footer: {
       tagline: 'De schrijfapp voor songteksten, met rijmen, lettergrepen en je beat op één plek.',
       product: 'Product', help: 'Hulp', legal: 'Juridisch',
-      features: 'Functies', pricing: 'Prijzen', download: 'Download voor Windows', downloadMac: 'Download voor Mac',
+      features: 'Functies', pricing: 'Prijzen', download: 'Download voor Windows', downloadMac: 'Download voor Mac', webApp: 'Open in je browser',
       docs: 'Handleiding', faq: 'FAQ', contact: 'Contact',
       privacy: 'Privacyverklaring', terms: 'Voorwaarden',
       rights: (y: number) => `© ${y} Rhyme Helper. Gemaakt door makers, voor makers.`,
