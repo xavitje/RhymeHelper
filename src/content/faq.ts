@@ -4,7 +4,7 @@ import { fmtPrice } from '../i18n/ui';
 
 export type FaqId =
   | 'free' | 'oneTime' | 'languages' | 'offline' | 'licenseKey' | 'devices' | 'cloudSync'
-  | 'conflicts' | 'cloudOffline' | 'stopCloud' | 'restore' | 'smartscreen' | 'mac';
+  | 'conflicts' | 'cloudOffline' | 'stopCloud' | 'restore' | 'smartscreen' | 'mac' | 'web';
 export type FaqItem = { id?: FaqId; question: string; answer: string };
 
 /** FAQ in beide talen. Functie, zodat de prijs na de launch-einddatum klopt. Homepage toont de eerste vijf. */
@@ -26,6 +26,7 @@ export function getFaqs(lang: Lang = 'en'): FaqItem[] {
       { id: 'restore', question: 'Ik heb per ongeluk een lied verwijderd. Kan ik het terugkrijgen?', answer: 'Met Cloud Sync wel. Verwijderde liedjes blijven 30 dagen in Onlangs verwijderd. Klik in de app op de Cloud-knop in de bovenbalk en kies Onlangs verwijderd om ze terug te zetten.' },
       { id: 'smartscreen', question: 'Windows toont een blauwe SmartScreen-melding. Is dat veilig?', answer: 'Ja. Rhyme Helper is nieuw en ons code-signing-certificaat wordt nog verwerkt, dus Windows herkent de installer nog niet. Klik op “Meer informatie” en dan op “Toch uitvoeren” om te installeren.' },
       { id: 'mac', question: 'Is er een Mac-versie?', answer: 'Ja. Rhyme Helper werkt op macOS 12 en nieuwer, op Macs met Apple Silicon (M1 en nieuwer) en met een Intel-chip. Open deze site op je Mac en klik op de downloadknop. Open het .dmg-bestand en sleep Rhyme Helper naar Apps. De Mac-versie is door Apple gecontroleerd, dus hij opent zonder waarschuwing, en hij werkt zichzelf bij.' },
+      { id: 'web', question: 'Werkt het in mijn browser of op mijn telefoon?', answer: 'Ja. Open app.rhymehelper.store in elke browser, ook op je telefoon of tablet. Je kunt hem daar als app op je beginscherm zetten en hij werkt ook offline. Met hetzelfde account heb je Pro overal, en met Cloud Sync staan je liedjes op al je apparaten.' },
     ];
   }
   return [
@@ -42,5 +43,6 @@ export function getFaqs(lang: Lang = 'en'): FaqItem[] {
     { id: 'restore', question: 'I deleted a song by accident. Can I get it back?', answer: 'With Cloud Sync, yes. Deleted songs stay in Recently deleted for 30 days. In the app, click the Cloud button in the top bar and choose Recently deleted to restore them.' },
     { id: 'smartscreen', question: 'Windows shows a blue SmartScreen warning. Is that safe?', answer: 'Yes. Rhyme Helper is new and our code-signing certificate is still being processed, so Windows does not recognise the installer yet. Click "More info" and then "Run anyway" to install.' },
     { id: 'mac', question: 'Is there a Mac version?', answer: 'Yes. Rhyme Helper runs on macOS 12 and newer, on Macs with Apple Silicon (M1 and newer) and with an Intel chip. Open this site on your Mac and click the download button. Open the .dmg file and drag Rhyme Helper to Applications. The Mac version is checked by Apple, so it opens without a warning, and it updates itself.' },
+    { id: 'web', question: 'Does it work in my browser or on my phone?', answer: 'Yes. Open app.rhymehelper.store in any browser, also on your phone or tablet. You can add it to your home screen as an app and it works offline too. With the same account you have Pro everywhere, and with Cloud Sync your songs are on all your devices.' },
   ];
 }

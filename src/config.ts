@@ -10,6 +10,8 @@ export const APP_CONFIG = {
   WINDOWS_DOWNLOAD_URL: '/downloads/windows',
   /** Apple Silicon (M1 en nieuwer). Intel-Macs: MAC_INTEL_DOWNLOAD_URL. */
   MAC_DOWNLOAD_URL: '/downloads/mac',
+  /** De webversie (PWA): werkt in elke browser, ook op telefoons. */
+  WEB_APP_URL: 'https://app.rhymehelper.store',
   MAC_INTEL_DOWNLOAD_URL: '/downloads/mac?arch=x64',
   LEMON_SQUEEZY_CHECKOUT_URL: 'https://checkout.rhymehelper.store/checkout/buy/85bfb619-30c6-4b30-89c9-14830c1ce986?embed=1',
   CLOUD_SYNC_CHECKOUT_URL: 'https://checkout.rhymehelper.store/checkout/buy/be44a7ad-1f20-47a7-a50d-142100e26651',

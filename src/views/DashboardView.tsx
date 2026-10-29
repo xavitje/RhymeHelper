@@ -183,6 +183,8 @@ export function DashboardView() {
             <a href={APP_CONFIG.MAC_DOWNLOAD_URL} className="underline underline-offset-2 hover:text-text">Mac (Apple Silicon)</a>
             {' · '}
             <a href={APP_CONFIG.MAC_INTEL_DOWNLOAD_URL} className="underline underline-offset-2 hover:text-text">Mac (Intel)</a>
+            {' · '}
+            <a href={APP_CONFIG.WEB_APP_URL} className="underline underline-offset-2 hover:text-text">{lang === 'nl' ? 'In je browser' : 'In your browser'}</a>
           </p>
           <p className="mt-auto pt-5 text-xs leading-relaxed text-text-muted">
             {t.smart}
