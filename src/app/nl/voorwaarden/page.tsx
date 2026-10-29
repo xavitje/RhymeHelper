@@ -4,6 +4,7 @@ import { DocHeader, Prose } from '../../../components/docs/DocPage';
 import { Container } from '../../../components/ui';
 import { LEGAL_UPDATED_NL } from '../../../content/legal';
 import { alternates } from '../../../i18n/routes';
+import { BUSINESS } from '../../../config';
 
 export const metadata: Metadata = {
   title: 'Gebruiksvoorwaarden',
@@ -17,9 +18,21 @@ export default function Voorwaarden() {
       <DocHeader lang="nl" crumb="Voorwaarden" title="Gebruiksvoorwaarden" lead={<span className="text-sm">Laatst bijgewerkt: {LEGAL_UPDATED_NL}</span>} />
       <Prose>
         <p>
-          Lees deze gebruiksvoorwaarden (“Voorwaarden”) goed door voordat je de Rhyme Helper-app (de “Dienst”) gebruikt, die wordt aangeboden door
-          Rhyme Helper (“wij” of “ons”). Deze Voorwaarden volgen het consumentenrecht van de Europese Unie.
+          Lees deze gebruiksvoorwaarden (“Voorwaarden”) goed door voordat je de Rhyme Helper-app (de “Dienst”) gebruikt, die wordt aangeboden door{' '}
+          {BUSINESS.legalName}, een onderneming in Nederland met de handelsnaam {BUSINESS.tradeName}{BUSINESS.kvk && <> (KvK-nummer {BUSINESS.kvk})</>} (“wij” of “ons”).
+          Deze Voorwaarden volgen het consumentenrecht van de Europese Unie. Nederlands recht is van toepassing, zonder dat je de bescherming verliest die het
+          recht van je eigen land je als consument geeft.
           Dit is een vertaling van de <Link href="/terms">Engelse voorwaarden</Link>; beide versies hebben dezelfde inhoud.
+        </p>
+
+        <p>
+          <strong>Van wie je koopt.</strong> Rhyme Helper Pro en Cloud Sync worden verkocht door Lemon Squeezy, als wederverkoper (“Merchant of Record”).
+          Je koopovereenkomst sluit je dus met Lemon Squeezy, en hun{' '}
+          <a href="https://www.lemonsqueezy.com/buyer-terms" target="_blank" rel="noopener">voorwaarden voor kopers</a> gelden voor betaling, facturen en terugbetalingen.
+          Deze Voorwaarden gelden voor het gebruik van de software en Cloud Sync.
+        </p>
+        <p>
+          <strong>Leeftijd.</strong> Je moet 16 jaar of ouder zijn om een account te maken of Pro of Cloud Sync te kopen, of toestemming hebben van een ouder of voogd.
         </p>
 
         <h2>1. Licentie</h2>

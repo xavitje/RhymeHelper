@@ -1,7 +1,7 @@
 "use client";
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { APP_CONFIG, SITE } from '../config';
+import { BUSINESS, APP_CONFIG, SITE } from '../config';
 import { href, switchPath } from '../i18n/routes';
 import { ui } from '../i18n/ui';
 import { useLang } from '../i18n/useLang';
@@ -70,7 +70,14 @@ export default function Footer() {
         ))}
       </div>
       <div className="mx-auto flex w-full max-w-[1200px] flex-col gap-2 border-t border-border px-5 py-6 text-[13px] text-text-muted sm:flex-row sm:items-center sm:justify-between sm:px-8">
-        <p>{t.rights(new Date().getFullYear())}</p>
+        <div>
+          <p>{t.rights(new Date().getFullYear())}</p>
+          {BUSINESS.kvk && (
+            <p className="mt-1">
+              {[BUSINESS.tradeName + ' · ' + BUSINESS.legalName, BUSINESS.address, `KvK ${BUSINESS.kvk}`, BUSINESS.vat && `${lang === 'nl' ? 'btw' : 'VAT'} ${BUSINESS.vat}`].filter(Boolean).join(' · ')}
+            </p>
+          )}
+        </div>
         <div className="flex flex-wrap items-center gap-x-5 gap-y-2">
           <Link href={switchPath(pathname, other)} hrefLang={other} lang={other} className="font-medium transition-colors hover:text-text">
             {ui(lang).langSwitch.toOther}
