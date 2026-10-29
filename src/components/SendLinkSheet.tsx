@@ -12,8 +12,8 @@ export type SheetLang = 'en' | 'nl';
 
 const COPY = {
   en: {
-    title: 'Get Rhyme Helper on your PC',
-    leadMobile: 'Rhyme Helper runs on Windows. We’ll email you the download link, so you can open it on your computer.',
+    title: 'Get Rhyme Helper on your computer',
+    leadMobile: 'Rhyme Helper runs on Windows and Mac. We’ll email you the download link, so you can open it on your computer.',
     leadMac: 'Rhyme Helper runs on Windows for now. We’ll email you the download link for your PC.',
     email: 'Email address',
     mac: 'Email me once when the Mac version is ready',
@@ -22,15 +22,15 @@ const COPY = {
     note: 'We only use your address to send this link, and delete it after 30 days.',
     privacy: 'Privacy',
     doneTitle: 'Check your inbox',
-    done: 'The link is on its way. Open it on your Windows PC. Not there in a few minutes? Check your spam folder.',
+    done: 'The link is on its way. Open it on your computer. Not there in a few minutes? Check your spam folder.',
     close: 'Close',
     errInvalid: 'That email address doesn’t look right. Check it and try again.',
     errLimit: 'You’ve already asked for the link a few times today. Check your inbox and spam folder.',
     errFailed: `Sending didn’t work. Try again later, or email ${SITE.contactEmail}.`,
   },
   nl: {
-    title: 'Rhyme Helper op je pc',
-    leadMobile: 'Rhyme Helper werkt op Windows. We mailen je de downloadlink, zodat je hem op je computer kunt openen.',
+    title: 'Rhyme Helper op je computer',
+    leadMobile: 'Rhyme Helper werkt op Windows en Mac. We mailen je de downloadlink, zodat je hem op je computer kunt openen.',
     leadMac: 'Rhyme Helper werkt voorlopig op Windows. We mailen je de downloadlink voor je pc.',
     email: 'E-mailadres',
     mac: 'Mail me één keer als de Mac-versie er is',
@@ -39,7 +39,7 @@ const COPY = {
     note: 'We gebruiken je adres alleen voor deze link en wissen het na 30 dagen.',
     privacy: 'Privacy',
     doneTitle: 'Kijk in je inbox',
-    done: 'De link is onderweg. Open hem op je Windows-pc. Na een paar minuten nog niets? Kijk in je spammap.',
+    done: 'De link is onderweg. Open hem op je computer. Na een paar minuten nog niets? Kijk in je spammap.',
     close: 'Sluiten',
     errInvalid: 'Dat e-mailadres klopt niet helemaal. Controleer het en probeer opnieuw.',
     errLimit: 'Je hebt de link vandaag al een paar keer aangevraagd. Kijk in je inbox en spammap.',

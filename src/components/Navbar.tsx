@@ -174,7 +174,7 @@ export default function Navbar() {
               </li>
             </ul>
           </nav>
-          <GetAppButton size="lg" fullWidth className="mt-8" label={hasLicense ? (lang === 'nl' ? 'Download voor Windows' : 'Download for Windows') : undefined} />
+          <GetAppButton size="lg" fullWidth className="mt-8" paid={hasLicense} />
           <p className="mt-3 text-center text-sm text-text-muted">{t.priceLine(fmtPrice(lang, proPrice().price))}</p>
           <Link
             href={switchPath(pathname, other)}

@@ -21,6 +21,7 @@ export default function Footer() {
         { href: href(lang, 'features'), label: t.features },
         { href: href(lang, 'pricing'), label: t.pricing },
         { href: APP_CONFIG.WINDOWS_DOWNLOAD_URL, label: t.download, plain: true },
+        { href: APP_CONFIG.MAC_DOWNLOAD_URL, label: t.downloadMac, plain: true },
       ],
     },
     {

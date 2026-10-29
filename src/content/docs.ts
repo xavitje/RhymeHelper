@@ -14,7 +14,7 @@ const DOCS_EN: DocSection[] = [
     title: 'Getting started',
     intro: 'Rhyme Helper is a writing app for lyrics. Your songs save automatically on your computer about a second after you type. You don’t need an account to write.',
     items: [
-      ['Install', 'Download the installer for Windows 10 or 11 and run it. Windows may show a SmartScreen warning the first time: click More info, then Run anyway. The app updates itself after that.'],
+      ['Install', 'Windows 10 or 11: download the installer and run it. Windows may show a SmartScreen warning the first time: click More info, then Run anyway. Mac (macOS 12 or newer): open the .dmg file and drag Rhyme Helper to Applications. The app updates itself after that.'],
       ['New song', 'Press {Ctrl+N} or click New Song in the sidebar. Name it by typing in the big title above your lyrics.'],
       ['Sections', 'Type a line like [Verse 1], [Chorus] or [Bridge]. It becomes a label, and the lines below it are grouped, with their own syllable average.'],
       ['BPM and key', 'Use the small chips above the title to note the tempo and key of the beat.'],
@@ -127,7 +127,7 @@ const DOCS_NL: DocSection[] = [
     title: 'Aan de slag',
     intro: 'Rhyme Helper is een schrijfapp voor songteksten. Je songs worden ongeveer een seconde nadat je typt automatisch op je computer opgeslagen. Je hebt geen account nodig om te schrijven.',
     items: [
-      ['Installeren', 'Download de installer voor Windows 10 of 11 en start hem. Windows laat de eerste keer misschien een SmartScreen-melding zien: klik op Meer informatie en dan op Toch uitvoeren. Daarna werkt de app zichzelf bij.'],
+      ['Installeren', 'Windows 10 of 11: download de installer en start hem. Windows laat de eerste keer misschien een SmartScreen-melding zien: klik op Meer informatie en dan op Toch uitvoeren. Mac (macOS 12 of nieuwer): open het .dmg-bestand en sleep Rhyme Helper naar Apps. Daarna werkt de app zichzelf bij.'],
       ['Nieuw lied', 'Druk op {Ctrl+N} of klik in de zijbalk op Nieuw lied. Geef het een naam door de grote titel boven je tekst in te typen.'],
       ['Secties', 'Typ een regel als [Couplet 1], [Refrein] of [Bridge]. Die wordt een label, en de regels eronder worden gegroepeerd met een eigen gemiddelde aantal lettergrepen.'],
       ['BPM en toonsoort', 'Noteer met de kleine labels boven de titel het tempo en de toonsoort van de beat.'],

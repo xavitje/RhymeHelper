@@ -20,3 +20,26 @@ export function usePlatform(): Platform {
   useEffect(() => setPlatform(detectPlatform()), []);
   return platform;
 }
+
+/**
+ * Apple Silicon of Intel? Chrome en Edge vertellen dat; Safari en Firefox niet.
+ * Dan gaan we uit van Apple Silicon (alle Macs sinds eind 2020) en tonen we ernaast een Intel-link.
+ */
+export type MacArch = 'arm64' | 'x64' | 'unknown';
+
+export function useMacArch(enabled: boolean): MacArch {
+  const [arch, setArch] = useState<MacArch>('unknown');
+  useEffect(() => {
+    if (!enabled) return;
+    const uad = (navigator as Navigator & {
+      userAgentData?: { getHighEntropyValues?: (hints: string[]) => Promise<{ architecture?: string }> };
+    }).userAgentData;
+    uad?.getHighEntropyValues?.(['architecture'])
+      .then(({ architecture }) => {
+        if (architecture === 'arm') setArch('arm64');
+        else if (architecture === 'x86') setArch('x64');
+      })
+      .catch(() => {});
+  }, [enabled]);
+  return arch;
+}

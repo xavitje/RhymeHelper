@@ -8,7 +8,7 @@ import { Container, RhymeStrip, Section, SectionHeading, SongCard } from '../../
 import type { LyricLine } from '../../../components/ui';
 
 const TITLE = 'Sinterklaasgedicht schrijven met rijmwoorden';
-const DESCRIPTION = 'Schrijf je Sinterklaasgedicht in een paar minuten: Rhyme Helper geeft Nederlandse rijmwoorden boven je woord en telt de lettergrepen per regel, zodat je gedicht lekker loopt. Gratis voor Windows.';
+const DESCRIPTION = 'Schrijf je Sinterklaasgedicht in een paar minuten: Rhyme Helper geeft Nederlandse rijmwoorden boven je woord en telt de lettergrepen per regel, zodat je gedicht lekker loopt. Gratis voor Windows en Mac.';
 
 export const metadata: Metadata = {
   title: TITLE,
@@ -43,7 +43,7 @@ const TIPS = [
 
 const FAQ_SINT: FaqItem[] = [
   { question: 'Kost het iets?', answer: 'Nee. Rijmwoorden, lettergrepen tellen en printen zitten in de gratis versie. Geen proefperiode, geen account nodig.' },
-  { question: 'Werkt het op mijn Mac of telefoon?', answer: 'Nog niet. Rhyme Helper is er nu voor Windows 10 en 11.' },
+  { question: 'Werkt het op mijn Mac of telefoon?', answer: 'Op je Mac wel: Rhyme Helper werkt op Windows 10 en 11 en op macOS 12 en nieuwer. Voor telefoons is er nog geen app.' },
   { question: 'Heb ik internet nodig?', answer: 'Nee. De Nederlandse rijmwoorden zitten in de app zelf, dus het werkt ook offline.' },
   { question: 'Schrijft de app het gedicht voor me?', answer: 'Nee, jij schrijft. De app geeft rijmwoorden en telt lettergrepen, zodat jouw gedicht beter loopt. Zo blijft het persoonlijk.' },
 ];
@@ -67,7 +67,7 @@ export default function Sinterklaasgedicht() {
               <div className="mt-9 flex flex-col items-start gap-3 sm:flex-row sm:items-center">
                 <GetAppButton lang="nl" size="lg" />
               </div>
-              <p className="mt-4 text-sm text-text-muted">Gratis · Windows 10 en 11 · Werkt offline</p>
+              <p className="mt-4 text-sm text-text-muted">Gratis · Windows en Mac · Werkt offline</p>
             </div>
             <SongCard title="Voor Sanne" meta="Sinterklaasgedicht · paarrijm" lines={POEM} />
           </div>
@@ -116,7 +116,7 @@ export default function Sinterklaasgedicht() {
                 <h2 className="text-3xl font-semibold leading-[1.1] tracking-[-0.03em] sm:text-[40px]">
                   Sint heeft het druk. <span className="text-text-muted">Jij nu niet meer.</span>
                 </h2>
-                <p className="mt-3 text-[17px] text-text-muted">Gratis voor Windows. Geen account nodig.</p>
+                <p className="mt-3 text-[17px] text-text-muted">Gratis voor Windows en Mac. Geen account nodig.</p>
               </div>
               <GetAppButton lang="nl" variant="pill" size="lg" short />
             </div>

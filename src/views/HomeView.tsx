@@ -10,7 +10,7 @@ import { SITE, proPrice } from '../config';
 import { getFaqs } from '../content/faq';
 import { FadeIn } from '../components/FadeIn';
 import { PlanCards } from '../components/PlanCards';
-import { GetAppButton } from '../components/GetAppButton';
+import { GetAppButton, MacIntelLink } from '../components/GetAppButton';
 import { FaqList } from '../components/home/FaqList';
 import { HeroDemo } from '../components/home/HeroDemo';
 import { MakerBlock } from '../components/home/MakerBlock';
@@ -39,11 +39,11 @@ function content(lang: Lang) {
   if (lang === 'nl') {
     return {
       metaTitle: 'Songteksten schrijven met rijmen en lettergrepen',
-      metaDesc: 'Rhyme Helper is een schrijfapp voor songteksten en raps: Nederlandse en Engelse rijmwoorden, lettergrepen per regel en je beat in één venster. Gratis voor Windows.',
+      metaDesc: 'Rhyme Helper is een schrijfapp voor songteksten en raps: Nederlandse en Engelse rijmwoorden, lettergrepen per regel en je beat in één venster. Gratis voor Windows en Mac.',
       h1: 'Vind het rijm.', h1Accent: 'Houd de flow.',
       lead: 'De schrijfapp voor songteksten en raps. Rijmen, lettergrepen per regel en je beat, samen in één rustig venster. In het Nederlands en het Engels.',
       seePro: 'Bekijk Pro',
-      heroMeta: `Windows 10 en 11 · Altijd gratis · Pro ${pro} eenmalig`,
+      heroMeta: `Windows en Mac · Altijd gratis · Pro ${pro} eenmalig`,
       problemEyebrow: 'Hoe het nu vaak gaat',
       problemTitle: 'Vijf tabbladen voor één couplet.',
       problemLead: 'Een rijmsite, een lettergreepteller, een synoniemenlijst, je notities en een beat op YouTube. Bij elke wissel ben je de regel kwijt die je in je hoofd had.',
@@ -93,7 +93,7 @@ function content(lang: Lang) {
       compareA: 'Vergelijk alles', compareB: 'in Free en Pro.',
       faqTitle: 'Vragen,', faqAccent: 'beantwoord.',
       faqMore: <>Meer in de <Link href={href('nl', 'faq')} className={link}>FAQ</Link> en de <Link href={href('nl', 'docs')} className={link}>handleiding</Link>. Een Sinterklaasgedicht schrijven? <Link href="/nl/sinterklaasgedicht" className={link}>Zo doe je dat</Link>.</>,
-      endTitle: 'Je volgende couplet', endAccent: 'begint hier.', endSub: 'Gratis voor Windows. Geen account nodig.',
+      endTitle: 'Je volgende couplet', endAccent: 'begint hier.', endSub: 'Gratis voor Windows en Mac. Geen account nodig.',
     };
   }
   return {
@@ -102,7 +102,7 @@ function content(lang: Lang) {
     h1: 'Find the rhyme.', h1Accent: 'Keep the flow.',
     lead: 'The writing app for lyrics. Rhymes, syllable counts and your beat, together in one quiet window.',
     seePro: 'See Pro',
-    heroMeta: `Windows 10 and 11 · Free forever · Pro ${pro} one-time`,
+    heroMeta: `Windows and Mac · Free forever · Pro ${pro} one-time`,
     problemEyebrow: 'How it usually goes',
     problemTitle: 'Five tabs for one verse.',
     problemLead: 'A rhyme site, a syllable counter, a thesaurus, your notes and a beat on YouTube. Every switch costs you the line you were holding in your head.',
@@ -152,7 +152,7 @@ function content(lang: Lang) {
     compareA: 'Compare everything', compareB: 'in Free and Pro.',
     faqTitle: 'Questions,', faqAccent: 'answered.',
     faqMore: <>More in the <Link href="/faq" className={link}>FAQ</Link> and the <Link href="/resources" className={link}>docs</Link>.</>,
-    endTitle: 'Your next verse', endAccent: 'starts here.', endSub: 'Free for Windows. No account needed.',
+    endTitle: 'Your next verse', endAccent: 'starts here.', endSub: 'Free for Windows and Mac. No account needed.',
   };
 }
 
@@ -214,6 +214,7 @@ export function HomeView({ lang }: { lang: Lang }) {
               <ButtonLink href={href(lang, 'pricing')} size="lg" variant="secondary" iconRight={ArrowRight}>{c.seePro}</ButtonLink>
             </div>
             <p className="mt-4 text-sm text-text-muted">{c.heroMeta}</p>
+            <MacIntelLink lang={lang} className="mt-1" />
           </div>
 
           <div className="mt-14 sm:mt-20">
