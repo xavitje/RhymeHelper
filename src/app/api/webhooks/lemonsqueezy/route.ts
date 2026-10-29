@@ -120,6 +120,12 @@ export async function POST(req: Request) {
       return NextResponse.json({ success: true, ignored: eventName }, { status: 200 });
     }
 
+    // Cloud Sync cadeau (cloud_sync_comp, handmatig gezet): nooit uitzetten door een abonnements-event.
+    if (userData.app_metadata?.cloud_sync_comp === true && 'cloud_sync_active' in patch) {
+      patch.cloud_sync_active = true;
+      patch.cloud_sync_until = null;
+    }
+
     const appMetadata = { ...(userData.app_metadata || {}), ...patch };
 
     // Compatibiliteit met app 1.3.0 (leest user_metadata).
