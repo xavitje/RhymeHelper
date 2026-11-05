@@ -3,7 +3,7 @@ import type { ReactNode } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import {
-  ArrowRight, Check, HardDrive, History, Languages, Maximize2, PenLine, Play, StickyNote, WifiOff,
+  ArrowRight, Check, Cloud, FileDown, HardDrive, History, Languages, Link2, Maximize2, PenLine, Play, StickyNote, Timer, Users, WifiOff,
 } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
 import { SITE, proPrice } from '../config';
@@ -24,7 +24,7 @@ type Spotlight = {
   id: string; eyebrow: string; title: string; accent: string; body: string; points: ReactNode[];
   image: { src: string; w: number; h: number; alt: string };
 };
-type Feature = { icon: LucideIcon; title: string; body: ReactNode; pro?: boolean };
+type Feature = { icon: LucideIcon; title: string; body: ReactNode; pro?: boolean; tag?: string };
 
 const IMG = {
   rhymes: { src: '/screens/app-rhymes.webp', w: 1720, h: 810 },
@@ -59,11 +59,11 @@ function content(lang: Lang) {
           image: { ...IMG.rhymes, alt: 'Het woord “light” is geselecteerd in de editor. Een klein menu erboven toont rijmen: night, fight, height, tight, bright, flight.' } },
         { id: 'flow', eyebrow: 'Flow', title: 'Elke regel,', accent: 'geteld.',
           body: 'Rhyme Helper telt de lettergrepen van elke regel terwijl je typt en kleurt de woorden die rijmen. Je ziet je flow voordat je hem hardop zegt.',
-          points: [<>Lettergrepen per regel, met een gemiddelde per couplet en refrein</>, <>Rijmschema in kleur: dezelfde kleur is hetzelfde rijm</>, <>BPM en toonsoort bij elk lied</>],
+          points: [<>Lettergrepen per regel, met een gemiddelde per couplet en refrein</>, <>Rijmschema in kleur: dezelfde kleur is hetzelfde rijm</>, <>Met een BPM zie je of elke regel in de maat past, met een metronoom en tik-tempo erbij</>],
           image: { ...IMG.flow, alt: 'Een couplet met lettergrepen per regel (9, 10, 12, 12) en de rijmwoorden light, fight, height en night in amber, de refreinrijmen fold, told en gold in groen.' } },
         { id: 'studio', eyebrow: 'Studio · Pro', title: 'Je beat,', accent: 'gewoon erbij.',
           body: 'Sleep een beat in de app en schrijf terwijl hij speelt. Afspelen en pauzeren met één sneltoets, zonder je tekst te verlaten.',
-          points: [<>Afspelen en pauzeren met <Kbd keys={['Ctrl', 'Space']} /></>, <>Loopen, tijdstempels zetten en gesynchroniseerde tekst exporteren als .lrc</>, <>Je tekst opslaan in de MP3 zelf</>],
+          points: [<>Afspelen en pauzeren met <Kbd keys={['Ctrl', 'Space']} /></>, <>Herkent de BPM van je beat en herhaalt 4 of 8 maten in een lus</>, <>Tijdstempels zetten en gesynchroniseerde tekst exporteren als .lrc</>, <>Je tekst opslaan in de MP3 zelf</>],
           image: { ...IMG.studio, alt: 'Het refrein van een lied met de Studio-speler eronder: een afspeelknop, de beat “Late Night 92bpm”, een golfvorm en de tijd 0:09 van 0:41.' } },
       ] as Spotlight[],
       aiEyebrow: 'Jouw woorden',
@@ -71,7 +71,7 @@ function content(lang: Lang) {
       aiLead: 'Rhyme Helper schrijft nooit regels voor je. Hij laat opties zien, telt en kleurt. Elke regel op de pagina is van jou.',
       aiPoints: [
         { icon: PenLine, title: 'Suggesties, geen ghostwriter', body: 'Rijmen en synoniemen zijn woordenlijsten. Ook de AI-rijmen in Pro stellen alleen woorden voor.' },
-        { icon: HardDrive, title: 'Je teksten blijven bij jou', body: 'Zonder Cloud Sync verlaten je liedjes je eigen computer niet.' },
+        { icon: HardDrive, title: 'Je teksten blijven bij jou', body: 'Zonder Cloud Sync of een deellink verlaten je liedjes je eigen apparaat niet.' },
         { icon: WifiOff, title: 'Werkt offline', body: 'Schrijven, opslaan en lettergrepen tellen werken zonder internet.' },
       ] as Feature[],
       moreTitle: 'Kleine dingen,', moreAccent: 'zodat je blijft schrijven.', moreLead: '',
@@ -80,6 +80,16 @@ function content(lang: Lang) {
         { icon: Maximize2, title: 'Focusmodus', body: <>Verberg alles behalve je tekst met <Kbd keys={['F11']} />.</> },
         { icon: StickyNote, title: 'Notities', body: 'Parkeer alternatieve regels en losse ideeën naast je lied, niet erin.' },
         { icon: Languages, title: 'Nederlands en Engels', body: 'De app, de rijmen en het tellen van lettergrepen werken in allebei.' },
+        { icon: Timer, title: 'Metronoom en tik-tempo', body: 'Een simpele kick-snare op je BPM, of tik het tempo zelf in als je het niet weet.' },
+        { icon: FileDown, title: 'Exporteren', body: 'Maak een nette pdf, een tekstbestand of Markdown van je lied, met regelnummers als je wilt.' },
+      ] as Feature[],
+      togetherEyebrow: 'Nieuw in 1.4',
+      togetherTitle: 'Deel je tekst.', togetherAccent: 'Of schrijf hem samen.',
+      togetherLead: 'Stuur een couplet naar je producer, schrijf live verder met een vriend, of pak je lied op je telefoon weer op waar je op je laptop bleef.',
+      together: [
+        { icon: Link2, title: 'Deellink', body: 'Een alleen-lezen link die iedereen in de browser opent, zonder account of app. Of deel via WhatsApp, mail of het deelmenu van je telefoon.' },
+        { icon: Users, title: 'Samen schrijven', body: 'Stuur een uitnodigingslink en zie elkaar live typen. Wie meedoet heeft alleen een gratis account nodig.', tag: 'Cloud Sync' },
+        { icon: Cloud, title: 'Op al je apparaten', body: 'Je liedjes op je pc, je Mac en je telefoon, binnen seconden bijgewerkt. Aan het icoon zie je waar elk lied vandaan komt.', tag: 'Cloud Sync' },
       ] as Feature[],
       whoTitle: 'Voor iedereen', whoAccent: 'die op een beat schrijft.',
       whoLyric: <>Ik schrijf tot de ochtend, de stad is nog <RhymeWord family={1}>stil</RhymeWord>,<br />elk woord op papier is precies wat ik <RhymeWord family={1}>wil</RhymeWord>.</>,
@@ -118,11 +128,11 @@ function content(lang: Lang) {
         image: { ...IMG.rhymes, alt: 'The word “light” is selected in the editor. A small menu above it shows rhymes: night, fight, height, tight, bright, flight.' } },
       { id: 'flow', eyebrow: 'Flow', title: 'Every line,', accent: 'counted.',
         body: 'Rhyme Helper counts the syllables of every line while you type and colours the words that rhyme. You see your flow before you say it out loud.',
-        points: [<>Syllables per line, with an average per verse and chorus</>, <>Rhyme scheme in colour: the same colour means the same rhyme</>, <>BPM and key on every song</>],
+        points: [<>Syllables per line, with an average per verse and chorus</>, <>Rhyme scheme in colour: the same colour means the same rhyme</>, <>With a BPM set, see whether every line fits the bar, with a metronome and tap tempo</>],
         image: { ...IMG.flow, alt: 'A verse with syllable counts per line (9, 10, 12, 12) and the rhyming words light, fight, height and night marked in amber, the chorus rhymes fold, told and gold in green.' } },
       { id: 'studio', eyebrow: 'Studio · Pro', title: 'Your beat,', accent: 'right there.',
         body: 'Drop a beat into the app and write while it plays. Play and pause with one shortcut, without leaving your lyrics.',
-        points: [<>Play and pause with <Kbd keys={['Ctrl', 'Space']} /></>, <>Loop, set timestamps and export synced lyrics as .lrc</>, <>Save your lyrics into the MP3 itself</>],
+        points: [<>Play and pause with <Kbd keys={['Ctrl', 'Space']} /></>, <>Detects the BPM of your beat and loops 4 or 8 bars</>, <>Set timestamps and export synced lyrics as .lrc</>, <>Save your lyrics into the MP3 itself</>],
         image: { ...IMG.studio, alt: 'The chorus of a song with the Studio player below it: a play button, the beat “Late Night 92bpm”, a waveform and the time 0:09 of 0:41.' } },
     ] as Spotlight[],
     aiEyebrow: 'Your words',
@@ -130,7 +140,7 @@ function content(lang: Lang) {
     aiLead: 'Rhyme Helper never writes lines for you. It shows options, counts and colours. Every bar on the page is yours.',
     aiPoints: [
       { icon: PenLine, title: 'Suggestions, not ghostwriting', body: 'Rhymes and synonyms are word lists. Even the AI rhymes in Pro only suggest words.' },
-      { icon: HardDrive, title: 'Your lyrics stay with you', body: 'Without Cloud Sync, your songs never leave your own computer.' },
+      { icon: HardDrive, title: 'Your lyrics stay with you', body: 'Without Cloud Sync or a share link, your songs never leave your own device.' },
       { icon: WifiOff, title: 'Works offline', body: 'Writing, saving and syllable counts work without an internet connection.' },
     ] as Feature[],
     moreTitle: 'Small things', moreAccent: 'that keep you writing.', moreLead: '',
@@ -139,6 +149,16 @@ function content(lang: Lang) {
       { icon: Maximize2, title: 'Focus mode', body: <>Hide everything but your lyrics with <Kbd keys={['F11']} />.</> },
       { icon: StickyNote, title: 'Notes', body: 'Park alternate bars and loose ideas next to your song, not in it.' },
       { icon: Languages, title: 'English and Dutch', body: 'The app, the rhymes and the syllable counts work in both.' },
+      { icon: Timer, title: 'Metronome and tap tempo', body: 'A simple kick-snare at your BPM, or tap in the tempo yourself when you don’t know it.' },
+      { icon: FileDown, title: 'Export', body: 'Turn your song into a clean PDF, a text file or Markdown, with line numbers if you like.' },
+    ] as Feature[],
+    togetherEyebrow: 'New in 1.4',
+    togetherTitle: 'Share your lyrics.', togetherAccent: 'Or write them together.',
+    togetherLead: 'Send a verse to your producer, keep writing live with a friend, or pick up on your phone where you left off on your laptop.',
+    together: [
+      { icon: Link2, title: 'Share link', body: 'A read-only link anyone can open in a browser, no account or app needed. Or share through WhatsApp, email or your phone’s share menu.' },
+      { icon: Users, title: 'Write together', body: 'Send an invite link and see each other type, live. Anyone who joins only needs a free account.', tag: 'Cloud Sync' },
+      { icon: Cloud, title: 'On all your devices', body: 'Your songs on your PC, your Mac and your phone, updated within seconds. The icon shows where each song comes from.', tag: 'Cloud Sync' },
     ] as Feature[],
     whoTitle: 'For everyone', whoAccent: 'who writes to a beat.',
     whoLyric: <>I been up all <RhymeWord family={1}>night</RhymeWord> chasing the <RhymeWord family={1}>light</RhymeWord>,<br />every line on the <RhymeWord family={2}>page</RhymeWord> feels like a <RhymeWord family={2}>stage</RhymeWord>.</>,
@@ -306,10 +326,27 @@ export function HomeView({ lang }: { lang: Lang }) {
         </div>
       </Section>
 
+      {/* Delen en samen schrijven */}
+      <Section id="together" className="scroll-mt-16 border-t border-border">
+        <SectionHeading eyebrow={c.togetherEyebrow} title={c.togetherTitle} accent={c.togetherAccent} lead={c.togetherLead} />
+        <ul className="mt-12 grid gap-px overflow-hidden rounded-xl border border-border bg-border md:grid-cols-3">
+          {c.together.map((f) => (
+            <li key={f.title} className="bg-surface p-6">
+              <div className="flex items-center justify-between">
+                <f.icon aria-hidden strokeWidth={1.75} className="size-5 text-iris-text" />
+                {f.tag && <Badge>{f.tag}</Badge>}
+              </div>
+              <h3 className="mt-5 text-[17px] font-semibold tracking-[-0.01em]">{f.title}</h3>
+              <p className="mt-1.5 text-[15px] leading-relaxed text-text-muted">{f.body}</p>
+            </li>
+          ))}
+        </ul>
+      </Section>
+
       {/* Alles erbij */}
       <Section className="border-t border-border">
         <SectionHeading title={c.moreTitle} accent={c.moreAccent} lead={c.moreLead} />
-        <ul className="mt-12 grid gap-px overflow-hidden rounded-xl border border-border bg-border sm:grid-cols-2 lg:grid-cols-4">
+        <ul className="mt-12 grid gap-px overflow-hidden rounded-xl border border-border bg-border sm:grid-cols-2 lg:grid-cols-3">
           {c.features.map((f) => (
             <li key={f.title} className="bg-surface p-6">
               <div className="flex items-center justify-between">
