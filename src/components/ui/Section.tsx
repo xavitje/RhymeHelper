@@ -24,7 +24,7 @@ export function SectionHeading({
   return (
     <div className={cn(Tag === 'h1' ? 'max-w-4xl' : 'max-w-2xl', align === 'center' && 'mx-auto text-center', className)}>
       {eyebrow && <p className="mb-4 text-[13px] font-medium text-iris-text">{eyebrow}</p>}
-      <Tag className={cn(Tag === 'h1' ? 'text-5xl sm:text-7xl lg:text-display' : 'text-4xl sm:text-headline', 'font-semibold tracking-[-0.035em] leading-[1.04]')}>
+      <Tag className={cn(Tag === 'h1' ? 'text-5xl sm:text-7xl lg:text-display' : 'text-4xl sm:text-headline', 'font-semibold tracking-[-0.035em] leading-[1.04] hyphens-auto')}>
         {title}
         {accent && <> <span className={accentTone === 'iris' ? 'text-iris-text' : 'text-text-muted'}>{accent}</span></>}
       </Tag>

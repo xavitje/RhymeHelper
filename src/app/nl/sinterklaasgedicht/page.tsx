@@ -57,9 +57,9 @@ export default function Sinterklaasgedicht() {
         <div aria-hidden className="pointer-events-none absolute -top-40 left-1/2 h-[640px] w-[1000px] -translate-x-1/2 bg-[radial-gradient(closest-side,rgb(124_108_255/0.20),transparent)]" />
         <Container className="relative">
           <div className="grid items-center gap-12 lg:grid-cols-[minmax(0,6fr)_minmax(0,5fr)] lg:gap-16">
-            <div>
+            <div className="min-w-0">
               <p className="text-[13px] font-medium text-iris-text">Pakjesavond 5 december</p>
-              <h1 className="mt-4 text-5xl font-semibold leading-[1.04] tracking-[-0.035em] sm:text-6xl">
+              <h1 className="mt-4 text-[clamp(2.1rem,9.5vw,3rem)] font-semibold leading-[1.04] tracking-[-0.035em] hyphens-auto sm:text-6xl">
                 Je Sinterklaasgedicht, <span className="text-iris-text">zonder rijmstress.</span>
               </h1>
               <p className="mt-6 max-w-xl text-lg text-text-muted sm:text-lead">

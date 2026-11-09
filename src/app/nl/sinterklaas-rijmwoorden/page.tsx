@@ -77,7 +77,7 @@ export default async function SinterklaasRijmwoorden() {
           <nav aria-label="Kruimelpad" className="text-sm text-text-muted">
             <Link href="/nl/sinterklaasgedicht" className="hover:text-text">Sinterklaasgedicht</Link> <span aria-hidden>›</span> Rijmwoorden
           </nav>
-          <h1 className="mt-4 max-w-3xl text-4xl font-semibold leading-[1.05] tracking-[-0.035em] sm:text-6xl">
+          <h1 className="mt-4 max-w-3xl text-[clamp(2rem,9vw,2.25rem)] font-semibold leading-[1.05] tracking-[-0.035em] hyphens-auto sm:text-6xl">
             Rijmwoorden voor je <span className="text-iris-text">Sinterklaasgedicht</span>
           </h1>
           <p className="mt-5 max-w-2xl text-lg text-text-muted">
