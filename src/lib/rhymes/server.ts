@@ -22,6 +22,9 @@ export function getNlIndex(): Promise<NlIndex> {
   return indexPromise;
 }
 
+// Woorden die wel in de lijst staan maar raar zijn als rijmwoord op de website (namen, voodoo).
+const NOT_RHYMES = new Set(['joe', 'jo', 'flo', 'bo', 'lou', 'lord', 'griet', 'jood', 'voodoo']);
+
 const SHORT_OK = new Set(['zo', 'nu', 'ja', 'na', 'al', 'nee', 'ik', 'jij', 'wij', 'zij', 'af', 'op', 'in', 'uit', 'om']);
 
 export type RhymeWord = { word: string; syllables: number };
@@ -43,6 +46,7 @@ export async function nlRhymesFor(raw: string, { perfectMax = 60, nearMax = 20 }
       const i = index.byWord.get(x.word);
       const e = i === undefined ? null : index.words[i];
       if (!e || e.lang !== 'nl' || (e.alt && (!qKey || e.key !== qKey)) || x.freq <= 0 || isCoarse(x.word) || x.word.includes(' ')) continue;
+      if (NOT_RHYMES.has(x.word)) continue;
       if (x.word.length <= 2 && !SHORT_OK.has(x.word)) continue; // oh, ho, yo: geen rijmwoorden voor een gedicht
       const plain = x.word.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
       if (seen.has(plain)) continue; // zó naast zo
