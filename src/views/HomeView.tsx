@@ -180,7 +180,7 @@ export function homeMetadata(lang: Lang): Metadata {
   const c = content(lang);
   if (lang === 'en') return { alternates: alternates('home', 'en') };
   return {
-    title: c.metaTitle,
+    title: { absolute: `${c.metaTitle} · ${SITE.name}` },
     description: c.metaDesc,
     alternates: alternates('home', 'nl'),
     openGraph: { title: `${SITE.name} – Vind het rijm. Houd de flow.`, description: c.metaDesc, url: '/nl', locale: 'nl_NL' },
@@ -216,15 +216,46 @@ function FoundingWriters() {
   );
 }
 
+/** Van half oktober tot en met 5 december (pakjesavond): de Sinterklaaslink bovenaan de Nederlandse homepage. */
+function sinterklaasSeason(now = new Date()) {
+  const m = now.getMonth(); const d = now.getDate();
+  return (m === 9 && d >= 15) || m === 10 || (m === 11 && d <= 5);
+}
+
 export function HomeView({ lang }: { lang: Lang }) {
   const c = content(lang);
+  const home = lang === 'nl' ? `${SITE.url}/nl` : SITE.url;
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@graph': [
+      { '@type': 'WebSite', '@id': `${SITE.url}/#website`, url: SITE.url, name: SITE.name, inLanguage: ['en', 'nl'] },
+      {
+        '@type': 'SoftwareApplication',
+        '@id': `${SITE.url}/#app`,
+        name: SITE.name,
+        url: home,
+        description: lang === 'nl' ? c.metaDesc : SITE.description,
+        applicationCategory: 'MultimediaApplication',
+        operatingSystem: 'Windows 10, Windows 11, macOS 12+, Web',
+        inLanguage: ['en', 'nl'],
+        offers: { '@type': 'Offer', price: '0', priceCurrency: 'EUR' },
+        image: `${SITE.url}/og-image.png`,
+      },
+    ],
+  };
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, '\\u003c') }} />
       {/* Hero */}
       <section className="relative overflow-hidden pt-16 sm:pt-24">
         <div aria-hidden className="pointer-events-none absolute -top-40 left-1/2 h-[720px] w-[1100px] -translate-x-1/2 bg-[radial-gradient(closest-side,rgb(124_108_255/0.22),transparent)]" />
         <Container className="relative text-center">
           <div>
+            {lang === 'nl' && sinterklaasSeason() && (
+              <Link href="/nl/sinterklaasgedicht" className="mb-7 inline-flex items-center gap-2 rounded-full border border-iris/40 bg-iris/10 px-4 py-1.5 text-sm text-text transition-colors hover:border-iris/70">
+                Sinterklaasgedicht schrijven? <span className="text-iris-text">Begin hier</span> <ArrowRight aria-hidden className="size-3.5 text-iris-text" />
+              </Link>
+            )}
             <h1 className="mx-auto max-w-4xl text-5xl font-semibold leading-[1.02] tracking-[-0.035em] sm:text-7xl lg:text-display">
               {c.h1} <span className="text-iris-text">{c.h1Accent}</span>
             </h1>

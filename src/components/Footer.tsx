@@ -30,6 +30,10 @@ export default function Footer() {
       links: [
         { href: href(lang, 'docs'), label: t.docs },
         { href: href(lang, 'faq'), label: t.faq },
+        ...(lang === 'nl' ? [
+          { href: '/nl/sinterklaasgedicht', label: 'Sinterklaasgedicht schrijven' },
+          { href: '/nl/sinterklaas-rijmwoorden', label: 'Rijmwoorden Sinterklaas' },
+        ] : []),
         { href: `mailto:${SITE.contactEmail}`, label: t.contact, plain: true },
       ],
     },

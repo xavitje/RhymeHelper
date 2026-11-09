@@ -8,7 +8,6 @@ const PAGES: { key: keyof typeof ROUTES; priority: number; changeFrequency: Freq
   { key: 'pricing', priority: 0.9, changeFrequency: 'monthly' },
   { key: 'docs', priority: 0.7, changeFrequency: 'monthly' },
   { key: 'faq', priority: 0.7, changeFrequency: 'monthly' },
-  { key: 'login', priority: 0.4, changeFrequency: 'yearly' },
   { key: 'privacy', priority: 0.3, changeFrequency: 'yearly' },
   { key: 'terms', priority: 0.3, changeFrequency: 'yearly' },
 ];
@@ -25,5 +24,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
       { url: languages.nl, lastModified: now, changeFrequency: p.changeFrequency, priority: Math.max(0.3, p.priority - 0.1), alternates: { languages } },
     ];
   });
-  return [...pages, { url: `${SITE.url}/nl/sinterklaasgedicht`, lastModified: now, changeFrequency: 'yearly', priority: 0.7 }];
+  return [
+    ...pages,
+    { url: `${SITE.url}/nl/sinterklaasgedicht`, lastModified: now, changeFrequency: 'weekly', priority: 0.9 },
+    { url: `${SITE.url}/nl/sinterklaas-rijmwoorden`, lastModified: now, changeFrequency: 'weekly', priority: 0.9 },
+  ];
 }
