@@ -23,7 +23,7 @@ export function getNlIndex(): Promise<NlIndex> {
 }
 
 // Woorden die wel in de lijst staan maar raar zijn als rijmwoord op de website (namen, voodoo).
-const NOT_RHYMES = new Set(['joe', 'jo', 'flo', 'bo', 'lou', 'lord', 'griet', 'jood', 'voodoo']);
+const NOT_RHYMES = new Set(['joe', 'jo', 'flo', 'bo', 'lou', 'lord', 'griet', 'jood', 'voodoo', 'zoo']);
 
 const SHORT_OK = new Set(['zo', 'nu', 'ja', 'na', 'al', 'nee', 'ik', 'jij', 'wij', 'zij', 'af', 'op', 'in', 'uit', 'om']);
 
