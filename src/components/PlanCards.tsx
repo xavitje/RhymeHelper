@@ -26,7 +26,7 @@ export function PlanCards({ checkout = false, className, headingLevel = 3, lang 
   const regular = fmtPrice(lang, pro.regular);
   return (
     <div className={cn('mx-auto grid max-w-4xl gap-6 md:grid-cols-2', className)}>
-      <div className="flex flex-col rounded-xl border border-border bg-surface p-7">
+      <div className="flex flex-col rounded-xl border border-border bg-surface p-5 sm:p-7">
         <div className="flex items-baseline justify-between">
           <H className="text-xl font-semibold">Free</H>
           <p className="text-2xl font-semibold tracking-[-0.02em]">€0</p>
@@ -40,8 +40,8 @@ export function PlanCards({ checkout = false, className, headingLevel = 3, lang 
         <GetAppButton lang={lang} variant="secondary" size="lg" fullWidth short className="mt-8" />
       </div>
 
-      <div className="flex flex-col rounded-xl border border-iris/60 bg-surface p-7 shadow-[0_0_0_1px_rgb(124_108_255/0.25)]">
-        <div className="flex items-baseline justify-between gap-4">
+      <div className="flex flex-col rounded-xl border border-iris/60 bg-surface p-5 sm:p-7 shadow-[0_0_0_1px_rgb(124_108_255/0.25)]">
+        <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
           <H className="flex items-center gap-2 text-xl font-semibold">Pro {pro.isLaunch && <Badge tone="accent">{t.launch}</Badge>}</H>
           <p className="text-2xl font-semibold tracking-[-0.02em] whitespace-nowrap">
             {price}

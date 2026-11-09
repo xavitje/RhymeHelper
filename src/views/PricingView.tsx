@@ -97,7 +97,7 @@ export function PricingView({ lang }: { lang: Lang }) {
                 </p>
               </div>
             </div>
-            <div className="flex shrink-0 items-center gap-4 sm:flex-col sm:items-end sm:gap-2">
+            <div className="flex shrink-0 flex-wrap items-center gap-4 sm:flex-col sm:flex-nowrap sm:items-end sm:gap-2">
               <p className="text-lg font-semibold">{fmtPrice(lang, APP_CONFIG.CLOUD_SYNC_PRICE)}<span className="text-sm font-normal text-text-muted">{t.month}</span></p>
               <p className="max-w-[15rem] text-xs text-text-muted sm:text-right">{t.renews}</p>
               <ButtonLink href={href(lang, 'account')} variant="secondary" size="sm">{t.setup}</ButtonLink>
