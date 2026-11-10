@@ -1,5 +1,7 @@
 "use client";
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { checkoutPath, readPendingCheckout } from '../lib/checkout';
 import Link from 'next/link';
 import { ArrowRight, Check, Cloud, Copy, Download, Eye, EyeOff, KeyRound, Sparkles } from 'lucide-react';
 import { supabase } from '../lib/supabaseClient';
@@ -54,6 +56,12 @@ function mask(key: string) {
 export function DashboardView() {
   const { user, setUser, loading } = useSessionUser();
   const lang = useLang();
+  const router = useRouter();
+  // Terug na de bevestigingsmail of Google terwijl je aan het afrekenen was: daar verder
+  useEffect(() => {
+    const p = readPendingCheckout();
+    if (p && user) router.replace(checkoutPath(lang, p.kind, p.code || undefined));
+  }, [user, lang, router]);
   const t = T[lang];
   const pro = fmtPrice(lang, proPrice().price);
   const [licenseInput, setLicenseInput] = useState('');

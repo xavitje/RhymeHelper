@@ -10,9 +10,9 @@ const T = {
   en: {
     meta: 'Welcome to Pro',
     steps: [
-      { title: 'Find your license key', body: 'We emailed it to you right after your purchase (from Lemon Squeezy). Can’t find it? Check your spam folder or log in to your dashboard.' },
-      { title: 'Open Rhyme Helper', body: 'Download and install the app if you haven’t yet (Windows or Mac). Windows may show a SmartScreen warning: click More info, then Run anyway.' },
-      { title: 'Activate Pro', body: 'In the app, choose Upgrade to Pro, then “I already have a license key”, and paste your key. That’s it.' },
+      { title: 'Open Rhyme Helper', body: 'In your browser at app.rhymehelper.store (also on your phone), or in the app for Windows or Mac. Windows may show a SmartScreen warning: click More info, then Run anyway.' },
+      { title: 'Log in with the same account', body: 'Pro is linked to the account you just used. Log in with it in the app and Pro turns on by itself.' },
+      { title: 'Not on yet?', body: 'You also got a license key by email (from Lemon Squeezy). In the app, choose Upgrade to Pro, then “I already have a license key”, and paste it.' },
     ],
     paid: 'Payment received', h1: 'Welcome to Pro.', h1b: 'Let’s write.', lead: 'Thanks for supporting Rhyme Helper. Three steps and you’re set.',
     dash: 'Go to your dashboard',
@@ -21,9 +21,9 @@ const T = {
   nl: {
     meta: 'Welkom bij Pro',
     steps: [
-      { title: 'Zoek je licentiesleutel', body: 'We hebben hem direct na je aankoop gemaild (afzender Lemon Squeezy). Kun je hem niet vinden? Kijk in je spammap of log in op je dashboard.' },
-      { title: 'Open Rhyme Helper', body: 'Download en installeer de app als je dat nog niet hebt gedaan (Windows of Mac). Windows kan een SmartScreen-melding tonen: klik op Meer informatie en dan op Toch uitvoeren.' },
-      { title: 'Activeer Pro', body: 'Kies in de app Upgraden naar Pro, dan “Ik heb al een licentiesleutel”, en plak je sleutel. Klaar.' },
+      { title: 'Open Rhyme Helper', body: 'In je browser op app.rhymehelper.store (ook op je telefoon), of in de app voor Windows of Mac. Windows kan een SmartScreen-melding tonen: klik op Meer informatie en dan op Toch uitvoeren.' },
+      { title: 'Log in met hetzelfde account', body: 'Pro zit vast aan het account waarmee je net afrekende. Log daarmee in de app in en Pro gaat vanzelf aan.' },
+      { title: 'Staat het nog niet aan?', body: 'Je hebt ook een licentiesleutel gemaild gekregen (afzender Lemon Squeezy). Kies in de app Upgraden naar Pro, dan “Ik heb al een licentiesleutel”, en plak hem.' },
     ],
     paid: 'Betaling ontvangen', h1: 'Welkom bij Pro.', h1b: 'Tijd om te schrijven.', lead: 'Bedankt dat je Rhyme Helper steunt. Nog drie stappen en je bent klaar.',
     dash: 'Naar je dashboard',

@@ -10,6 +10,7 @@ import { cn } from '../lib/cn';
 type Mode = 'signin' | 'signup' | 'forgot';
 import { useLang } from '../i18n/useLang';
 import { href } from '../i18n/routes';
+import { checkoutPath, readPendingCheckout } from '../lib/checkout';
 
 const T = {
   en: {
@@ -52,9 +53,15 @@ export function LoginView() {
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
-      if (session) router.replace(href(lang, 'dashboard'));
+      if (session) router.replace(afterLogin());
     });
   }, [router, lang]);
+
+  // Was je aan het afrekenen of een code aan het verzilveren? Dan daar verder.
+  const afterLogin = () => {
+    const p = readPendingCheckout();
+    return p ? checkoutPath(lang, p.kind, p.code || undefined) : href(lang, 'dashboard');
+  };
 
   const switchMode = (next: Mode) => {
     setMode(next);
@@ -78,7 +85,7 @@ export function LoginView() {
       } else {
         const { error } = await supabase.auth.signInWithPassword({ email: mail, password });
         if (error) throw error;
-        router.push(href(lang, 'dashboard'));
+        router.push(afterLogin());
       }
     } catch (err) {
       setMessage({ tone: 'error', text: err instanceof Error ? err.message : L.generic });

@@ -265,6 +265,11 @@ export function HomeView({ lang }: { lang: Lang }) {
               <ButtonLink href={href(lang, 'pricing')} size="lg" variant="secondary" iconRight={ArrowRight}>{c.seePro}</ButtonLink>
             </div>
             <p className="mt-4 text-sm text-text-muted">{c.heroMeta}</p>
+            <p className="mt-2 text-sm">
+              <Link href={href(lang, 'code')} className="text-iris-text underline decoration-iris-text/40 underline-offset-4 hover:decoration-iris-text" data-testid="redeem-link">
+                {lang === 'nl' ? 'Een kaartje met een Pro-code? Verzilver hem hier' : 'Got a card with a Pro code? Redeem it here'}
+              </Link>
+            </p>
             <MacIntelLink lang={lang} className="mt-1" />
             <AltAppLink lang={lang} className="mt-1" />
           </div>

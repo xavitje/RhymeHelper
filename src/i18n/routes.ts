@@ -18,6 +18,8 @@ export const ROUTES = {
   account: { en: '/account', nl: '/nl/account' },
   resetPassword: { en: '/reset-password', nl: '/nl/wachtwoord-herstellen' },
   thankYou: { en: '/thank-you', nl: '/nl/bedankt' },
+  checkout: { en: '/checkout', nl: '/nl/afrekenen' },
+  code: { en: '/code', nl: '/nl/code' },
 } as const;
 
 export type RouteKey = keyof typeof ROUTES;
