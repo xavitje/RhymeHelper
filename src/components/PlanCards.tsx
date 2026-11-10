@@ -62,7 +62,7 @@ export function PlanCards({ checkout = false, className, headingLevel = 3, lang 
           ))}
         </ul>
         {checkout ? (
-          <ButtonLink href={pro.checkoutUrl} external size="lg" fullWidth className="mt-8 lemonsqueezy-button">
+          <ButtonLink href={href(lang, 'checkout')} size="lg" fullWidth className="mt-8">
             {t.buy(price)}
           </ButtonLink>
         ) : (
