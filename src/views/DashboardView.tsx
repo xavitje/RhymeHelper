@@ -60,7 +60,7 @@ export function DashboardView() {
   // Terug na de bevestigingsmail of Google terwijl je aan het afrekenen was: daar verder
   useEffect(() => {
     const p = readPendingCheckout();
-    if (p && user) router.replace(checkoutPath(lang, p.kind, p.code || undefined));
+    if (p && user) router.replace(checkoutPath(p.lang || lang, p.kind, p.code || undefined));
   }, [user, lang, router]);
   const t = T[lang];
   const pro = fmtPrice(lang, proPrice().price);

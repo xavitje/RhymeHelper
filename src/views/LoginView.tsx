@@ -60,7 +60,7 @@ export function LoginView() {
   // Was je aan het afrekenen of een code aan het verzilveren? Dan daar verder.
   const afterLogin = () => {
     const p = readPendingCheckout();
-    return p ? checkoutPath(lang, p.kind, p.code || undefined) : href(lang, 'dashboard');
+    return p ? checkoutPath(p.lang || lang, p.kind, p.code || undefined) : href(lang, 'dashboard');
   };
 
   const switchMode = (next: Mode) => {

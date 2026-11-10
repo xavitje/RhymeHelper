@@ -32,7 +32,7 @@ const T = {
     google: 'Continue with Google', or: 'or', email: 'Email', password: 'Password', min: 'At least 6 characters.', placeholder: 'you@example.com',
     signup: 'Create account', signin: 'Log in', busy: 'One moment…',
     haveAccount: 'Already have an account?', newHere: 'No account yet?',
-    confirm: (m: string) => `Almost there: we sent a link to ${m}. Open it on this phone, then you’ll come back here for step 2.`,
+    confirm: (m: string) => `Almost there: we sent a link to ${m}. Open it in this browser to continue with step 2. Opened it on another device? Then log in here.`,
     signedInAs: 'Logged in as', notYou: 'Not you?',
     codeLabel: 'Code from your card', codePh: 'e.g. RHYME-ABC123', codeHint: 'Already filled in at checkout. Total: €0.',
     toCheckout: 'Go to checkout', toCheckoutFree: 'Redeem at checkout',
@@ -47,7 +47,7 @@ const T = {
     google: 'Doorgaan met Google', or: 'of', email: 'E-mail', password: 'Wachtwoord', min: 'Minimaal 6 tekens.', placeholder: 'jij@voorbeeld.nl',
     signup: 'Account maken', signin: 'Inloggen', busy: 'Even geduld…',
     haveAccount: 'Heb je al een account?', newHere: 'Nog geen account?',
-    confirm: (m: string) => `Bijna: we hebben een link gestuurd naar ${m}. Open hem op deze telefoon, dan kom je hier terug voor stap 2.`,
+    confirm: (m: string) => `Bijna: we hebben een link gestuurd naar ${m}. Open hem in deze browser, dan ga je verder met stap 2. Op een ander apparaat geopend? Log daarna hier in.`,
     signedInAs: 'Ingelogd als', notYou: 'Niet jij?',
     codeLabel: 'Code van je kaartje', codePh: 'bijv. RHYME-ABC123', codeHint: 'Staat bij de kassa al ingevuld. Totaal: €0.',
     toCheckout: 'Naar de kassa', toCheckoutFree: 'Verzilveren bij de kassa',
@@ -134,13 +134,17 @@ export function CheckoutView({ kind }: { kind: Kind }) {
     e.preventDefault();
     setBusy(true);
     setMessage(null);
-    savePending(kind, code);
+    savePending(kind, code, lang);
     const mail = email.trim();
     try {
       if (mode === 'signup') {
         const { data, error } = await supabase.auth.signUp({ email: mail, password, options: { emailRedirectTo: here() } });
         if (error) throw error;
-        if (!data.session) setMessage({ tone: 'success', text: L.confirm(mail) });
+        if (!data.session) {
+          setMessage({ tone: 'success', text: L.confirm(mail) });
+          setMode('signin'); // na het bevestigen hier inloggen (bijv. als de mail op een ander apparaat is geopend)
+          setPassword('');
+        }
       } else {
         const { error } = await supabase.auth.signInWithPassword({ email: mail, password });
         if (error) throw error;
@@ -155,7 +159,7 @@ export function CheckoutView({ kind }: { kind: Kind }) {
   const google = async () => {
     setBusy(true);
     setMessage(null);
-    savePending(kind, code);
+    savePending(kind, code, lang);
     const { error } = await supabase.auth.signInWithOAuth({ provider: 'google', options: { redirectTo: here() } });
     if (error) { setMessage({ tone: 'error', text: error.message }); setBusy(false); }
   };

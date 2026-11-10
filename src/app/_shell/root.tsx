@@ -6,6 +6,7 @@ import Footer from '../../components/Footer';
 import { Analytics } from '../../components/Analytics';
 import { HtmlLang, SkipLink } from '../../i18n/HtmlLang';
 import { RefTracker } from '../../components/RefTracker';
+import { ResumeCheckout } from '../../components/ResumeCheckout';
 import { AffiliateTracking } from '../../components/AffiliateTracking';
 import { SITE } from '../../config';
 
@@ -76,6 +77,7 @@ export function RootShell({ lang, children }: { lang: 'en' | 'nl'; children: Rea
         <Footer />
         <Analytics />
         <RefTracker />
+        <ResumeCheckout />
         <AffiliateTracking />
       </body>
     </html>
