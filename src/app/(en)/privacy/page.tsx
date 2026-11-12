@@ -37,6 +37,7 @@ export default function PrivacyPolicy() {
           <li><strong>Words you look up (app):</strong> when you look up rhymes, near rhymes or synonyms, the app sends that word or short phrase to Datamuse, a free word database in the United States. As with any internet request, Datamuse sees your IP address. For AI rhymes (Pro), the word goes through our server to OpenAI, which receives only the word. We never send your lyrics.</li>
           <li><strong>Downloads and updates:</strong> the installer and app updates are downloaded from GitHub, which receives your IP address as with any download.</li>
           <li><strong>App usage (only with your consent):</strong> if you turn on Share anonymous usage in the app, it sends once a day a random installation ID, the app version, the app language and whether Pro is active. This is not linked to your account and never includes your lyrics. You can turn it off at any time in Settings → Account.</li>
+          <li><strong>Web app opens (anonymous count):</strong> when you open the web app at app.rhymehelper.store, it adds one to a daily count: opened, first time today, or first time on this device, plus whether it is a phone, tablet or computer. No ID, IP address, account or lyrics are sent or stored, only the totals per day. To count each device once a day, the web app keeps the date of the last count in your browser.</li>
         </ul>
 
         <h2>3. How we use data, and on what legal grounds</h2>
@@ -45,6 +46,7 @@ export default function PrivacyPolicy() {
           <li><strong>Contractual necessity:</strong> processing your email and license key to deliver the software, authenticate your Pro access and provide customer support, and storing and syncing your songs when you subscribe to Cloud Sync.</li>
           <li><strong>Consent:</strong> using Google Analytics on our website to understand how visitors find and use it. You can withdraw your consent at any time.</li>
           <li><strong>Consent:</strong> the anonymous daily usage signal from the app, if you turn it on.</li>
+          <li><strong>Legitimate interest:</strong> the anonymous count of web app opens, to see how many people use the web app. It contains no personal data.</li>
           <li><strong>Your request:</strong> sending you the download link you asked for, and the one Mac email if you ticked that box.</li>
           <li><strong>Legitimate interest:</strong> counting downloads per channel, so we know which places help people find Rhyme Helper. We keep this to the minimum described above.</li>
           <li><strong>Legal obligation:</strong> retaining necessary transaction records to comply with tax and accounting laws.</li>
