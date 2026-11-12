@@ -40,6 +40,7 @@ export default function Privacyverklaring() {
           <li><strong>Woorden die je opzoekt (app):</strong> als je rijmen, bijna-rijmen of synoniemen opzoekt, stuurt de app dat woord of korte zinsdeel naar Datamuse, een gratis woordendatabase in de Verenigde Staten. Zoals bij elk internetverzoek ziet Datamuse daarbij je IP-adres. Voor AI-rijmen (Pro) gaat het woord via onze server naar OpenAI, dat alleen het woord ontvangt. Je teksten sturen we nooit mee.</li>
           <li><strong>Downloads en updates:</strong> de installer en app-updates worden gedownload van GitHub, dat zoals bij elke download je IP-adres ontvangt.</li>
           <li><strong>App-gebruik (alleen met je toestemming):</strong> als je in de app Anoniem gebruik delen aanzet, stuurt die één keer per dag een willekeurige installatie-ID, de appversie, de taal van de app en of Pro actief is. Dit is niet aan je account gekoppeld en bevat nooit je teksten. Je kunt het altijd uitzetten via Instellingen → Account.</li>
+          <li><strong>Webapp geopend (anonieme telling):</strong> als je de webapp op app.rhymehelper.store opent, telt die één op bij een dagtotaal: geopend, vandaag voor het eerst, of voor het eerst op dit apparaat, en of het een telefoon, tablet of computer is. Er gaat geen ID, IP-adres, account of tekst mee en er wordt niets van bewaard behalve de totalen per dag. Om elk apparaat maar één keer per dag te tellen, onthoudt de webapp in je browser de datum van de laatste telling.</li>
         </ul>
 
         <h2>3. Waarvoor we gegevens gebruiken, en op welke grondslag</h2>
@@ -48,6 +49,7 @@ export default function Privacyverklaring() {
           <li><strong>Uitvoering van de overeenkomst:</strong> je e-mailadres en licentiesleutel gebruiken om de software te leveren, je Pro-toegang te controleren en je te helpen, en je liedjes bewaren en synchroniseren als je Cloud Sync gebruikt.</li>
           <li><strong>Toestemming:</strong> Google Analytics op onze website, om te begrijpen hoe bezoekers de site vinden en gebruiken. Je kunt je toestemming altijd intrekken.</li>
           <li><strong>Toestemming:</strong> het anonieme dagelijkse gebruikssignaal van de app, als je dat aanzet.</li>
+          <li><strong>Gerechtvaardigd belang:</strong> de anonieme telling van het openen van de webapp, om te zien hoeveel mensen de webapp gebruiken. Daar zitten geen persoonsgegevens in.</li>
           <li><strong>Jouw verzoek:</strong> je de downloadlink sturen waar je om vroeg, en de ene Mac-mail als je dat hebt aangevinkt.</li>
           <li><strong>Gerechtvaardigd belang:</strong> downloads per kanaal tellen, zodat we weten via welke plekken mensen Rhyme Helper vinden. We houden dit bij het minimum dat hierboven staat.</li>
           <li><strong>Wettelijke plicht:</strong> de nodige transactiegegevens bewaren om aan belasting- en boekhoudregels te voldoen.</li>
